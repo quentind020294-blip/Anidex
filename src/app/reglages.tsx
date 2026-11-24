@@ -42,7 +42,7 @@ export default function SettingsScreen() {
       <Card style={{ gap: 10 }}>
         {/* Le sélecteur affiche « Français » et « English » : il reste reconnaissable dans les deux langues. */}
         <Text style={styles.title}>🌐 {s.language.title}</Text>
-        <LanguageToggle variant="settings" />
+        <LanguageToggle />
         <Text style={styles.small}>{s.language.hint}</Text>
       </Card>
 

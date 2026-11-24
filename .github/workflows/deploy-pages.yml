@@ -35,11 +35,17 @@ jobs:
           npm run typecheck
           npm run lint
           npm run check:i18n
+          npm run gen:sql -- --check
 
       - name: Construire la version web
         env:
           # Le site est servi sous https://<utilisateur>.github.io/<dépôt>/
           EXPO_PUBLIC_BASE_URL: /${{ github.event.repository.name }}
+          # Système d'amis (facultatif). Valeurs PUBLIQUES, réglées dans
+          # Settings → Secrets and variables → Actions → onglet « Variables ».
+          # Ne jamais y mettre la clé secrète (sb_secret_… / service_role) : le build échouerait.
+          EXPO_PUBLIC_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          EXPO_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
         run: npm run build:web
 
       - uses: actions/configure-pages@v5

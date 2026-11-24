@@ -1,11 +1,12 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, Platform, Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { LanguageToggle } from '../components/LanguageToggle';
+import { HeaderTitle } from '../components/HeaderTitle';
 import { colors } from '../components/theme';
 import { I18nProvider, useI18n } from '../i18n';
+import { FriendsProvider } from '../lib/friendsStore';
 import { DexProvider, useDex } from '../lib/store';
 
 function Gate() {
@@ -26,12 +27,8 @@ function Gate() {
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: '800' },
         contentStyle: { backgroundColor: colors.bg },
-        // Sur le web, l'en-tête n'ajoute pas de marge à droite (le natif le fait déjà).
-        headerRight: () => (
-          <View style={{ marginRight: Platform.OS === 'web' ? 16 : 0 }}>
-            <LanguageToggle />
-          </View>
-        ),
+        // Titres longs : deux lignes au maximum, puis « … » (jamais de chevauchement).
+        headerTitle: ({ children, tintColor }) => <HeaderTitle tintColor={tintColor}>{children}</HeaderTitle>,
       }}
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
@@ -39,6 +36,7 @@ function Gate() {
       <Stack.Screen name="reglages" options={{ title: s.screens.settings }} />
       <Stack.Screen name="conservation" options={{ title: s.screens.conservation }} />
       <Stack.Screen name="secours" options={{ title: s.screens.rescue }} />
+      <Stack.Screen name="ami/[id]" options={{ title: s.screens.friend }} />
       <Stack.Screen name="+not-found" options={{ title: s.screens.notFound }} />
     </Stack>
   );
@@ -49,8 +47,10 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <I18nProvider>
         <DexProvider>
-          <StatusBar style="light" />
-          <Gate />
+          <FriendsProvider>
+            <StatusBar style="light" />
+            <Gate />
+          </FriendsProvider>
         </DexProvider>
       </I18nProvider>
     </SafeAreaProvider>

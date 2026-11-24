@@ -8,6 +8,7 @@ Application **Android / iOS et web** construite avec Expo (React Native + TypeSc
 
 - **Anidex de 151 espèces** australiennes, numérotées de #001 à #151 : mammifères, oiseaux, reptiles, amphibiens, vie aquatique, insectes, araignées et autres invertébrés, avec de nombreuses espèces de Victoria et de Phillip Island. Les plus rares (#142 à #151) sont « légendaires ». Pour chaque espèce : noms français, anglais et scientifique, rareté, habitat, États où on la trouve, description et anecdote.
 - **Cartes** : chaque fiche a une carte de répartition de l’Australie (SVG intégré, sans service payant). Les États où l’espèce vit sont colorés : foncé pour une espèce commune, clair pour une espèce rare ou localisée, hachuré pour une espèce introduite. Tes observations géolocalisées apparaissent en points (touche-les pour voir la date). Le mode « Zones réelles » affiche des carrés d’environ 100 km où l’espèce a été observée, d’après l’API publique et gratuite de l’Atlas of Living Australia ; les données sont gardées 30 jours sur l’appareil, et sans connexion la carte revient à l’affichage par États. Le Journal affiche une carte de toutes tes observations.
+- **Amis** (facultatif, via Supabase) : compte avec un simple pseudo (sans e-mail), code ami à partager, liste d’amis, fiche de progression d’un ami et classement. Seuls l’espèce, le jour et l’**État** des observations sont partagés : jamais la position GPS ni le lieu précis, et aucun lieu pour les espèces menacées. Sans compte ou hors connexion, l’appli fonctionne comme avant. Mise en route pas à pas : [`supabase/GUIDE.md`](supabase/GUIDE.md).
 - **Conservation** sur chaque fiche : statut mondial (UICN), national (loi EPBC) et en Victoria (loi FFG), tendance de la population, principales menaces, gestes utiles, programmes de protection et, pour les espèces introduites, leur impact. Filtres « Menacées » et « Menacées en Victoria », écran de bilan et écran « Animal blessé ? » avec les numéros de secours de chaque État.
 - Les espèces pas encore observées apparaissent comme des **silhouettes mystère** ; une fois découvertes, elles affichent **ta photo**.
 - **Observer** : prends une photo (ou importe-la depuis la galerie) et l’IA propose jusqu’à 3 espèces avec un indice de confiance. Tu confirmes d’un geste. Sans connexion ni clé API, tu peux choisir l’espèce dans la liste.
@@ -15,7 +16,7 @@ Application **Android / iOS et web** construite avec Expo (React Native + TypeSc
 - **Progression** : XP selon la rareté (commun 10, peu commun 25, rare 50, légendaire 100 ; 2 XP pour une espèce déjà vue), 10 rangs, du « Touriste curieux » à la « Légende de l’Anidex ».
 - **20 badges** : par catégorie, espèces rares ou légendaires, animaux dangereux (de loin !), espèces invasives, espèces menacées, États visités, etc.
 - Recherche, filtres par catégorie et par statut (découverts ou à trouver).
-- **Français / anglais** : bouton FR | EN en haut de chaque écran et dans les réglages. Toute l’interface est traduite, ainsi que les fiches des 151 espèces. Le nom affiché est le nom courant dans la langue choisie. Au premier lancement, l’app suit la langue du téléphone (français s’il est en français, anglais sinon) ; le choix est ensuite mémorisé.
+- **Français / anglais** : choix « Langue / Language » dans les réglages (icône engrenage). Toute l’interface est traduite, ainsi que les fiches des 151 espèces. Le nom affiché est le nom courant dans la langue choisie. Au premier lancement, l’app suit la langue du téléphone (français s’il est en français, anglais sinon) ; le choix est ensuite mémorisé.
 - Toutes les données restent sur l’appareil. Sur mobile, la clé API est stockée chiffrée (Keychain / Keystore) ; sur le web, elle est enregistrée dans le navigateur.
 
 ## Identification par IA
@@ -77,6 +78,12 @@ src/
   data/rescue.ts        # numéros de secours pour la faune, par État
   data/australiaMap.ts  # contours SVG des États (généré par npm run gen:map, Natural Earth)
   lib/alaGrid.ts        # zones réelles de présence (Atlas of Living Australia) + cache
+  lib/supabase.ts       # connexion Supabase (clé publique uniquement)
+  lib/friends.ts        # API amis : compte, code, amis, synchronisation
+  lib/friendsStore.tsx  # état du système d’amis, cache hors connexion
+supabase/anidex.sql     # tables, règles RLS et fonctions (à coller dans Supabase)
+supabase/GUIDE.md       # guide de mise en route depuis un téléphone
+supabase/tests/         # tests des règles de sécurité sur PostgreSQL
   data/meta.ts          # couleurs, XP et ordres d’affichage
   i18n/fr.ts, i18n/en.ts # textes de l’interface (même structure, vérifiée par TypeScript)
   i18n/index.tsx        # langue choisie, langue du téléphone, mémorisation
@@ -114,4 +121,5 @@ Ajoute la clé dans `src/i18n/fr.ts` **et** `src/i18n/en.ts` (TypeScript signale
 npm run typecheck
 npm run lint
 npm run check:i18n
+npm run gen:sql -- --check   # liste des espèces sensibles à jour dans le SQL
 ```
