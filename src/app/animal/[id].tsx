@@ -3,10 +3,12 @@ import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from '
 
 import { colors, radius } from '../../components/theme';
 import { ConservationCard } from '../../components/ConservationCard';
+import { SpeciesFacts, SpeciesStats } from '../../components/SpeciesStats';
 import { SpeciesMap } from '../../components/SpeciesMap';
 import { AnimalAvatar, Button, Card, RarityStars, StoredImage } from '../../components/ui';
 import { ANIMALS, dexNumber, getAnimal } from '../../data/animals';
 import { CATEGORIES, RARITIES, STATE_ORDER } from '../../data/meta';
+import { TRAITS } from '../../data/traits';
 import { useI18n } from '../../i18n';
 import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
@@ -75,6 +77,12 @@ export default function AnimalScreen() {
             {discovered ? s.animal.discovered(sightings.length) : s.animal.notSeen}
           </Text>
         </View>
+
+        <SpeciesStats traits={TRAITS[animal.id]} />
+
+        <Card style={{ paddingVertical: 10 }}>
+          <SpeciesFacts traits={TRAITS[animal.id]} />
+        </Card>
 
         {(animal.dangerous || animal.introduced) && (
           <View style={{ gap: 8 }}>
