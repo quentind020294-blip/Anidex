@@ -1,19 +1,18 @@
-import { Link, Stack } from 'expo-router';
+import { Link } from 'expo-router';
 import { StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius } from '../components/theme';
+import { useI18n } from '../i18n';
 
 export default function NotFoundScreen() {
+  const { s } = useI18n();
   return (
-    <>
-      <Stack.Screen options={{ title: 'Introuvable' }} />
-      <View style={styles.page}>
-        <Text style={{ fontSize: 56 }}>🦘💨</Text>
-        <Text style={styles.title}>Cette page a filé dans le bush</Text>
-        <Text style={styles.text}>L’adresse demandée n’existe pas.</Text>
-        <Link href="/" style={styles.link}>Retour à l’Anidex</Link>
-      </View>
-    </>
+    <View style={styles.page}>
+      <Text style={{ fontSize: 56 }}>🦘💨</Text>
+      <Text style={styles.title}>{s.notFound.title}</Text>
+      <Text style={styles.text}>{s.notFound.text}</Text>
+      <Link href="/" style={styles.link}>{s.notFound.back}</Link>
+    </View>
   );
 }
 

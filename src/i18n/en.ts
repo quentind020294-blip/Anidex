@@ -1,0 +1,245 @@
+import type { Strings } from './fr';
+
+// English UI strings. Must match the structure of fr.ts exactly (checked by TypeScript).
+export const en: Strings = {
+  dateLocale: 'en-AU',
+
+  tabs: { dex: 'Anidex', observe: 'Observe', journal: 'Journal', badges: 'Badges' },
+  screens: { settings: 'Settings', notFound: 'Not found' },
+
+  a11y: {
+    settings: 'Settings',
+    languageSwitch: 'Change language',
+    deleteSighting: 'Delete sighting',
+  },
+
+  language: {
+    title: 'Language',
+    hint: 'By default, the Anidex uses your phone’s language.',
+  },
+
+  categories: {
+    mammifere: { label: 'Mammal', plural: 'Mammals' },
+    oiseau: { label: 'Bird', plural: 'Birds' },
+    reptile: { label: 'Reptile', plural: 'Reptiles' },
+    amphibien: { label: 'Amphibian', plural: 'Amphibians' },
+    marin: { label: 'Marine', plural: 'Marine life' },
+    invertebre: { label: 'Invertebrate', plural: 'Invertebrates' },
+  },
+
+  rarities: { commun: 'Common', 'peu-commun': 'Uncommon', rare: 'Rare', legendaire: 'Legendary' },
+
+  states: {
+    NSW: 'New South Wales',
+    VIC: 'Victoria',
+    QLD: 'Queensland',
+    WA: 'Western Australia',
+    SA: 'South Australia',
+    TAS: 'Tasmania',
+    NT: 'Northern Territory',
+    ACT: 'Australian Capital Territory',
+  },
+
+  conservation: {
+    LC: 'Least Concern',
+    NT: 'Near Threatened',
+    VU: 'Vulnerable',
+    EN: 'Endangered',
+    CR: 'Critically Endangered',
+  },
+
+  ranks: [
+    'Curious Tourist',
+    'Bushwalker',
+    'Bush Explorer',
+    'Junior Ranger',
+    'Ranger',
+    'Naturalist',
+    'Seasoned Tracker',
+    'Outback Guardian',
+    'Master of the Bush',
+    'Anidex Legend',
+  ],
+
+  dex: {
+    discovered: 'Species discovered',
+    level: (n) => `Level ${n}`,
+    search: 'Search (name, no., scientific name…)',
+    allCategories: 'All',
+    showAll: 'All',
+    showFound: 'Discovered',
+    showMissing: 'To find',
+    emptyNone: 'No species discovered yet.\nHead to the “Observe” tab to get started!',
+    emptySearch: 'No species match your search.',
+  },
+
+  observe: {
+    title: 'Go exploring!',
+    subtitle: 'Photograph an Australian animal: the Anidex identifies it and adds it to your collection.',
+    takePhoto: 'Take a photo',
+    importPhoto: 'Import from gallery',
+    aiTitle: '🤖 Automatic identification',
+    aiText:
+      'Add your Claude API key in the settings so the app can recognise animals on its own. Without a key, you pick the species from the list.',
+    openSettings: 'Open settings',
+    tipsTitle: 'Ranger tips',
+    tips: [
+      'Keep your distance: photograph snakes, crocodiles and spiders from afar.',
+      'Don’t feed wild animals.',
+      'Fit the whole animal in the frame, sharp and well lit.',
+      'Rare species earn more XP!',
+    ],
+    footnote: (n, total) => `${n} / ${total} species discovered`,
+    analyzing: 'Analysing…',
+    analyzingText: (total) => `The Anidex is comparing your photo with the ${total} species in the catalogue.`,
+    saving: 'Saving…',
+    whichSpecies: 'Which species did you photograph?',
+    pickOther: 'Another species: pick from the list',
+    pickFromList: 'Pick the species from the list',
+    retry: 'Try identifying again',
+    cancel: 'Cancel',
+    resultFound: 'Here’s what the Anidex found:',
+    noAnimal: 'No animal detected in this photo.',
+    outsideDex: (name) => `It looks like: ${name}. This species isn’t in the Anidex (yet).`,
+    unknown: 'Couldn’t recognise a species from the Anidex.',
+    alreadyFound: 'already discovered',
+    newSpecies: 'new species!',
+    itsThisOne: 'That’s the one!',
+    ratherThis: 'This one instead',
+    pickerTitle: 'Pick the species',
+    pickerSearch: 'Search for a species…',
+    close: 'Close',
+    rewardNew: 'NEW SPECIES!',
+    rewardRepeat: 'New sighting',
+    levelReached: (n) => `Level ${n} reached!`,
+    nowRank: (rank) => `You are now “${rank}”.`,
+    badgeUnlocked: 'Badge unlocked',
+    didYouKnow: 'Did you know?',
+    seeEntry: 'View entry',
+    newObservation: 'New sighting',
+  },
+
+  errors: {
+    openPhoto: 'Couldn’t open the photo.',
+    cameraPermission: 'Camera access is needed to observe animals.',
+    preparePhoto: 'Couldn’t prepare the photo.',
+    identify: {
+      noKey: 'Add your Claude API key in the settings to turn on automatic identification.',
+      auth: 'Invalid API key. Check it in the settings.',
+      permission: 'This API key doesn’t have access to the requested model.',
+      rateLimit: 'Too many requests at once. Try again in a moment.',
+      badRequest: 'The photo couldn’t be analysed (format or size). Try another photo.',
+      connection: 'No internet connection. You can pick the species manually.',
+      api: (status) => `The identification service is unavailable (error ${status}).`,
+      refusal: 'This photo couldn’t be analysed. Pick the species manually.',
+      empty: 'Empty response from the identification service.',
+      parse: 'Unreadable response from the identification service.',
+      generic: 'Identification failed. Pick the species manually.',
+    },
+  },
+
+  journal: {
+    count: (n) => `${n} sighting${n > 1 ? 's' : ''}`,
+    emptyTitle: 'Your field journal is empty',
+    emptyText: 'Every animal you photograph will appear here, with the date and place.',
+    firstObservation: 'Make my first sighting',
+  },
+
+  method: {
+    ai: (pct) => `🤖 Identified by AI${pct != null ? ` (${pct}%)` : ''}`,
+    manual: '✍️ Identified manually',
+  },
+
+  badgesScreen: {
+    levelShort: 'LVL',
+    xpLeft: (xp, left, next) => `${xp} XP · ${left} XP to level ${next}`,
+    xpMax: (xp) => `${xp} XP · max level!`,
+    collection: 'Collection by category',
+    title: (n, total) => `Badges · ${n} / ${total}`,
+    unlocked: 'Unlocked ✓',
+  },
+
+  badges: {
+    first: { title: 'First Steps', desc: 'Add your first species to the Anidex.' },
+    ten: { title: 'Collector', desc: 'Discover 10 different species.' },
+    twentyfive: { title: 'Budding Naturalist', desc: 'Discover 25 different species.' },
+    fifty: { title: 'Living Encyclopedia', desc: 'Discover 50 different species.' },
+    all: { title: 'Anidex Complete', desc: (total) => `Discover all ${total} species in the Anidex.` },
+    icons: {
+      title: 'Aussie Icons',
+      desc: 'Spot the red kangaroo, koala, wombat, platypus, echidna and emu.',
+    },
+    category: {
+      mammifere: 'Marsupial Mate',
+      oiseau: 'Birdwatcher',
+      reptile: 'Herpetologist',
+      amphibien: 'King of the Pond',
+      marin: 'Reef Diver',
+      invertebre: 'Entomologist',
+    },
+    categoryDesc: (plural, goal, total) => `Discover ${goal} species in the “${plural}” category (out of ${total}).`,
+    rare: { title: 'Eagle Eye', desc: 'Discover 5 rare species.' },
+    legend: { title: 'Legend Hunter', desc: 'Discover a legendary species.' },
+    danger: { title: 'Nerves of Steel', desc: 'Spot 3 dangerous species (from a distance!).' },
+    invasive: { title: 'Sentinel', desc: 'Report 3 introduced invasive species.' },
+    endangered: { title: 'Protector', desc: 'Spot 3 threatened species (Vulnerable or worse).' },
+    states3: { title: 'Globetrotter', desc: 'Make sightings in 3 states or territories.' },
+    states8: { title: 'Around Australia', desc: 'Make sightings in all 8 states and territories.' },
+    obs50: { title: 'Dedicated Observer', desc: 'Record 50 sightings.' },
+  },
+
+  animal: {
+    notFound: 'Species not found.',
+    discovered: (n) => `✓ Discovered · ${n} sighting${n > 1 ? 's' : ''}`,
+    notSeen: 'Not seen yet',
+    dangerous: '☠️ Dangerous species: watch it from a distance and never touch it.',
+    introduced: '🚨 Introduced species: it threatens native wildlife.',
+    description: 'Description',
+    didYouKnow: 'Did you know?',
+    habitat: 'Habitat',
+    conservation: 'Conservation status (IUCN)',
+    whereToSee: 'Where to see it',
+    mySightings: 'My sightings',
+    foundIt: 'I found it! Observe',
+    deleteTitle: 'Delete this sighting?',
+    deleteText: 'The photo will be deleted too.',
+    delete: 'Delete',
+    cancel: 'Cancel',
+  },
+
+  settings: {
+    aiTitle: '🤖 AI identification',
+    aiText:
+      'The Anidex uses Claude (Anthropic) to recognise animals in your photos. Create an API key at console.anthropic.com and paste it here. It is only ever sent to Anthropic’s API.',
+    keyStorageWeb:
+      'On the web version, it is stored in this browser only (unencrypted): only use the app on your own device, and set a spending limit on your key in the Anthropic console.',
+    keyStorageNative: 'It is stored encrypted on your device.',
+    keySaved: (masked) => `✓ Key saved (${masked})`,
+    noKey: 'No key saved: manual identification only.',
+    save: 'Save',
+    saved: 'Saved ✓',
+    remove: 'Remove',
+    autoIdentify: 'Identify automatically after taking a photo',
+    locationTitle: '📍 Location',
+    saveLocation: 'Save the place of each sighting',
+    locationHint: 'The place is used for your journal and exploration badges. It stays on your phone.',
+    dataTitle: '🗂️ Data',
+    dataSummary: (n, total) => `${n} sighting(s) saved · ${total} species in the Anidex.`,
+    resetAll: 'Erase everything',
+    resetTitle: 'Erase everything?',
+    resetText: (n) => `All your sightings (${n}) and their photos will be deleted.`,
+    cancel: 'Cancel',
+    footer: 'Anidex · A field guide to Australian wildlife.\nRespect wildlife: observe without disturbing. 🦘',
+  },
+
+  notFound: {
+    title: 'This page has bolted into the bush',
+    text: 'The address you asked for doesn’t exist.',
+    back: 'Back to the Anidex',
+  },
+
+  ai: {
+    question: 'Which animal can you see in this photo?',
+    replyLanguage: 'Write "comment" and "outside_dex" in English.',
+  },
+};

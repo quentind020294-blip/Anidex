@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Alert, Platform, ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
+import { LanguageToggle } from '../components/LanguageToggle';
 import { colors, radius } from '../components/theme';
 import { Button, Card } from '../components/ui';
 import { ANIMALS } from '../data/animals';
+import { useI18n } from '../i18n';
 import { useDex } from '../lib/store';
 
 function mask(key: string) {
@@ -12,6 +14,7 @@ function mask(key: string) {
 
 export default function SettingsScreen() {
   const { apiKey, setApiKey, settings, updateSettings, sightings, resetAll } = useDex();
+  const { s } = useI18n();
   const [draft, setDraft] = useState('');
   const [saved, setSaved] = useState(false);
 
@@ -23,31 +26,32 @@ export default function SettingsScreen() {
   }
 
   function confirmReset() {
-    const message = `Toutes tes observations (${sightings.length}) et leurs photos seront supprimées.`;
+    const message = s.settings.resetText(sightings.length);
     if (Platform.OS === 'web') {
-      if (window.confirm(`Tout effacer ?\n${message}`)) void resetAll();
+      if (window.confirm(`${s.settings.resetTitle}\n${message}`)) void resetAll();
       return;
     }
-    Alert.alert('Tout effacer ?', message, [
-      { text: 'Annuler', style: 'cancel' },
-      { text: 'Tout effacer', style: 'destructive', onPress: () => void resetAll() },
+    Alert.alert(s.settings.resetTitle, message, [
+      { text: s.settings.cancel, style: 'cancel' },
+      { text: s.settings.resetAll, style: 'destructive', onPress: () => void resetAll() },
     ]);
   }
 
   return (
     <ScrollView contentContainerStyle={styles.page} keyboardShouldPersistTaps="handled">
       <Card style={{ gap: 10 }}>
-        <Text style={styles.title}>🤖 Identification par IA</Text>
+        {/* Le sélecteur affiche « Français » et « English » : il reste reconnaissable dans les deux langues. */}
+        <Text style={styles.title}>🌐 {s.language.title}</Text>
+        <LanguageToggle variant="settings" />
+        <Text style={styles.small}>{s.language.hint}</Text>
+      </Card>
+
+      <Card style={{ gap: 10 }}>
+        <Text style={styles.title}>{s.settings.aiTitle}</Text>
         <Text style={styles.text}>
-          L’Anidex utilise Claude (Anthropic) pour reconnaître les animaux sur tes photos. Crée une clé API sur
-          console.anthropic.com puis colle-la ici. Elle n’est envoyée qu’à l’API d’Anthropic.{' '}
-          {Platform.OS === 'web'
-            ? 'Sur la version web, elle est enregistrée dans ce navigateur uniquement (non chiffrée) : n’utilise l’app que sur ton propre appareil, et fixe une limite de dépenses sur ta clé dans la console Anthropic.'
-            : 'Elle est stockée de façon chiffrée sur ton appareil.'}
+          {s.settings.aiText} {Platform.OS === 'web' ? s.settings.keyStorageWeb : s.settings.keyStorageNative}
         </Text>
-        <Text style={styles.status}>
-          {apiKey ? `✓ Clé enregistrée (${mask(apiKey)})` : 'Aucune clé enregistrée : identification manuelle uniquement.'}
-        </Text>
+        <Text style={styles.status}>{apiKey ? s.settings.keySaved(mask(apiKey)) : s.settings.noKey}</Text>
         <TextInput
           value={draft}
           onChangeText={setDraft}
@@ -59,35 +63,33 @@ export default function SettingsScreen() {
           style={styles.input}
         />
         <View style={{ flexDirection: 'row', gap: 10 }}>
-          <Button title={saved ? 'Enregistrée ✓' : 'Enregistrer'} onPress={save} disabled={!draft.trim()} style={{ flex: 1 }} />
-          {!!apiKey && <Button title="Supprimer" variant="secondary" onPress={() => void setApiKey('')} style={{ flex: 1 }} />}
+          <Button title={saved ? s.settings.saved : s.settings.save} onPress={save} disabled={!draft.trim()} style={{ flex: 1 }} />
+          {!!apiKey && <Button title={s.settings.remove} variant="secondary" onPress={() => void setApiKey('')} style={{ flex: 1 }} />}
         </View>
         <Row
-          label="Identifier automatiquement après la photo"
+          label={s.settings.autoIdentify}
           value={settings.autoIdentify}
           onChange={(v) => void updateSettings({ autoIdentify: v })}
         />
       </Card>
 
       <Card style={{ gap: 10 }}>
-        <Text style={styles.title}>📍 Localisation</Text>
+        <Text style={styles.title}>{s.settings.locationTitle}</Text>
         <Row
-          label="Enregistrer le lieu de chaque observation"
+          label={s.settings.saveLocation}
           value={settings.saveLocation}
           onChange={(v) => void updateSettings({ saveLocation: v })}
         />
-        <Text style={styles.small}>Le lieu sert à ton journal et aux badges d’exploration. Il reste sur ton téléphone.</Text>
+        <Text style={styles.small}>{s.settings.locationHint}</Text>
       </Card>
 
       <Card style={{ gap: 10 }}>
-        <Text style={styles.title}>🗂️ Données</Text>
-        <Text style={styles.text}>{sightings.length} observation(s) enregistrée(s) · {ANIMALS.length} espèces dans l’Anidex.</Text>
-        <Button title="Tout effacer" variant="secondary" onPress={confirmReset} disabled={!sightings.length} />
+        <Text style={styles.title}>{s.settings.dataTitle}</Text>
+        <Text style={styles.text}>{s.settings.dataSummary(sightings.length, ANIMALS.length)}</Text>
+        <Button title={s.settings.resetAll} variant="secondary" onPress={confirmReset} disabled={!sightings.length} />
       </Card>
 
-      <Text style={styles.footer}>
-        Anidex · Un Pokédex de la faune australienne.{'\n'}Respecte la faune : observe sans déranger. 🦘
-      </Text>
+      <Text style={styles.footer}>{s.settings.footer}</Text>
     </ScrollView>
   );
 }

@@ -3,8 +3,15 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import { Platform } from 'react-native';
 
-import { approxStateFromCoords, STATES, stateFromRegion } from '../data/meta';
+import { approxStateFromCoords, stateFromRegion } from '../data/meta';
 import type { StateCode } from '../data/types';
+
+/** Erreur de capture : le message est traduit par l'interface selon `code`. */
+export class CaptureError extends Error {
+  constructor(public code: 'cameraPermission' | 'preparePhoto') {
+    super(code);
+  }
+}
 
 export interface PreparedPhoto {
   uri: string;
@@ -15,7 +22,7 @@ export interface PreparedPhoto {
 export async function pickPhoto(source: 'camera' | 'library'): Promise<PreparedPhoto | null> {
   if (source === 'camera' && Platform.OS !== 'web') {
     const perm = await ImagePicker.requestCameraPermissionsAsync();
-    if (!perm.granted) throw new Error('L’accès à l’appareil photo est nécessaire pour observer des animaux.');
+    if (!perm.granted) throw new CaptureError('cameraPermission');
   }
   const options: ImagePicker.ImagePickerOptions = {
     mediaTypes: ['images'],
@@ -36,7 +43,7 @@ export async function pickPhoto(source: 'camera' | 'library'): Promise<PreparedP
   ctx.resize(landscape ? { width: 1280 } : { height: 1280 });
   const image = await ctx.renderAsync();
   const saved = await image.saveAsync({ base64: true, compress: 0.7, format: SaveFormat.JPEG });
-  if (!saved.base64) throw new Error('Impossible de préparer la photo.');
+  if (!saved.base64) throw new CaptureError('preparePhoto');
   return { uri: saved.uri, base64: saved.base64 };
 }
 
@@ -73,7 +80,6 @@ export async function getCurrentPlace(): Promise<Place | null> {
       }
     }
     state ??= approxStateFromCoords(latitude, longitude);
-    place ??= state ? STATES[state] : undefined;
     return { latitude, longitude, place, state };
   } catch {
     return null;

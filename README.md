@@ -13,6 +13,7 @@ Application **Android / iOS et web** construite avec Expo (React Native + TypeSc
 - **Progression** : XP selon la rareté (commun 10, peu commun 25, rare 50, légendaire 100 ; 2 XP pour une espèce déjà vue), 10 rangs, du « Touriste curieux » à la « Légende de l’Anidex ».
 - **20 badges** : par catégorie, espèces rares ou légendaires, animaux dangereux (de loin !), espèces invasives, espèces menacées, États visités, etc.
 - Recherche, filtres par catégorie et par statut (découverts ou à trouver).
+- **Français / anglais** : bouton FR | EN en haut de chaque écran et dans les réglages. Toute l’interface est traduite, ainsi que les fiches des 105 espèces. Le nom affiché est le nom courant dans la langue choisie. Au premier lancement, l’app suit la langue du téléphone (français s’il est en français, anglais sinon) ; le choix est ensuite mémorisé.
 - Toutes les données restent sur l’appareil. Sur mobile, la clé API est stockée chiffrée (Keychain / Keystore) ; sur le web, elle est enregistrée dans le navigateur.
 
 ## Identification par IA
@@ -70,7 +71,9 @@ src/
     animal/[id].tsx     # fiche d’une espèce
     reglages.tsx        # clé API, localisation, données
   data/animals.ts       # catalogue des 105 espèces
-  data/meta.ts          # catégories, raretés, États, statuts UICN
+  data/meta.ts          # couleurs, XP et ordres d’affichage
+  i18n/fr.ts, i18n/en.ts # textes de l’interface (même structure, vérifiée par TypeScript)
+  i18n/index.tsx        # langue choisie, langue du téléphone, mémorisation
   lib/identify.ts       # identification avec Claude
   lib/progress.ts       # XP, niveaux et badges
   lib/store.tsx         # état global + persistance
@@ -78,15 +81,21 @@ src/
   lib/photoStore.ts     # photos : fichiers (mobile) ou IndexedDB (photoStore.web.ts)
   lib/capture.ts        # appareil photo, redimensionnement, GPS
 scripts/postbuild-web.mjs  # finalise l’export web (manifeste PWA, 404.html)
+scripts/check-i18n.mjs     # repère les textes écrits en dur dans l’interface
 ```
 
 ## Ajouter une espèce
 
-Ajoute une entrée `sp(...)` **à la fin** de `src/data/animals.ts` : les numéros sont attribués dans l’ordre, donc en insérer une au milieu décalerait les numéros des observations déjà enregistrées.
+Ajoute une entrée **à la fin** de `src/data/animals.ts` : les numéros sont attribués dans l’ordre, donc en insérer une au milieu décalerait les numéros des observations déjà enregistrées. Le nom, l’habitat, la description et l’anecdote doivent être fournis en français (`fr`) et en anglais (`en`) ; TypeScript refuse la compilation s’il en manque un.
+
+## Ajouter ou modifier un texte
+
+Ajoute la clé dans `src/i18n/fr.ts` **et** `src/i18n/en.ts` (TypeScript signale celle qui manque), puis utilise-la via `const { s } = useI18n()`. `npm run check:i18n` signale tout texte resté en dur dans les écrans.
 
 ## Vérifications
 
 ```bash
 npm run typecheck
 npm run lint
+npm run check:i18n
 ```
