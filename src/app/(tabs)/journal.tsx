@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
+import { JournalMap } from '../../components/JournalMap';
 import { AnimalAvatar, Button, StoredImage, TypeBadge } from '../../components/ui';
 import { dexNumber, getAnimal } from '../../data/animals';
 import { useI18n } from '../../i18n';
@@ -20,7 +21,10 @@ export default function JournalScreen() {
       contentContainerStyle={styles.list}
       ListHeaderComponent={
         sorted.length ? (
-          <Text style={styles.header}>{s.journal.count(sorted.length)}</Text>
+          <View>
+            <JournalMap sightings={sorted} />
+            <Text style={styles.header}>{s.journal.count(sorted.length)}</Text>
+          </View>
         ) : undefined
       }
       ListEmptyComponent={

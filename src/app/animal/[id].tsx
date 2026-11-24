@@ -3,6 +3,7 @@ import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from '
 
 import { colors, radius } from '../../components/theme';
 import { ConservationCard } from '../../components/ConservationCard';
+import { SpeciesMap } from '../../components/SpeciesMap';
 import { AnimalAvatar, Button, Card, RarityStars, StoredImage } from '../../components/ui';
 import { ANIMALS, dexNumber, getAnimal } from '../../data/animals';
 import { CATEGORIES, RARITIES, STATE_ORDER } from '../../data/meta';
@@ -112,6 +113,10 @@ export default function AnimalScreen() {
               })}
             </View>
             <Text style={styles.small}>{STATE_ORDER.filter((code) => animal.states.includes(code)).map((code) => s.states[code]).join(' · ')}</Text>
+          </View>
+          <View style={{ gap: 6 }}>
+            <Text style={styles.label}>{s.map.title}</Text>
+            <SpeciesMap animal={animal} sightings={sightings} />
           </View>
         </Card>
 
