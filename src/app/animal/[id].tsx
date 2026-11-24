@@ -2,9 +2,10 @@ import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
+import { ConservationCard } from '../../components/ConservationCard';
 import { AnimalAvatar, Button, Card, RarityStars, StoredImage } from '../../components/ui';
 import { ANIMALS, dexNumber, getAnimal } from '../../data/animals';
-import { CATEGORIES, CONSERVATION, CONSERVATION_ORDER, RARITIES, STATE_ORDER } from '../../data/meta';
+import { CATEGORIES, RARITIES, STATE_ORDER } from '../../data/meta';
 import { useI18n } from '../../i18n';
 import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
@@ -32,7 +33,6 @@ export default function AnimalScreen() {
   const sightings = [...(progress.sightingsByAnimal.get(animal.id) ?? [])].reverse();
   const cover = sightings.find((x) => x.photoUri)?.photoUri;
   const color = CATEGORIES[animal.category].color;
-  const consColor = CONSERVATION[animal.conservation].color;
   const prev = getAnimal(animal.id - 1);
   const next = getAnimal(animal.id + 1);
 
@@ -100,20 +100,6 @@ export default function AnimalScreen() {
         <Card style={{ gap: 12 }}>
           <Info label={s.animal.habitat} value={animal.habitat[lang]} />
           <View style={{ gap: 6 }}>
-            <Text style={styles.label}>{s.animal.conservation}</Text>
-            <View style={styles.consRow}>
-              {CONSERVATION_ORDER.map((k) => (
-                <View
-                  key={k}
-                  style={[styles.consCell, { backgroundColor: k === animal.conservation ? CONSERVATION[k].color : '#EEE9DD' }]}
-                >
-                  <Text style={[styles.consCode, { color: k === animal.conservation ? '#fff' : colors.muted }]}>{k}</Text>
-                </View>
-              ))}
-            </View>
-            <Text style={[styles.text, { color: consColor, fontWeight: '800' }]}>{s.conservation[animal.conservation]}</Text>
-          </View>
-          <View style={{ gap: 6 }}>
             <Text style={styles.label}>{s.animal.whereToSee}</Text>
             <View style={styles.states}>
               {STATE_ORDER.map((code) => {
@@ -128,6 +114,8 @@ export default function AnimalScreen() {
             <Text style={styles.small}>{STATE_ORDER.filter((code) => animal.states.includes(code)).map((code) => s.states[code]).join(' · ')}</Text>
           </View>
         </Card>
+
+        <ConservationCard animal={animal} />
 
         {discovered ? (
           <View style={{ gap: 10 }}>
@@ -202,9 +190,6 @@ const styles = StyleSheet.create({
   text: { fontSize: 15, color: colors.ink, lineHeight: 21 },
   label: { fontSize: 12, fontWeight: '800', color: colors.muted, textTransform: 'uppercase', letterSpacing: 0.5 },
   small: { fontSize: 12, color: colors.muted },
-  consRow: { flexDirection: 'row', gap: 4 },
-  consCell: { flex: 1, paddingVertical: 6, borderRadius: 6, alignItems: 'center' },
-  consCode: { fontWeight: '900', fontSize: 12 },
   states: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   stateChip: { paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
   stateText: { fontWeight: '800', fontSize: 12 },

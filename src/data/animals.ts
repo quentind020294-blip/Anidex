@@ -12,7 +12,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Kangourou roux", en: "Red Kangaroo" },
     scientific: "Osphranter rufus",
-    category: 'mammifere', rarity: 'commun', emoji: "🦘", conservation: 'LC',
+    category: 'mammifere', rarity: 'commun', emoji: "🦘",
     states: ['NSW', 'QLD', 'SA', 'WA', 'NT'],
     habitat: {
       fr: "Plaines arides et semi-arides de l’intérieur",
@@ -30,7 +30,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Kangourou gris de l’Est", en: "Eastern Grey Kangaroo" },
     scientific: "Macropus giganteus",
-    category: 'mammifere', rarity: 'commun', emoji: "🦘", conservation: 'LC',
+    category: 'mammifere', rarity: 'commun', emoji: "🦘",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts claires, prairies, terrains de golf",
@@ -48,7 +48,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Wallaby à cou rouge", en: "Red-necked Wallaby" },
     scientific: "Notamacropus rufogriseus",
-    category: 'mammifere', rarity: 'commun', emoji: "🦘", conservation: 'LC',
+    category: 'mammifere', rarity: 'commun', emoji: "🦘",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts d’eucalyptus et lisières",
@@ -66,7 +66,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Wallaroo commun", en: "Common Wallaroo" },
     scientific: "Osphranter robustus",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🦘", conservation: 'LC',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🦘",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Zones rocheuses et escarpements",
@@ -84,7 +84,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Quokka", en: "Quokka" },
     scientific: "Setonix brachyurus",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🦘", conservation: 'VU',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🦘",
     states: ['WA'],
     habitat: {
       fr: "Île de Rottnest et forêts du sud-ouest",
@@ -102,7 +102,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Koala", en: "Koala" },
     scientific: "Phascolarctos cinereus",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🐨", conservation: 'VU',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🐨",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts d’eucalyptus",
@@ -120,7 +120,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Wombat commun", en: "Common Wombat" },
     scientific: "Vombatus ursinus",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🐻", conservation: 'LC',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🐻",
     states: ['NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts, landes et prairies tempérées",
@@ -138,7 +138,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Ornithorynque", en: "Platypus" },
     scientific: "Ornithorhynchus anatinus",
-    category: 'mammifere', rarity: 'rare', emoji: "🦫", conservation: 'NT',
+    category: 'mammifere', rarity: 'rare', emoji: "🦫",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Rivières et ruisseaux d’eau douce",
@@ -156,7 +156,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Échidné à nez court", en: "Short-beaked Echidna" },
     scientific: "Tachyglossus aculeatus",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🦔", conservation: 'LC',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🦔",
     states: ALL,
     habitat: {
       fr: "Presque tous les milieux, du désert à la forêt",
@@ -174,7 +174,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Diable de Tasmanie", en: "Tasmanian Devil" },
     scientific: "Sarcophilus harrisii",
-    category: 'mammifere', rarity: 'rare', emoji: "😈", conservation: 'EN',
+    category: 'mammifere', rarity: 'rare', emoji: "😈",
     states: ['TAS'],
     habitat: {
       fr: "Forêts et bocages de Tasmanie",
@@ -192,7 +192,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Dingo", en: "Dingo" },
     scientific: "Canis dingo",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🐕", conservation: 'LC',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🐕",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Déserts, forêts, côtes",
@@ -210,7 +210,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Phalanger renard", en: "Common Brushtail Possum" },
     scientific: "Trichosurus vulpecula",
-    category: 'mammifere', rarity: 'commun', emoji: "🐿️", conservation: 'LC',
+    category: 'mammifere', rarity: 'commun', emoji: "🐿️",
     states: ALL,
     habitat: {
       fr: "Forêts, parcs et… greniers urbains",
@@ -228,7 +228,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Pseudocheire commun", en: "Common Ringtail Possum" },
     scientific: "Pseudocheirus peregrinus",
-    category: 'mammifere', rarity: 'commun', emoji: "🐿️", conservation: 'LC',
+    category: 'mammifere', rarity: 'commun', emoji: "🐿️",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts, broussailles et jardins",
@@ -246,7 +246,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Phalanger volant", en: "Sugar Glider" },
     scientific: "Petaurus breviceps",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🐿️", conservation: 'LC',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🐿️",
     states: ALL,
     habitat: {
       fr: "Forêts d’eucalyptus",
@@ -264,7 +264,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Numbat", en: "Numbat" },
     scientific: "Myrmecobius fasciatus",
-    category: 'mammifere', rarity: 'legendaire', emoji: "🐾", conservation: 'EN',
+    category: 'mammifere', rarity: 'legendaire', emoji: "🐾",
     states: ['WA', 'SA'],
     habitat: {
       fr: "Forêts de wandoo du sud-ouest",
@@ -282,7 +282,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Grand bilby", en: "Greater Bilby" },
     scientific: "Macrotis lagotis",
-    category: 'mammifere', rarity: 'legendaire', emoji: "🐰", conservation: 'VU',
+    category: 'mammifere', rarity: 'legendaire', emoji: "🐰",
     states: ['WA', 'NT', 'QLD'],
     habitat: {
       fr: "Déserts et savanes arides",
@@ -300,7 +300,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Quoll tacheté", en: "Spotted-tailed Quoll" },
     scientific: "Dasyurus maculatus",
-    category: 'mammifere', rarity: 'rare', emoji: "🐆", conservation: 'NT',
+    category: 'mammifere', rarity: 'rare', emoji: "🐆",
     states: ['QLD', 'NSW', 'VIC', 'TAS'],
     habitat: {
       fr: "Forêts humides et sclérophylles",
@@ -318,7 +318,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Bandicoot à nez long", en: "Long-nosed Bandicoot" },
     scientific: "Perameles nasuta",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🐀", conservation: 'LC',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🐀",
     states: ['QLD', 'NSW', 'VIC'],
     habitat: {
       fr: "Forêts, landes et jardins",
@@ -336,7 +336,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Renard volant à tête grise", en: "Grey-headed Flying-fox" },
     scientific: "Pteropus poliocephalus",
-    category: 'mammifere', rarity: 'commun', emoji: "🦇", conservation: 'VU',
+    category: 'mammifere', rarity: 'commun', emoji: "🦇",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts côtières, parcs urbains",
@@ -354,7 +354,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Wallaby des rochers à pieds jaunes", en: "Yellow-footed Rock-wallaby" },
     scientific: "Petrogale xanthopus",
-    category: 'mammifere', rarity: 'rare', emoji: "🦘", conservation: 'NT',
+    category: 'mammifere', rarity: 'rare', emoji: "🦘",
     states: ['SA', 'NSW', 'QLD'],
     habitat: {
       fr: "Gorges et falaises de l’intérieur",
@@ -372,7 +372,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Pademelon de Tasmanie", en: "Tasmanian Pademelon" },
     scientific: "Thylogale billardierii",
-    category: 'mammifere', rarity: 'peu-commun', emoji: "🦘", conservation: 'LC',
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🦘",
     states: ['TAS'],
     habitat: {
       fr: "Sous-bois humides de Tasmanie",
@@ -390,7 +390,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Kangourou arboricole de Lumholtz", en: "Lumholtz’s Tree-kangaroo" },
     scientific: "Dendrolagus lumholtzi",
-    category: 'mammifere', rarity: 'legendaire', emoji: "🦘", conservation: 'NT',
+    category: 'mammifere', rarity: 'legendaire', emoji: "🦘",
     states: ['QLD'],
     habitat: {
       fr: "Forêts tropicales des Atherton Tablelands",
@@ -408,7 +408,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Lapin de garenne", en: "European Rabbit" },
     scientific: "Oryctolagus cuniculus",
-    category: 'mammifere', rarity: 'commun', emoji: "🐇", conservation: 'LC',
+    category: 'mammifere', rarity: 'commun', emoji: "🐇",
     states: ALL,
     introduced: true,
     habitat: {
@@ -427,7 +427,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Renard roux", en: "Red Fox" },
     scientific: "Vulpes vulpes",
-    category: 'mammifere', rarity: 'commun', emoji: "🦊", conservation: 'LC',
+    category: 'mammifere', rarity: 'commun', emoji: "🦊",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     introduced: true,
     habitat: {
@@ -446,7 +446,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Dromadaire sauvage", en: "Feral Camel" },
     scientific: "Camelus dromedarius",
-    category: 'mammifere', rarity: 'rare', emoji: "🐫", conservation: 'LC',
+    category: 'mammifere', rarity: 'rare', emoji: "🐫",
     states: ['WA', 'SA', 'NT', 'QLD'],
     introduced: true,
     habitat: {
@@ -466,7 +466,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Émeu d’Australie", en: "Emu" },
     scientific: "Dromaius novaehollandiae",
-    category: 'oiseau', rarity: 'commun', emoji: "🐦", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🐦",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Plaines, savanes et forêts claires",
@@ -484,7 +484,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Casoar à casque", en: "Southern Cassowary" },
     scientific: "Casuarius casuarius",
-    category: 'oiseau', rarity: 'legendaire', emoji: "🦤", conservation: 'LC',
+    category: 'oiseau', rarity: 'legendaire', emoji: "🦤",
     states: ['QLD'],
     dangerous: true,
     habitat: {
@@ -503,7 +503,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Martin-chasseur géant", en: "Laughing Kookaburra" },
     scientific: "Dacelo novaeguineae",
-    category: 'oiseau', rarity: 'commun', emoji: "🐦", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🐦",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'TAS', 'ACT', 'WA'],
     habitat: {
       fr: "Forêts claires, parcs et jardins",
@@ -521,7 +521,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Cacatoès à huppe jaune", en: "Sulphur-crested Cockatoo" },
     scientific: "Cacatua galerita",
-    category: 'oiseau', rarity: 'commun', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🦜",
     states: ALL,
     habitat: {
       fr: "Forêts, parcs et villes",
@@ -539,7 +539,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Cacatoès rosalbin", en: "Galah" },
     scientific: "Eolophus roseicapilla",
-    category: 'oiseau', rarity: 'commun', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🦜",
     states: ALL,
     habitat: {
       fr: "Plaines, champs et villes",
@@ -557,7 +557,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Loriquet arc-en-ciel", en: "Rainbow Lorikeet" },
     scientific: "Trichoglossus moluccanus",
-    category: 'oiseau', rarity: 'commun', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🦜",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'TAS', 'ACT'],
     habitat: {
       fr: "Forêts côtières, jardins fleuris",
@@ -575,7 +575,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Perruche ondulée", en: "Budgerigar" },
     scientific: "Melopsittacus undulatus",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦜",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Savanes et prairies arides",
@@ -593,7 +593,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Calopsitte élégante", en: "Cockatiel" },
     scientific: "Nymphicus hollandicus",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦜",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Zones arides proches de l’eau",
@@ -611,7 +611,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Cacatoès banksien", en: "Red-tailed Black Cockatoo" },
     scientific: "Calyptorhynchus banksii",
-    category: 'oiseau', rarity: 'rare', emoji: "🐦‍⬛", conservation: 'LC',
+    category: 'oiseau', rarity: 'rare', emoji: "🐦‍⬛",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Forêts claires et savanes",
@@ -629,7 +629,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Cacatoès de Leadbeater", en: "Major Mitchell’s Cockatoo" },
     scientific: "Lophochroa leadbeateri",
-    category: 'oiseau', rarity: 'rare', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'rare', emoji: "🦜",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT'],
     habitat: {
       fr: "Bush aride et zones de mallee",
@@ -647,7 +647,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Ménure superbe", en: "Superb Lyrebird" },
     scientific: "Menura novaehollandiae",
-    category: 'oiseau', rarity: 'rare', emoji: "🐦", conservation: 'LC',
+    category: 'oiseau', rarity: 'rare', emoji: "🐦",
     states: ['VIC', 'NSW', 'QLD', 'ACT', 'TAS'],
     habitat: {
       fr: "Forêts humides de montagne",
@@ -665,7 +665,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Cassican flûteur", en: "Australian Magpie" },
     scientific: "Gymnorhina tibicen",
-    category: 'oiseau', rarity: 'commun', emoji: "🐦‍⬛", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🐦‍⬛",
     states: ALL,
     habitat: {
       fr: "Parcs, terrains de sport, campagnes",
@@ -683,7 +683,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Ibis blanc d’Australie", en: "Australian White Ibis" },
     scientific: "Threskiornis molucca",
-    category: 'oiseau', rarity: 'commun', emoji: "🦩", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🦩",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'NT', 'WA', 'ACT'],
     habitat: {
       fr: "Zones humides, parcs urbains",
@@ -701,7 +701,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Pélican à lunettes", en: "Australian Pelican" },
     scientific: "Pelecanus conspicillatus",
-    category: 'oiseau', rarity: 'commun', emoji: "🐦", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🐦",
     states: ALL,
     habitat: {
       fr: "Lacs, estuaires et côtes",
@@ -719,7 +719,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Cygne noir", en: "Black Swan" },
     scientific: "Cygnus atratus",
-    category: 'oiseau', rarity: 'commun', emoji: "🦢", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🦢",
     states: ALL,
     habitat: {
       fr: "Lacs, marais et estuaires",
@@ -737,7 +737,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Manchot pygmée", en: "Little Penguin" },
     scientific: "Eudyptula minor",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🐧", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🐧",
     states: ['NSW', 'VIC', 'TAS', 'SA', 'WA'],
     habitat: {
       fr: "Côtes et îles du sud",
@@ -755,7 +755,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Mérion superbe", en: "Superb Fairywren" },
     scientific: "Malurus cyaneus",
-    category: 'oiseau', rarity: 'commun', emoji: "🐦", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🐦",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Buissons, jardins et parcs",
@@ -773,7 +773,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Aigle d’Australie", en: "Wedge-tailed Eagle" },
     scientific: "Aquila audax",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦅", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦅",
     states: ALL,
     habitat: {
       fr: "Presque tous les milieux ouverts",
@@ -791,7 +791,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Pygargue blagre", en: "White-bellied Sea-Eagle" },
     scientific: "Haliaeetus leucogaster",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦅", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦅",
     states: ALL,
     habitat: {
       fr: "Côtes, grands lacs et rivières",
@@ -809,7 +809,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Podarge gris", en: "Tawny Frogmouth" },
     scientific: "Podargus strigoides",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦉", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦉",
     states: ALL,
     habitat: {
       fr: "Forêts claires et parcs",
@@ -827,7 +827,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Ninoxe boubouk", en: "Southern Boobook" },
     scientific: "Ninox boobook",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦉", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦉",
     states: ALL,
     habitat: {
       fr: "Forêts et zones boisées",
@@ -845,7 +845,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Ninoxe puissante", en: "Powerful Owl" },
     scientific: "Ninox strenua",
-    category: 'oiseau', rarity: 'rare', emoji: "🦉", conservation: 'LC',
+    category: 'oiseau', rarity: 'rare', emoji: "🦉",
     states: ['QLD', 'NSW', 'VIC', 'ACT'],
     habitat: {
       fr: "Forêts humides à grands arbres",
@@ -863,7 +863,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Grue brolga", en: "Brolga" },
     scientific: "Antigone rubicunda",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦩", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦩",
     states: ['QLD', 'NT', 'WA', 'NSW', 'VIC'],
     habitat: {
       fr: "Zones humides et prairies inondables",
@@ -881,7 +881,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Jabiru d’Asie", en: "Black-necked Stork" },
     scientific: "Ephippiorhynchus asiaticus",
-    category: 'oiseau', rarity: 'rare', emoji: "🦩", conservation: 'NT',
+    category: 'oiseau', rarity: 'rare', emoji: "🦩",
     states: ['QLD', 'NT', 'WA', 'NSW'],
     habitat: {
       fr: "Marais et billabongs tropicaux",
@@ -899,7 +899,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Méliphage bruyant", en: "Noisy Miner" },
     scientific: "Manorina melanocephala",
-    category: 'oiseau', rarity: 'commun', emoji: "🐦", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🐦",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Parcs, jardins et forêts claires",
@@ -917,7 +917,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Jardinier satiné", en: "Satin Bowerbird" },
     scientific: "Ptilonorhynchus violaceus",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🐦‍⬛", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🐦‍⬛",
     states: ['QLD', 'NSW', 'VIC', 'ACT'],
     habitat: {
       fr: "Forêts humides et jardins",
@@ -935,7 +935,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Talégalle de Latham", en: "Australian Brushturkey" },
     scientific: "Alectura lathami",
-    category: 'oiseau', rarity: 'commun', emoji: "🦃", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🦃",
     states: ['QLD', 'NSW'],
     habitat: {
       fr: "Forêts humides, jardins de banlieue",
@@ -953,7 +953,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Diamant de Gould", en: "Gouldian Finch" },
     scientific: "Chloebia gouldiae",
-    category: 'oiseau', rarity: 'legendaire', emoji: "🐦", conservation: 'NT',
+    category: 'oiseau', rarity: 'legendaire', emoji: "🐦",
     states: ['WA', 'NT', 'QLD'],
     habitat: {
       fr: "Savanes tropicales du nord",
@@ -971,7 +971,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Pardalote pointillé", en: "Spotted Pardalote" },
     scientific: "Pardalotus punctatus",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🐦", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🐦",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'WA', 'ACT'],
     habitat: {
       fr: "Forêts d’eucalyptus",
@@ -989,7 +989,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Rhipidure hochequeue", en: "Willie Wagtail" },
     scientific: "Rhipidura leucophrys",
-    category: 'oiseau', rarity: 'commun', emoji: "🐦‍⬛", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🐦‍⬛",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Partout sauf en forêt dense",
@@ -1007,7 +1007,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Perruche royale", en: "Australian King-Parrot" },
     scientific: "Alisterus scapularis",
-    category: 'oiseau', rarity: 'peu-commun', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🦜",
     states: ['QLD', 'NSW', 'VIC', 'ACT'],
     habitat: {
       fr: "Forêts humides et jardins",
@@ -1025,7 +1025,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Rosella de Pennant", en: "Crimson Rosella" },
     scientific: "Platycercus elegans",
-    category: 'oiseau', rarity: 'commun', emoji: "🦜", conservation: 'LC',
+    category: 'oiseau', rarity: 'commun', emoji: "🦜",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts de montagne et parcs",
@@ -1044,7 +1044,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Crocodile marin", en: "Saltwater Crocodile" },
     scientific: "Crocodylus porosus",
-    category: 'reptile', rarity: 'rare', emoji: "🐊", conservation: 'LC',
+    category: 'reptile', rarity: 'rare', emoji: "🐊",
     states: ['QLD', 'NT', 'WA'],
     dangerous: true,
     habitat: {
@@ -1063,7 +1063,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Crocodile de Johnston", en: "Freshwater Crocodile" },
     scientific: "Crocodylus johnstoni",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🐊", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🐊",
     states: ['QLD', 'NT', 'WA'],
     habitat: {
       fr: "Rivières et gorges d’eau douce",
@@ -1081,7 +1081,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Lézard à collerette", en: "Frill-necked Lizard" },
     scientific: "Chlamydosaurus kingii",
-    category: 'reptile', rarity: 'rare', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'rare', emoji: "🦎",
     states: ['QLD', 'NT', 'WA'],
     habitat: {
       fr: "Savanes et forêts tropicales sèches",
@@ -1099,7 +1099,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Diable cornu", en: "Thorny Devil" },
     scientific: "Moloch horridus",
-    category: 'reptile', rarity: 'legendaire', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'legendaire', emoji: "🦎",
     states: ['WA', 'SA', 'NT', 'QLD'],
     habitat: {
       fr: "Déserts de sable",
@@ -1117,7 +1117,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Scinque à langue bleue", en: "Eastern Blue-tongued Lizard" },
     scientific: "Tiliqua scincoides",
-    category: 'reptile', rarity: 'commun', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'commun', emoji: "🦎",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'NT', 'WA', 'ACT'],
     habitat: {
       fr: "Jardins, forêts claires, prairies",
@@ -1135,7 +1135,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Scinque à queue courte", en: "Shingleback Lizard" },
     scientific: "Tiliqua rugosa",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🦎",
     states: ['WA', 'SA', 'NSW', 'VIC', 'QLD'],
     habitat: {
       fr: "Zones semi-arides et mallee",
@@ -1153,7 +1153,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Dragon barbu", en: "Central Bearded Dragon" },
     scientific: "Pogona vitticeps",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🦎",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'NT'],
     habitat: {
       fr: "Zones arides et bois secs",
@@ -1171,7 +1171,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Dragon d’eau australien", en: "Australian Water Dragon" },
     scientific: "Intellagama lesueurii",
-    category: 'reptile', rarity: 'commun', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'commun', emoji: "🦎",
     states: ['QLD', 'NSW', 'VIC', 'ACT'],
     habitat: {
       fr: "Berges des cours d’eau, parcs urbains",
@@ -1189,7 +1189,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Varan bigarré", en: "Lace Monitor" },
     scientific: "Varanus varius",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🦎",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
     habitat: {
       fr: "Forêts et aires de pique-nique",
@@ -1207,7 +1207,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Perentie", en: "Perentie" },
     scientific: "Varanus giganteus",
-    category: 'reptile', rarity: 'rare', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'rare', emoji: "🦎",
     states: ['WA', 'SA', 'NT', 'QLD'],
     habitat: {
       fr: "Déserts rocheux du centre",
@@ -1225,7 +1225,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Gecko à queue de feuille", en: "Northern Leaf-tailed Gecko" },
     scientific: "Saltuarius cornutus",
-    category: 'reptile', rarity: 'rare', emoji: "🦎", conservation: 'LC',
+    category: 'reptile', rarity: 'rare', emoji: "🦎",
     states: ['QLD'],
     habitat: {
       fr: "Forêts tropicales du nord-est",
@@ -1243,7 +1243,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Taïpan du désert", en: "Inland Taipan" },
     scientific: "Oxyuranus microlepidotus",
-    category: 'reptile', rarity: 'legendaire', emoji: "🐍", conservation: 'LC',
+    category: 'reptile', rarity: 'legendaire', emoji: "🐍",
     states: ['QLD', 'SA'],
     dangerous: true,
     habitat: {
@@ -1262,7 +1262,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Serpent brun de l’Est", en: "Eastern Brown Snake" },
     scientific: "Pseudonaja textilis",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🐍", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🐍",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'NT', 'ACT'],
     dangerous: true,
     habitat: {
@@ -1281,7 +1281,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Serpent noir à ventre rouge", en: "Red-bellied Black Snake" },
     scientific: "Pseudechis porphyriacus",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🐍", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🐍",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
     dangerous: true,
     habitat: {
@@ -1300,7 +1300,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Python tapis", en: "Carpet Python" },
     scientific: "Morelia spilota",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🐍", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🐍",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Forêts, zones rocheuses et greniers",
@@ -1318,7 +1318,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Chélodine à long cou", en: "Eastern Long-necked Turtle" },
     scientific: "Chelodina longicollis",
-    category: 'reptile', rarity: 'peu-commun', emoji: "🐢", conservation: 'LC',
+    category: 'reptile', rarity: 'peu-commun', emoji: "🐢",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
     habitat: {
       fr: "Marais, étangs et barrages",
@@ -1337,7 +1337,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Rainette de White", en: "Australian Green Tree Frog" },
     scientific: "Ranoides caerulea",
-    category: 'amphibien', rarity: 'commun', emoji: "🐸", conservation: 'LC',
+    category: 'amphibien', rarity: 'commun', emoji: "🐸",
     states: ['QLD', 'NSW', 'NT', 'WA', 'SA'],
     habitat: {
       fr: "Forêts, jardins et… toilettes !",
@@ -1355,7 +1355,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Rainette aux yeux rouges", en: "Red-eyed Tree Frog" },
     scientific: "Litoria chloris",
-    category: 'amphibien', rarity: 'peu-commun', emoji: "🐸", conservation: 'LC',
+    category: 'amphibien', rarity: 'peu-commun', emoji: "🐸",
     states: ['QLD', 'NSW'],
     habitat: {
       fr: "Forêts humides de la côte est",
@@ -1373,7 +1373,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Grenouille rayée des marais", en: "Striped Marsh Frog" },
     scientific: "Limnodynastes peronii",
-    category: 'amphibien', rarity: 'commun', emoji: "🐸", conservation: 'LC',
+    category: 'amphibien', rarity: 'commun', emoji: "🐸",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
     habitat: {
       fr: "Étangs, fossés et mares de jardin",
@@ -1391,7 +1391,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Grenouille corroboree", en: "Southern Corroboree Frog" },
     scientific: "Pseudophryne corroboree",
-    category: 'amphibien', rarity: 'legendaire', emoji: "🐸", conservation: 'CR',
+    category: 'amphibien', rarity: 'legendaire', emoji: "🐸",
     states: ['NSW', 'ACT'],
     habitat: {
       fr: "Tourbières alpines du Kosciuszko",
@@ -1409,7 +1409,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Crapaud buffle", en: "Cane Toad" },
     scientific: "Rhinella marina",
-    category: 'amphibien', rarity: 'commun', emoji: "🐸", conservation: 'LC',
+    category: 'amphibien', rarity: 'commun', emoji: "🐸",
     states: ['QLD', 'NSW', 'NT', 'WA'],
     introduced: true,
     dangerous: true,
@@ -1430,7 +1430,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Requin blanc", en: "Great White Shark" },
     scientific: "Carcharodon carcharias",
-    category: 'marin', rarity: 'legendaire', emoji: "🦈", conservation: 'VU',
+    category: 'marin', rarity: 'legendaire', emoji: "🦈",
     states: ['NSW', 'VIC', 'TAS', 'SA', 'WA', 'QLD'],
     dangerous: true,
     habitat: {
@@ -1449,7 +1449,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Requin-baleine", en: "Whale Shark" },
     scientific: "Rhincodon typus",
-    category: 'marin', rarity: 'legendaire', emoji: "🦈", conservation: 'EN',
+    category: 'marin', rarity: 'legendaire', emoji: "🦈",
     states: ['WA', 'QLD', 'NT'],
     habitat: {
       fr: "Récif de Ningaloo et eaux tropicales",
@@ -1467,7 +1467,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Baleine à bosse", en: "Humpback Whale" },
     scientific: "Megaptera novaeangliae",
-    category: 'marin', rarity: 'rare', emoji: "🐋", conservation: 'LC',
+    category: 'marin', rarity: 'rare', emoji: "🐋",
     states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'WA', 'NT'],
     habitat: {
       fr: "Côtes est et ouest lors des migrations",
@@ -1485,7 +1485,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Grand dauphin de l’Indo-Pacifique", en: "Indo-Pacific Bottlenose Dolphin" },
     scientific: "Tursiops aduncus",
-    category: 'marin', rarity: 'peu-commun', emoji: "🐬", conservation: 'LC',
+    category: 'marin', rarity: 'peu-commun', emoji: "🐬",
     states: ALL,
     habitat: {
       fr: "Baies et eaux côtières",
@@ -1503,7 +1503,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Dugong", en: "Dugong" },
     scientific: "Dugong dugon",
-    category: 'marin', rarity: 'rare', emoji: "🐄", conservation: 'VU',
+    category: 'marin', rarity: 'rare', emoji: "🐄",
     states: ['QLD', 'NT', 'WA'],
     habitat: {
       fr: "Herbiers marins tropicaux",
@@ -1521,7 +1521,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Tortue verte", en: "Green Sea Turtle" },
     scientific: "Chelonia mydas",
-    category: 'marin', rarity: 'peu-commun', emoji: "🐢", conservation: 'EN',
+    category: 'marin', rarity: 'peu-commun', emoji: "🐢",
     states: ['QLD', 'NT', 'WA', 'NSW'],
     habitat: {
       fr: "Récifs coralliens et herbiers",
@@ -1539,7 +1539,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Otarie à fourrure d’Australie", en: "Australian Fur Seal" },
     scientific: "Arctocephalus pusillus doriferus",
-    category: 'marin', rarity: 'peu-commun', emoji: "🦭", conservation: 'LC',
+    category: 'marin', rarity: 'peu-commun', emoji: "🦭",
     states: ['VIC', 'TAS', 'NSW', 'SA'],
     habitat: {
       fr: "Îles rocheuses du détroit de Bass",
@@ -1557,7 +1557,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Otarie cendrée", en: "Australian Sea Lion" },
     scientific: "Neophoca cinerea",
-    category: 'marin', rarity: 'rare', emoji: "🦭", conservation: 'EN',
+    category: 'marin', rarity: 'rare', emoji: "🦭",
     states: ['SA', 'WA'],
     habitat: {
       fr: "Plages et îles du sud",
@@ -1575,7 +1575,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Dragon de mer feuillu", en: "Leafy Seadragon" },
     scientific: "Phycodurus eques",
-    category: 'marin', rarity: 'legendaire', emoji: "🐉", conservation: 'LC',
+    category: 'marin', rarity: 'legendaire', emoji: "🐉",
     states: ['SA', 'WA', 'VIC'],
     habitat: {
       fr: "Forêts de kelp du sud",
@@ -1593,7 +1593,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Poisson-clown", en: "Orange Clownfish" },
     scientific: "Amphiprion percula",
-    category: 'marin', rarity: 'peu-commun', emoji: "🐠", conservation: 'LC',
+    category: 'marin', rarity: 'peu-commun', emoji: "🐠",
     states: ['QLD'],
     habitat: {
       fr: "Anémones de la Grande Barrière de corail",
@@ -1611,7 +1611,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Napoléon", en: "Humphead Wrasse" },
     scientific: "Cheilinus undulatus",
-    category: 'marin', rarity: 'rare', emoji: "🐟", conservation: 'EN',
+    category: 'marin', rarity: 'rare', emoji: "🐟",
     states: ['QLD', 'WA'],
     habitat: {
       fr: "Récifs coralliens",
@@ -1629,7 +1629,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Raie manta de récif", en: "Reef Manta Ray" },
     scientific: "Mobula alfredi",
-    category: 'marin', rarity: 'rare', emoji: "🐟", conservation: 'VU',
+    category: 'marin', rarity: 'rare', emoji: "🐟",
     states: ['QLD', 'WA'],
     habitat: {
       fr: "Récifs et stations de nettoyage",
@@ -1647,7 +1647,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Seiche géante d’Australie", en: "Giant Australian Cuttlefish" },
     scientific: "Sepia apama",
-    category: 'marin', rarity: 'rare', emoji: "🦑", conservation: 'NT',
+    category: 'marin', rarity: 'rare', emoji: "🦑",
     states: ['SA', 'WA', 'VIC', 'TAS', 'NSW', 'QLD'],
     habitat: {
       fr: "Récifs rocheux du golfe de Spencer",
@@ -1665,7 +1665,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Pieuvre à anneaux bleus", en: "Southern Blue-ringed Octopus" },
     scientific: "Hapalochlaena maculosa",
-    category: 'marin', rarity: 'rare', emoji: "🐙", conservation: 'LC',
+    category: 'marin', rarity: 'rare', emoji: "🐙",
     states: ['NSW', 'VIC', 'TAS', 'SA', 'WA'],
     dangerous: true,
     habitat: {
@@ -1684,7 +1684,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Méduse-boîte", en: "Box Jellyfish" },
     scientific: "Chironex fleckeri",
-    category: 'marin', rarity: 'rare', emoji: "🪼", conservation: 'LC',
+    category: 'marin', rarity: 'rare', emoji: "🪼",
     states: ['QLD', 'NT', 'WA'],
     dangerous: true,
     habitat: {
@@ -1703,7 +1703,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Crabe soldat", en: "Soldier Crab" },
     scientific: "Mictyris longicarpus",
-    category: 'marin', rarity: 'commun', emoji: "🦀", conservation: 'LC',
+    category: 'marin', rarity: 'commun', emoji: "🦀",
     states: ['QLD', 'NSW'],
     habitat: {
       fr: "Vasières et plages abritées",
@@ -1722,7 +1722,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Atrax de Sydney", en: "Sydney Funnel-web Spider" },
     scientific: "Atrax robustus",
-    category: 'invertebre', rarity: 'rare', emoji: "🕷️", conservation: 'LC',
+    category: 'arachnide', rarity: 'rare', emoji: "🕷️",
     states: ['NSW'],
     dangerous: true,
     habitat: {
@@ -1741,7 +1741,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Veuve à dos rouge", en: "Redback Spider" },
     scientific: "Latrodectus hasselti",
-    category: 'invertebre', rarity: 'commun', emoji: "🕷️", conservation: 'LC',
+    category: 'arachnide', rarity: 'commun', emoji: "🕷️",
     states: ALL,
     dangerous: true,
     habitat: {
@@ -1760,7 +1760,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Araignée chasseresse", en: "Grey Huntsman Spider" },
     scientific: "Holconia immanis",
-    category: 'invertebre', rarity: 'commun', emoji: "🕷️", conservation: 'LC',
+    category: 'arachnide', rarity: 'commun', emoji: "🕷️",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Écorces d’arbres, murs et pare-soleil de voiture",
@@ -1778,7 +1778,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Papillon Ulysse", en: "Ulysses Butterfly" },
     scientific: "Papilio ulysses",
-    category: 'invertebre', rarity: 'rare', emoji: "🦋", conservation: 'LC',
+    category: 'insecte', rarity: 'rare', emoji: "🦋",
     states: ['QLD'],
     habitat: {
       fr: "Forêts tropicales du nord du Queensland",
@@ -1796,7 +1796,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Phasme épineux géant", en: "Macleay’s Spectre" },
     scientific: "Extatosoma tiaratum",
-    category: 'invertebre', rarity: 'peu-commun', emoji: "🦗", conservation: 'LC',
+    category: 'insecte', rarity: 'peu-commun', emoji: "🦗",
     states: ['QLD', 'NSW'],
     habitat: {
       fr: "Forêts humides",
@@ -1814,7 +1814,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Phasme de Lord Howe", en: "Lord Howe Island Stick Insect" },
     scientific: "Dryococelus australis",
-    category: 'invertebre', rarity: 'legendaire', emoji: "🦗", conservation: 'CR',
+    category: 'insecte', rarity: 'legendaire', emoji: "🦗",
     states: ['NSW'],
     habitat: {
       fr: "Ball’s Pyramid et programmes d’élevage",
@@ -1832,7 +1832,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Fourmi bouledogue", en: "Red Bull Ant" },
     scientific: "Myrmecia gulosa",
-    category: 'invertebre', rarity: 'commun', emoji: "🐜", conservation: 'LC',
+    category: 'insecte', rarity: 'commun', emoji: "🐜",
     states: ['QLD', 'NSW', 'VIC', 'ACT'],
     dangerous: true,
     habitat: {
@@ -1851,7 +1851,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Cigale verte", en: "Green Grocer Cicada" },
     scientific: "Cyclochila australasiae",
-    category: 'invertebre', rarity: 'commun', emoji: "🦗", conservation: 'LC',
+    category: 'insecte', rarity: 'commun', emoji: "🦗",
     states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
     habitat: {
       fr: "Arbres des parcs et forêts",
@@ -1869,7 +1869,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Abeille à bandes bleues", en: "Blue-banded Bee" },
     scientific: "Amegilla cingulata",
-    category: 'invertebre', rarity: 'peu-commun', emoji: "🐝", conservation: 'LC',
+    category: 'insecte', rarity: 'peu-commun', emoji: "🐝",
     states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Jardins et lisières fleuries",
@@ -1887,7 +1887,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Ver luisant", en: "Glow-worm" },
     scientific: "Arachnocampa richardsae",
-    category: 'invertebre', rarity: 'rare', emoji: "✨", conservation: 'LC',
+    category: 'insecte', rarity: 'rare', emoji: "✨",
     states: ['NSW', 'QLD'],
     habitat: {
       fr: "Grottes et ravins humides",
@@ -1905,7 +1905,7 @@ const RAW: Raw[] = [
   {
     name: { fr: "Yabby", en: "Common Yabby" },
     scientific: "Cherax destructor",
-    category: 'invertebre', rarity: 'peu-commun', emoji: "🦞", conservation: 'LC',
+    category: 'invertebre', rarity: 'peu-commun', emoji: "🦞",
     states: ['NSW', 'VIC', 'QLD', 'SA', 'NT', 'ACT'],
     habitat: {
       fr: "Barrages, rivières et marais",
@@ -1918,6 +1918,841 @@ const RAW: Raw[] = [
     funFact: {
       fr: "Les enfants australiens les pêchent avec un morceau de viande au bout d’une ficelle.",
       en: "Australian kids catch them with a piece of meat tied to a string.",
+    },
+  },
+  // ───────────── Nouvelles espèces (#106 à #151) ─────────────
+  {
+    name: { fr: "Wallaby des marais", en: "Swamp Wallaby" },
+    scientific: "Wallabia bicolor",
+    category: 'mammifere', rarity: 'commun', emoji: "🦘",
+    states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
+    habitat: {
+      fr: "Forêts denses, sous-bois et landes",
+      en: "Dense forest, undergrowth and heathland",
+    },
+    description: {
+      fr: "Wallaby sombre et trapu qui se déplace tête basse dans les sous-bois. Très présent sur Phillip Island.",
+      en: "A dark, stocky wallaby that moves through the undergrowth with its head held low. Common on Phillip Island.",
+    },
+    funFact: {
+      fr: "La femelle peut redevenir gestante avant même la naissance de son petit : un cas unique chez les mammifères.",
+      en: "Females can become pregnant again before their current joey is even born — unique among mammals.",
+    },
+  },
+  {
+    name: { fr: "Chat haret", en: "Feral Cat" },
+    scientific: "Felis catus",
+    category: 'mammifere', rarity: 'commun', emoji: "🐈",
+    states: ALL,
+    introduced: true,
+    habitat: {
+      fr: "Partout, du désert aux forêts et aux îles",
+      en: "Everywhere, from desert to forest and islands",
+    },
+    description: {
+      fr: "Chat domestique retourné à l’état sauvage, présent sur presque tout le territoire australien.",
+      en: "A domestic cat gone wild, found across almost all of Australia.",
+    },
+    funFact: {
+      fr: "Les chats harets tueraient plus d’un milliard d’animaux natifs chaque année en Australie.",
+      en: "Feral cats are estimated to kill more than a billion native animals in Australia every year.",
+    },
+  },
+  {
+    name: { fr: "Guêpe germanique", en: "European Wasp" },
+    scientific: "Vespula germanica",
+    category: 'insecte', rarity: 'commun', emoji: "🐝",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'WA', 'ACT'],
+    introduced: true,
+    habitat: {
+      fr: "Jardins, parcs, aires de pique-nique",
+      en: "Gardens, parks and picnic areas",
+    },
+    description: {
+      fr: "Guêpe jaune et noire arrivée en Australie à la fin des années 1950, agressive près de son nid souterrain.",
+      en: "A yellow-and-black wasp that reached Australia in the late 1950s; aggressive near its underground nest.",
+    },
+    funFact: {
+      fr: "Contrairement à l’abeille, elle peut piquer plusieurs fois.",
+      en: "Unlike a honeybee, it can sting more than once.",
+    },
+  },
+  {
+    name: { fr: "Huîtrier pie australien", en: "Pied Oystercatcher" },
+    scientific: "Haematopus longirostris",
+    category: 'oiseau', rarity: 'commun', emoji: "🐦",
+    states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS', 'NT'],
+    habitat: {
+      fr: "Plages de sable et estuaires",
+      en: "Sandy beaches and estuaries",
+    },
+    description: {
+      fr: "Oiseau de rivage noir et blanc au long bec orange vif et aux pattes roses.",
+      en: "A black-and-white shorebird with a long bright-orange bill and pink legs.",
+    },
+    funFact: {
+      fr: "Malgré son nom anglais (« attrapeur d’huîtres »), il mange surtout des coquillages comme les pipis.",
+      en: "Despite its name, it mostly eats shellfish such as pipis rather than oysters.",
+    },
+  },
+  {
+    name: { fr: "Puffin à bec grêle", en: "Short-tailed Shearwater" },
+    scientific: "Ardenna tenuirostris",
+    category: 'oiseau', rarity: 'commun', emoji: "🐦",
+    states: ['NSW', 'VIC', 'TAS', 'SA'],
+    habitat: {
+      fr: "Îles et côtes du sud ; haute mer le reste de l’année",
+      en: "Southern islands and coasts; the open ocean the rest of the year",
+    },
+    description: {
+      fr: "Oiseau marin surnommé « muttonbird » qui niche par centaines de milliers dans des terriers sur Phillip Island et les îles du détroit de Bass.",
+      en: "A seabird nicknamed the “muttonbird” that nests in burrows by the hundreds of thousands on Phillip Island and the Bass Strait islands.",
+    },
+    funFact: {
+      fr: "Chaque année, il fait un aller-retour de plus de 30 000 km jusqu’au Pacifique Nord.",
+      en: "Every year it makes a round trip of more than 30,000 km to the North Pacific.",
+    },
+  },
+  {
+    name: { fr: "Grenouille criquet de l’Est", en: "Common Eastern Froglet" },
+    scientific: "Crinia signifera",
+    category: 'amphibien', rarity: 'commun', emoji: "🐸",
+    states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
+    habitat: {
+      fr: "Mares, fossés, jardins humides",
+      en: "Ponds, ditches and damp gardens",
+    },
+    description: {
+      fr: "Minuscule grenouille brune, l’une des plus communes du sud-est, qu’on entend bien plus qu’on ne la voit.",
+      en: "A tiny brown frog, one of the most common in the south-east, heard far more often than seen.",
+    },
+    funFact: {
+      fr: "Son chant ressemble au « crick-crick-crick » d’un grillon.",
+      en: "Its call sounds like a cricket’s “crick-crick-crick”.",
+    },
+  },
+  {
+    name: { fr: "Néphile dorée", en: "Australian Golden Orb-weaver" },
+    scientific: "Trichonephila edulis",
+    category: 'arachnide', rarity: 'commun', emoji: "🕷️",
+    states: ['QLD', 'NSW', 'VIC', 'WA', 'SA', 'NT', 'ACT'],
+    habitat: {
+      fr: "Jardins, lisières et forêts claires",
+      en: "Gardens, forest edges and open woodland",
+    },
+    description: {
+      fr: "Grande araignée dont la toile dorée et très solide peut dépasser un mètre de large.",
+      en: "A large spider whose strong, golden web can be more than a metre across.",
+    },
+    funFact: {
+      fr: "Le mâle est beaucoup plus petit que la femelle et vit souvent en bordure de sa toile.",
+      en: "The male is much smaller than the female and often lives on the edge of her web.",
+    },
+  },
+  {
+    name: { fr: "Araignée noire des maisons", en: "Black House Spider" },
+    scientific: "Badumna insignis",
+    category: 'arachnide', rarity: 'commun', emoji: "🕷️",
+    states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'WA', 'ACT'],
+    habitat: {
+      fr: "Coins de fenêtres, murs et écorces",
+      en: "Window corners, walls and tree bark",
+    },
+    description: {
+      fr: "Araignée noire et trapue qui tisse des toiles en entonnoir désordonnées autour des fenêtres.",
+      en: "A stocky black spider that spins messy, funnel-shaped webs around windows.",
+    },
+    funFact: {
+      fr: "Sa morsure est douloureuse mais rarement grave.",
+      en: "Its bite is painful but rarely serious.",
+    },
+  },
+  {
+    name: { fr: "Hanneton de Noël", en: "Christmas Beetle" },
+    scientific: "Anoplognathus",
+    category: 'insecte', rarity: 'commun', emoji: "🪲",
+    states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
+    habitat: {
+      fr: "Eucalyptus des parcs et des forêts",
+      en: "Eucalypts in parks and forests",
+    },
+    description: {
+      fr: "Gros scarabées aux reflets dorés, verts ou bruns qui apparaissent en nombre autour de Noël, en plein été austral. (Cette fiche regroupe tout le genre.)",
+      en: "Big beetles with golden, green or brown sheens that appear in numbers around Christmas, in the southern summer. (This entry covers the whole genus.)",
+    },
+    funFact: {
+      fr: "Il en existe environ 35 espèces, presque toutes en Australie.",
+      en: "There are about 35 species, almost all of them in Australia.",
+    },
+  },
+  {
+    name: { fr: "Requin de Port Jackson", en: "Port Jackson Shark" },
+    scientific: "Heterodontus portusjacksoni",
+    category: 'marin', rarity: 'commun', emoji: "🦈",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'WA', 'QLD'],
+    habitat: {
+      fr: "Fonds rocheux et sableux peu profonds",
+      en: "Shallow rocky and sandy seabeds",
+    },
+    description: {
+      fr: "Petit requin inoffensif au front proéminent et aux motifs en harnais, qui broie oursins et coquillages.",
+      en: "A small, harmless shark with a bulging forehead and harness-like markings that crushes sea urchins and shellfish.",
+    },
+    funFact: {
+      fr: "La femelle coince ses œufs en forme de tire-bouchon entre les rochers.",
+      en: "Females wedge their corkscrew-shaped egg cases between rocks.",
+    },
+  },
+  {
+    name: { fr: "Étoile de mer du Pacifique Nord", en: "Northern Pacific Seastar" },
+    scientific: "Asterias amurensis",
+    category: 'marin', rarity: 'commun', emoji: "⭐",
+    states: ['VIC', 'TAS'],
+    introduced: true,
+    habitat: {
+      fr: "Baie de Port Phillip et estuaires de Tasmanie",
+      en: "Port Phillip Bay and Tasmanian estuaries",
+    },
+    description: {
+      fr: "Étoile de mer arrivée d’Asie du Nord dans les eaux de ballast des navires, devenue une espèce envahissante majeure.",
+      en: "A seastar that arrived from North Asia in ships’ ballast water and became a major invasive species.",
+    },
+    funFact: {
+      fr: "Une seule femelle peut pondre jusqu’à 20 millions d’œufs par an.",
+      en: "A single female can release up to 20 million eggs a year.",
+    },
+  },
+  {
+    name: { fr: "Céréopse de Nouvelle-Hollande (oie de Cape Barren)", en: "Cape Barren Goose" },
+    scientific: "Cereopsis novaehollandiae",
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🪿",
+    states: ['VIC', 'TAS', 'SA', 'WA'],
+    habitat: {
+      fr: "Îles côtières, prairies et pâturages",
+      en: "Coastal islands, grassland and pasture",
+    },
+    description: {
+      fr: "Oie grise au bec presque entièrement couvert d’une cire vert citron, souvent vue en groupes sur Phillip Island.",
+      en: "A grey goose whose bill is almost covered by a lime-green cere, often seen in flocks on Phillip Island.",
+    },
+    funFact: {
+      fr: "Elle peut boire de l’eau saumâtre, ce qui lui permet de vivre sur des îles sans eau douce.",
+      en: "It can drink brackish water, which lets it live on islands without fresh water.",
+    },
+  },
+  {
+    name: { fr: "Fou austral", en: "Australasian Gannet" },
+    scientific: "Morus serrator",
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🐦",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'WA'],
+    habitat: {
+      fr: "Mers côtières ; colonies sur des îles et des caps",
+      en: "Coastal seas; colonies on islands and headlands",
+    },
+    description: {
+      fr: "Grand oiseau marin blanc à la tête jaune pâle qui plonge en piqué pour pêcher.",
+      en: "A large white seabird with a pale-yellow head that plunge-dives to catch fish.",
+    },
+    funFact: {
+      fr: "Il plonge depuis plusieurs dizaines de mètres et entre dans l’eau à près de 100 km/h.",
+      en: "It dives from tens of metres up and hits the water at close to 100 km/h.",
+    },
+  },
+  {
+    name: { fr: "Cacatoès funèbre", en: "Yellow-tailed Black Cockatoo" },
+    scientific: "Zanda funerea",
+    category: 'oiseau', rarity: 'peu-commun', emoji: "🐦‍⬛",
+    states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'ACT'],
+    habitat: {
+      fr: "Forêts, plantations de pins et parcs",
+      en: "Forests, pine plantations and parks",
+    },
+    description: {
+      fr: "Grand cacatoès noir aux taches jaunes sur les joues et la queue, au cri plaintif.",
+      en: "A large black cockatoo with yellow cheek and tail patches and a wailing call.",
+    },
+    funFact: {
+      fr: "Il déchiquette pommes de pin et écorces pour trouver graines et larves.",
+      en: "It shreds pine cones and bark to get at seeds and grubs.",
+    },
+  },
+  {
+    name: { fr: "Rakali (rat d’eau)", en: "Rakali" },
+    scientific: "Hydromys chrysogaster",
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🐀",
+    states: ALL,
+    habitat: {
+      fr: "Rivières, lacs, estuaires et ports",
+      en: "Rivers, lakes, estuaries and harbours",
+    },
+    description: {
+      fr: "Rongeur aquatique natif aux pattes palmées et à la queue au bout blanc, surnommé la « loutre australienne ».",
+      en: "A native water rodent with webbed feet and a white-tipped tail, nicknamed the “Australian otter”.",
+    },
+    funFact: {
+      fr: "Il sait retourner les crapauds buffles pour n’en manger que les parties non toxiques.",
+      en: "It has learned to flip cane toads over and eat only their non-toxic parts.",
+    },
+  },
+  {
+    name: { fr: "Sambar", en: "Sambar Deer" },
+    scientific: "Rusa unicolor",
+    category: 'mammifere', rarity: 'peu-commun', emoji: "🦌",
+    states: ['VIC', 'NSW', 'QLD', 'SA', 'ACT'],
+    introduced: true,
+    habitat: {
+      fr: "Forêts de montagne de Victoria et de NSW",
+      en: "Mountain forests of Victoria and NSW",
+    },
+    description: {
+      fr: "Grand cerf d’Asie introduit au XIXᵉ siècle, aujourd’hui très répandu dans les Alpes victoriennes.",
+      en: "A large Asian deer introduced in the 19th century, now widespread in the Victorian Alps.",
+    },
+    funFact: {
+      fr: "Il abîme les zones humides alpines en les piétinant et en se vautrant dans la boue.",
+      en: "It damages alpine wetlands by trampling them and wallowing in the mud.",
+    },
+  },
+  {
+    name: { fr: "Scinque à langue bleue tacheté", en: "Blotched Blue-tongued Lizard" },
+    scientific: "Tiliqua nigrolutea",
+    category: 'reptile', rarity: 'peu-commun', emoji: "🦎",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'ACT'],
+    habitat: {
+      fr: "Forêts, landes et prairies fraîches du sud-est",
+      en: "Cool forests, heathland and grassland of the south-east",
+    },
+    description: {
+      fr: "Scinque à langue bleue sombre, tacheté de rose, de crème ou d’orange, adapté aux régions fraîches.",
+      en: "A dark blue-tongued lizard blotched with pink, cream or orange, adapted to cool regions.",
+    },
+    funFact: {
+      fr: "Comme les autres langues bleues, la femelle donne naissance à des petits déjà formés.",
+      en: "Like other blue-tongues, the female gives birth to live young.",
+    },
+  },
+  {
+    name: { fr: "Serpent-tigre", en: "Tiger Snake" },
+    scientific: "Notechis scutatus",
+    category: 'reptile', rarity: 'peu-commun', emoji: "🐍",
+    states: ['NSW', 'VIC', 'QLD', 'WA', 'SA', 'TAS'],
+    dangerous: true,
+    habitat: {
+      fr: "Zones humides, bords de lacs et îles côtières",
+      en: "Wetlands, lake edges and coastal islands",
+    },
+    description: {
+      fr: "Serpent très venimeux, souvent rayé de bandes claires et sombres, fréquent autour des marais de Melbourne.",
+      en: "A highly venomous snake, often banded light and dark, common around Melbourne’s wetlands.",
+    },
+    funFact: {
+      fr: "Sur certaines îles, les serpents-tigres sont devenus très grands en se nourrissant de poussins d’oiseaux marins.",
+      en: "On some islands, tiger snakes have grown very large by feeding on seabird chicks.",
+    },
+  },
+  {
+    name: { fr: "Serpent à tête cuivrée des plaines", en: "Lowland Copperhead" },
+    scientific: "Austrelaps superbus",
+    category: 'reptile', rarity: 'peu-commun', emoji: "🐍",
+    states: ['NSW', 'VIC', 'TAS', 'SA'],
+    dangerous: true,
+    habitat: {
+      fr: "Marais et prairies humides du sud-est",
+      en: "Swamps and damp grassland of the south-east",
+    },
+    description: {
+      fr: "Serpent venimeux brun-cuivré, actif même par temps frais.",
+      en: "A venomous copper-brown snake that stays active even in cool weather.",
+    },
+    funFact: {
+      fr: "Il supporte mieux le froid que la plupart des serpents australiens.",
+      en: "It copes with cold better than most Australian snakes.",
+    },
+  },
+  {
+    name: { fr: "Dragon de mer commun", en: "Weedy Seadragon" },
+    scientific: "Phyllopteryx taeniolatus",
+    category: 'marin', rarity: 'peu-commun', emoji: "🐉",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'WA'],
+    habitat: {
+      fr: "Herbiers et récifs rocheux du sud",
+      en: "Southern seagrass beds and rocky reefs",
+    },
+    description: {
+      fr: "Emblème marin de Victoria, ce cousin rouge et jaune de l’hippocampe est orné de petites expansions en forme d’algues.",
+      en: "Victoria’s marine emblem, a red-and-yellow cousin of the seahorse decorated with small weed-like appendages.",
+    },
+    funFact: {
+      fr: "Comme chez le dragon de mer feuillu, c’est le mâle qui porte les œufs.",
+      en: "As with the leafy seadragon, the male carries the eggs.",
+    },
+  },
+  {
+    name: { fr: "Araignée paon", en: "Peacock Spider" },
+    scientific: "Maratus volans",
+    category: 'arachnide', rarity: 'peu-commun', emoji: "🕷️",
+    states: ['QLD', 'NSW', 'VIC', 'ACT'],
+    habitat: {
+      fr: "Landes et broussailles côtières",
+      en: "Coastal heath and scrub",
+    },
+    description: {
+      fr: "Araignée sauteuse d’environ 5 mm dont le mâle déploie un abdomen coloré lors d’une danse de séduction.",
+      en: "A jumping spider about 5 mm long whose male unfurls a colourful abdomen in a courtship dance.",
+    },
+    funFact: {
+      fr: "Si la danse ne lui plaît pas, la femelle peut dévorer le mâle.",
+      en: "If she doesn’t like the dance, the female may eat the male.",
+    },
+  },
+  {
+    name: { fr: "Papillon de nuit Bogong", en: "Bogong Moth" },
+    scientific: "Agrotis infusa",
+    category: 'insecte', rarity: 'peu-commun', emoji: "🦋",
+    states: ['QLD', 'NSW', 'VIC', 'SA', 'TAS', 'ACT'],
+    habitat: {
+      fr: "Plaines du sud-est l’hiver, grottes des Alpes l’été",
+      en: "South-eastern plains in winter, alpine caves in summer",
+    },
+    description: {
+      fr: "Papillon de nuit brun qui migre chaque printemps vers les grottes des Alpes australiennes pour y passer l’été.",
+      en: "A brown moth that migrates every spring to caves in the Australian Alps to spend the summer.",
+    },
+    funFact: {
+      fr: "Il se repère la nuit grâce aux étoiles et au champ magnétique terrestre.",
+      en: "It navigates at night using the stars and the Earth’s magnetic field.",
+    },
+  },
+  {
+    name: { fr: "Morue de Murray", en: "Murray Cod" },
+    scientific: "Maccullochella peelii",
+    category: 'marin', rarity: 'peu-commun', emoji: "🐟",
+    states: ['QLD', 'NSW', 'VIC', 'SA', 'ACT'],
+    habitat: {
+      fr: "Rivières du bassin Murray-Darling",
+      en: "Rivers of the Murray–Darling Basin",
+    },
+    description: {
+      fr: "Le plus grand poisson d’eau douce d’Australie, figure importante des récits aborigènes.",
+      en: "Australia’s largest freshwater fish and an important figure in Aboriginal stories.",
+    },
+    funFact: {
+      fr: "Il peut vivre plus de 50 ans et dépasser un mètre de long.",
+      en: "It can live for more than 50 years and grow longer than a metre.",
+    },
+  },
+  {
+    name: { fr: "Cacatoès à tête rouge", en: "Gang-gang Cockatoo" },
+    scientific: "Callocephalon fimbriatum",
+    category: 'oiseau', rarity: 'rare', emoji: "🦜",
+    states: ['NSW', 'VIC', 'ACT'],
+    habitat: {
+      fr: "Forêts de montagne ; parcs de Canberra l’hiver",
+      en: "Mountain forests; Canberra’s parks in winter",
+    },
+    description: {
+      fr: "Petit cacatoès gris dont le mâle a la tête rouge vif ; emblème du Territoire de la capitale australienne.",
+      en: "A small grey cockatoo whose male has a bright red head; emblem of the Australian Capital Territory.",
+    },
+    funFact: {
+      fr: "Son cri ressemble au grincement d’une porte qui s’ouvre.",
+      en: "Its call sounds like a creaky door opening.",
+    },
+  },
+  {
+    name: { fr: "Pluvier à camail", en: "Hooded Plover" },
+    scientific: "Thinornis cucullatus",
+    category: 'oiseau', rarity: 'rare', emoji: "🐦",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'WA'],
+    habitat: {
+      fr: "Plages océaniques exposées",
+      en: "Exposed ocean beaches",
+    },
+    description: {
+      fr: "Petit oiseau de plage qui pond directement dans le sable, en plein été, là où passent baigneurs et chiens.",
+      en: "A small beach bird that lays its eggs straight onto the sand in midsummer, right where swimmers and dogs pass.",
+    },
+    funFact: {
+      fr: "Ses œufs ressemblent tant au sable qu’on peut marcher dessus sans les voir.",
+      en: "Its eggs look so much like sand that people can step on them without noticing.",
+    },
+  },
+  {
+    name: { fr: "Leipoa ocellé", en: "Malleefowl" },
+    scientific: "Leipoa ocellata",
+    category: 'oiseau', rarity: 'rare', emoji: "🦃",
+    states: ['NSW', 'VIC', 'WA', 'SA'],
+    habitat: {
+      fr: "Mallee et bois secs du sud",
+      en: "Southern mallee and dry woodland",
+    },
+    description: {
+      fr: "Oiseau terrestre qui construit un énorme tas de sable et de feuilles pour incuber ses œufs.",
+      en: "A ground bird that builds a huge mound of sand and leaves to incubate its eggs.",
+    },
+    funFact: {
+      fr: "Le mâle passe la plus grande partie de l’année à régler la température du nid, autour de 33 °C.",
+      en: "The male spends most of the year keeping the mound at about 33 °C.",
+    },
+  },
+  {
+    name: { fr: "Grand phalanger volant", en: "Greater Glider" },
+    scientific: "Petauroides volans",
+    category: 'mammifere', rarity: 'rare', emoji: "🐿️",
+    states: ['QLD', 'NSW', 'VIC', 'ACT'],
+    habitat: {
+      fr: "Vieilles forêts d’eucalyptus à grands arbres creux",
+      en: "Old eucalypt forests with big hollow trees",
+    },
+    description: {
+      fr: "Le plus grand marsupial planeur, nocturne, aux grandes oreilles duveteuses, qui ne mange que des feuilles d’eucalyptus.",
+      en: "The largest gliding marsupial: nocturnal, with big fluffy ears, and it eats only eucalyptus leaves.",
+    },
+    funFact: {
+      fr: "Il peut planer sur une centaine de mètres en se dirigeant avec ses membres.",
+      en: "It can glide around 100 metres, steering with its limbs.",
+    },
+  },
+  {
+    name: { fr: "Potoroo à long nez", en: "Long-nosed Potoroo" },
+    scientific: "Potorous tridactylus",
+    category: 'mammifere', rarity: 'rare', emoji: "🐀",
+    states: ['QLD', 'NSW', 'VIC', 'TAS'],
+    habitat: {
+      fr: "Sous-bois denses et humides",
+      en: "Dense, damp undergrowth",
+    },
+    description: {
+      fr: "Petit marsupial sauteur au long museau qui déterre des champignons souterrains.",
+      en: "A small hopping marsupial with a long snout that digs up underground fungi.",
+    },
+    funFact: {
+      fr: "En mangeant des truffes, il dissémine leurs spores, indispensables à la santé des forêts.",
+      en: "By eating truffles, it spreads their spores, which forests need to stay healthy.",
+    },
+  },
+  {
+    name: { fr: "Bandicoot rayé de l’Est", en: "Eastern Barred Bandicoot" },
+    scientific: "Perameles gunnii",
+    category: 'mammifere', rarity: 'rare', emoji: "🐀",
+    states: ['VIC', 'TAS'],
+    habitat: {
+      fr: "Prairies et bocages ; îles sans renards",
+      en: "Grassland and farmland; fox-free islands",
+    },
+    description: {
+      fr: "Petit bandicoot aux rayures pâles sur l’arrière-train, disparu à l’état sauvage sur le continent puis réintroduit sur des îles de Victoria comme Phillip Island.",
+      en: "A small bandicoot with pale stripes on its rump that vanished from the wild on the mainland and was reintroduced to Victorian islands such as Phillip Island.",
+    },
+    funFact: {
+      fr: "En 2021, il est devenu le premier mammifère australien dont le statut est passé de « éteint à l’état sauvage » à « en danger ».",
+      en: "In 2021 it became the first Australian mammal to be moved from “extinct in the wild” to “endangered”.",
+    },
+  },
+  {
+    name: { fr: "Minioptère du Sud", en: "Southern Bent-wing Bat" },
+    scientific: "Miniopterus orianae bassanii",
+    category: 'mammifere', rarity: 'rare', emoji: "🦇",
+    states: ['VIC', 'SA'],
+    habitat: {
+      fr: "Grottes et forêts du sud-ouest de Victoria et du sud-est de l’Australie-Méridionale",
+      en: "Caves and forests of south-west Victoria and south-east South Australia",
+    },
+    description: {
+      fr: "Petite chauve-souris insectivore qui dépend de quelques grottes de maternité seulement.",
+      en: "A small insect-eating bat that relies on just a few maternity caves.",
+    },
+    funFact: {
+      fr: "Les femelles se rassemblent pour mettre bas surtout dans deux grottes, à Naracoorte et près de Warrnambool.",
+      en: "Females gather to give birth mainly in two caves, at Naracoorte and near Warrnambool.",
+    },
+  },
+  {
+    name: { fr: "Rainette grognante", en: "Growling Grass Frog" },
+    scientific: "Litoria raniformis",
+    category: 'amphibien', rarity: 'rare', emoji: "🐸",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'ACT'],
+    habitat: {
+      fr: "Mares et zones humides herbeuses",
+      en: "Ponds and grassy wetlands",
+    },
+    description: {
+      fr: "Grande grenouille verte et dorée au chant grave et grondant, autrefois commune autour de Melbourne.",
+      en: "A large green-and-gold frog with a deep growling call, once common around Melbourne.",
+    },
+    funFact: {
+      fr: "Elle mange aussi d’autres grenouilles, parfois de sa propre espèce.",
+      en: "It also eats other frogs, sometimes even its own kind.",
+    },
+  },
+  {
+    name: { fr: "Baleine franche australe", en: "Southern Right Whale" },
+    scientific: "Eubalaena australis",
+    category: 'marin', rarity: 'rare', emoji: "🐋",
+    states: ['NSW', 'VIC', 'TAS', 'SA', 'WA'],
+    habitat: {
+      fr: "Baies abritées de la côte sud (juin à octobre)",
+      en: "Sheltered southern bays (June to October)",
+    },
+    description: {
+      fr: "Grande baleine noire sans nageoire dorsale, aux callosités blanches sur la tête, qui vient mettre bas près des côtes.",
+      en: "A large black whale with no dorsal fin and white callosities on its head that comes close to shore to calve.",
+    },
+    funFact: {
+      fr: "On peut l’observer depuis la plage à Warrnambool (Logans Beach).",
+      en: "You can watch it from the beach at Warrnambool (Logans Beach).",
+    },
+  },
+  {
+    name: { fr: "Dauphin de Burrunan", en: "Burrunan Dolphin" },
+    scientific: "Tursiops australis",
+    category: 'marin', rarity: 'rare', emoji: "🐬",
+    states: ['VIC', 'SA', 'TAS'],
+    habitat: {
+      fr: "Baie de Port Phillip et lacs du Gippsland",
+      en: "Port Phillip Bay and the Gippsland Lakes",
+    },
+    description: {
+      fr: "Dauphin décrit en 2011 dont il ne resterait que quelques centaines d’individus. Sa reconnaissance comme espèce à part est encore discutée.",
+      en: "A dolphin described in 2011, with perhaps only a few hundred left. Whether it is a separate species is still debated.",
+    },
+    funFact: {
+      fr: "Son nom vient d’un mot aborigène qui signifierait « grand poisson de mer de l’espèce des marsouins ».",
+      en: "Its name comes from an Aboriginal word said to mean “large sea fish of the porpoise kind”.",
+    },
+  },
+  {
+    name: { fr: "Tortue luth", en: "Leatherback Turtle" },
+    scientific: "Dermochelys coriacea",
+    category: 'marin', rarity: 'rare', emoji: "🐢",
+    states: ['QLD', 'NSW', 'VIC', 'TAS', 'SA', 'WA', 'NT'],
+    habitat: {
+      fr: "Haute mer ; visiteuse des côtes australiennes",
+      en: "Open ocean; visits Australian coasts",
+    },
+    description: {
+      fr: "La plus grande tortue du monde, à la carapace souple et sans écailles.",
+      en: "The world’s largest turtle, with a soft, scaleless shell.",
+    },
+    funFact: {
+      fr: "Elle peut plonger à plus de 1 000 m pour chasser les méduses.",
+      en: "It can dive deeper than 1,000 m to hunt jellyfish.",
+    },
+  },
+  {
+    name: { fr: "Papillon soleil doré", en: "Golden Sun Moth" },
+    scientific: "Synemon plana",
+    category: 'insecte', rarity: 'rare', emoji: "🦋",
+    states: ['NSW', 'VIC', 'ACT'],
+    habitat: {
+      fr: "Prairies naturelles de graminées",
+      en: "Native grasslands",
+    },
+    description: {
+      fr: "Papillon de jour dont l’adulte n’a pas de bouche fonctionnelle : il ne vit que quelques jours, juste pour se reproduire.",
+      en: "A day-flying moth whose adults have no working mouth: they live only a few days, just to breed.",
+    },
+    funFact: {
+      fr: "Les femelles volent à peine ; elles attirent les mâles en montrant leurs ailes postérieures dorées.",
+      en: "Females barely fly; they attract males by flashing their golden hindwings.",
+    },
+  },
+  {
+    name: { fr: "Cuivré d’Eltham", en: "Eltham Copper Butterfly" },
+    scientific: "Paralucia pyrodiscus lucida",
+    category: 'insecte', rarity: 'rare', emoji: "🦋",
+    states: ['VIC'],
+    habitat: {
+      fr: "Quelques bois secs de Victoria (Eltham, Castlemaine…)",
+      en: "A few dry woodlands in Victoria (Eltham, Castlemaine…)",
+    },
+    description: {
+      fr: "Petit papillon aux reflets cuivrés qui ne vit que dans quelques bois de Victoria.",
+      en: "A small copper-sheened butterfly found only in a few Victorian woodlands.",
+    },
+    funFact: {
+      fr: "Ses chenilles sont gardées par des fourmis, qui les protègent en échange d’un liquide sucré.",
+      en: "Its caterpillars are guarded by ants, which protect them in exchange for a sugary liquid.",
+    },
+  },
+  {
+    name: { fr: "Phalanger pygmée des montagnes", en: "Mountain Pygmy-possum" },
+    scientific: "Burramys parvus",
+    category: 'mammifere', rarity: 'legendaire', emoji: "🐭",
+    states: ['NSW', 'VIC'],
+    habitat: {
+      fr: "Éboulis rocheux des Alpes australiennes",
+      en: "Boulder fields of the Australian Alps",
+    },
+    description: {
+      fr: "Le seul marsupial australien qui vit uniquement en haute montagne, sous la neige l’hiver.",
+      en: "The only Australian marsupial that lives only in the high mountains, under the snow in winter.",
+    },
+    funFact: {
+      fr: "Il hiberne jusqu’à 7 mois et dépend des papillons Bogong pour refaire ses réserves au printemps.",
+      en: "It hibernates for up to 7 months and relies on Bogong moths to refuel in spring.",
+    },
+  },
+  {
+    name: { fr: "Phalanger de Leadbeater", en: "Leadbeater’s Possum" },
+    scientific: "Gymnobelideus leadbeateri",
+    category: 'mammifere', rarity: 'legendaire', emoji: "🐿️",
+    states: ['VIC'],
+    habitat: {
+      fr: "Vieilles forêts de frênes des Central Highlands",
+      en: "Old mountain ash forests of the Central Highlands",
+    },
+    description: {
+      fr: "Emblème faunique de Victoria, ce petit possum était cru éteint jusqu’à sa redécouverte en 1961.",
+      en: "Victoria’s faunal emblem, this small possum was thought extinct until it was rediscovered in 1961.",
+    },
+    funFact: {
+      fr: "Il vit en petites colonies dans les creux de très vieux arbres, souvent âgés de plus de 150 ans.",
+      en: "It lives in small colonies in the hollows of very old trees, often more than 150 years old.",
+    },
+  },
+  {
+    name: { fr: "Méliphage casqué", en: "Helmeted Honeyeater" },
+    scientific: "Lichenostomus melanops cassidix",
+    category: 'oiseau', rarity: 'legendaire', emoji: "🐦",
+    states: ['VIC'],
+    habitat: {
+      fr: "Forêts marécageuses de Yellingbo",
+      en: "Swamp forests of Yellingbo",
+    },
+    description: {
+      fr: "Emblème aviaire de Victoria, au front orné d’une huppe dorée ; il ne reste qu’une seule population sauvage.",
+      en: "Victoria’s bird emblem, with a golden crest on its forehead; only one wild population remains.",
+    },
+    funFact: {
+      fr: "La population sauvage dépend d’un programme d’élevage et de lâchers lancé à la fin des années 1980.",
+      en: "The wild population depends on a breeding and release programme started in the late 1980s.",
+    },
+  },
+  {
+    name: { fr: "Perruche à ventre orange", en: "Orange-bellied Parrot" },
+    scientific: "Neophema chrysogaster",
+    category: 'oiseau', rarity: 'legendaire', emoji: "🦜",
+    states: ['TAS', 'VIC', 'SA'],
+    habitat: {
+      fr: "Landes de Tasmanie (été), marais salés de la côte sud (hiver)",
+      en: "Tasmanian heathland (summer), southern coastal saltmarsh (winter)",
+    },
+    description: {
+      fr: "Petite perruche verte au ventre orange qui migre chaque année à travers le détroit de Bass.",
+      en: "A small green parrot with an orange belly that migrates across Bass Strait every year.",
+    },
+    funFact: {
+      fr: "En 2017, seuls 17 adultes sont revenus nicher à l’état sauvage.",
+      en: "In 2017, only 17 adults returned to breed in the wild.",
+    },
+  },
+  {
+    name: { fr: "Méliphage régent", en: "Regent Honeyeater" },
+    scientific: "Anthochaera phrygia",
+    category: 'oiseau', rarity: 'legendaire', emoji: "🐦",
+    states: ['QLD', 'NSW', 'VIC', 'ACT'],
+    habitat: {
+      fr: "Forêts claires de « box » et d’« ironbark » du sud-est",
+      en: "Box–ironbark woodland of the south-east",
+    },
+    description: {
+      fr: "Méliphage noir et jaune vif, autrefois commun, aujourd’hui l’un des oiseaux les plus menacés d’Australie.",
+      en: "A black-and-bright-yellow honeyeater, once common and now one of Australia’s most threatened birds.",
+    },
+    funFact: {
+      fr: "Devenus si rares, certains mâles chantent « faux » : ils n’ont plus d’adultes de leur espèce pour apprendre leur chant.",
+      en: "They have become so rare that some males sing the “wrong” song: there are no adults of their own kind left to learn from.",
+    },
+  },
+  {
+    name: { fr: "Grenouille de Baw Baw", en: "Baw Baw Frog" },
+    scientific: "Philoria frosti",
+    category: 'amphibien', rarity: 'legendaire', emoji: "🐸",
+    states: ['VIC'],
+    habitat: {
+      fr: "Tourbières du plateau de Baw Baw",
+      en: "Bogs of the Baw Baw Plateau",
+    },
+    description: {
+      fr: "Grenouille brune qui ne vit que sur un seul plateau des Alpes victoriennes.",
+      en: "A brown frog that lives on a single plateau in the Victorian Alps.",
+    },
+    funFact: {
+      fr: "Ses têtards se développent sans se nourrir, grâce aux réserves de l’œuf.",
+      en: "Its tadpoles grow without feeding, living off the egg’s reserves.",
+    },
+  },
+  {
+    name: { fr: "Dragon sans oreilles des prairies victoriennes", en: "Victorian Grassland Earless Dragon" },
+    scientific: "Tympanocryptis pinguicolla",
+    category: 'reptile', rarity: 'legendaire', emoji: "🦎",
+    states: ['VIC'],
+    habitat: {
+      fr: "Prairies indigènes de basalte à l’ouest de Melbourne",
+      en: "Native basalt grasslands west of Melbourne",
+    },
+    description: {
+      fr: "Petit dragon d’environ 15 cm, cru disparu pendant plus de 50 ans et redécouvert en 2023.",
+      en: "A small dragon about 15 cm long, thought lost for more than 50 years and rediscovered in 2023.",
+    },
+    funFact: {
+      fr: "Il se cache dans les terriers d’araignées et les fissures du sol.",
+      en: "It hides in spider burrows and cracks in the soil.",
+    },
+  },
+  {
+    name: { fr: "Pédionome errant", en: "Plains-wanderer" },
+    scientific: "Pedionomus torquatus",
+    category: 'oiseau', rarity: 'legendaire', emoji: "🐦",
+    states: ['NSW', 'VIC', 'QLD', 'SA', 'NT'],
+    habitat: {
+      fr: "Prairies plates et clairsemées de l’intérieur",
+      en: "Flat, sparse inland grassland",
+    },
+    description: {
+      fr: "Oiseau unique au monde, seul représentant de sa famille, qui court plutôt que de voler.",
+      en: "A one-of-a-kind bird, the only member of its family, that runs rather than flies.",
+    },
+    funFact: {
+      fr: "Chez lui, c’est la femelle qui est la plus colorée et le mâle qui couve.",
+      en: "In this species the female is the more colourful one, and the male incubates the eggs.",
+    },
+  },
+  {
+    name: { fr: "Ver de terre géant du Gippsland", en: "Giant Gippsland Earthworm" },
+    scientific: "Megascolides australis",
+    category: 'invertebre', rarity: 'legendaire', emoji: "🪱",
+    states: ['VIC'],
+    habitat: {
+      fr: "Sols argileux humides du sud du Gippsland",
+      en: "Damp clay soils of South Gippsland",
+    },
+    description: {
+      fr: "Ver de terre géant qui mesure souvent un mètre, et ne vit que dans une petite région de Victoria.",
+      en: "A giant earthworm often a metre long, found only in a small part of Victoria.",
+    },
+    funFact: {
+      fr: "On l’entend parfois glouglouter sous terre quand il se déplace dans ses galeries.",
+      en: "You can sometimes hear it gurgling underground as it moves through its burrows.",
+    },
+  },
+  {
+    name: { fr: "Perruche nocturne", en: "Night Parrot" },
+    scientific: "Pezoporus occidentalis",
+    category: 'oiseau', rarity: 'legendaire', emoji: "🦜",
+    states: ['WA', 'QLD', 'SA', 'NT'],
+    habitat: {
+      fr: "Touffes de spinifex des déserts",
+      en: "Spinifex clumps in the deserts",
+    },
+    description: {
+      fr: "Perruche nocturne si discrète qu’aucune photo d’un oiseau vivant n’existait avant 2013.",
+      en: "A nocturnal parrot so secretive that no photo of a living bird existed before 2013.",
+    },
+    funFact: {
+      fr: "Elle passe la journée cachée à l’intérieur des touffes de spinifex.",
+      en: "It spends the day hidden inside clumps of spinifex.",
     },
   },
 ];

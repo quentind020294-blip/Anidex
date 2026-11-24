@@ -1,4 +1,5 @@
-import type { Category, Conservation, Rarity, StateCode } from './types';
+import type { IucnStatus } from './conservation';
+import type { Category, Rarity, StateCode } from './types';
 
 // Données visuelles et de jeu. Les libellés (noms de catégories, d'États, de statuts…)
 // sont traduits dans src/i18n/.
@@ -8,10 +9,12 @@ export const CATEGORIES: Record<Category, { color: string; emoji: string }> = {
   reptile: { color: '#4D8F2E', emoji: '🦎' },
   amphibien: { color: '#0F8F80', emoji: '🐸' },
   marin: { color: '#2563EB', emoji: '🐠' },
-  invertebre: { color: '#8250C4', emoji: '🕷️' },
+  insecte: { color: '#C2417A', emoji: '🦋' },
+  arachnide: { color: '#8250C4', emoji: '🕷️' },
+  invertebre: { color: '#7A6248', emoji: '🪱' },
 };
 
-export const CATEGORY_ORDER: Category[] = ['mammifere', 'oiseau', 'reptile', 'amphibien', 'marin', 'invertebre'];
+export const CATEGORY_ORDER: Category[] = ['mammifere', 'oiseau', 'reptile', 'amphibien', 'marin', 'insecte', 'arachnide', 'invertebre'];
 
 export const RARITIES: Record<Rarity, { xp: number; color: string; stars: number }> = {
   commun: { xp: 10, color: '#6B7280', stars: 1 },
@@ -28,15 +31,19 @@ export const REPEAT_XP = 2;
 /** Ordre d'affichage des États (d'ouest en est, puis la Tasmanie). */
 export const STATE_ORDER: StateCode[] = ['WA', 'NT', 'SA', 'QLD', 'NSW', 'ACT', 'VIC', 'TAS'];
 
-export const CONSERVATION: Record<Conservation, { color: string }> = {
-  LC: { color: '#16A34A' },
-  NT: { color: '#84CC16' },
-  VU: { color: '#EAB308' },
-  EN: { color: '#F97316' },
-  CR: { color: '#DC2626' },
+/** Couleurs des catégories de la Liste rouge de l'UICN (codes internationaux). */
+export const IUCN_COLORS: Record<IucnStatus, string> = {
+  LC: '#16A34A',
+  NT: '#84CC16',
+  VU: '#EAB308',
+  EN: '#F97316',
+  CR: '#DC2626',
+  DD: '#9CA3AF',
+  NE: '#9CA3AF',
 };
 
-export const CONSERVATION_ORDER: Conservation[] = ['LC', 'NT', 'VU', 'EN', 'CR'];
+export const IUCN_ORDER: IucnStatus[] = ['LC', 'NT', 'VU', 'EN', 'CR'];
+export const IUCN_ALL: IucnStatus[] = ['CR', 'EN', 'VU', 'NT', 'LC', 'DD', 'NE'];
 
 /** Associe un nom de région renvoyé par le géocodage inverse à un code d'État. */
 export function stateFromRegion(region?: string | null): StateCode | undefined {

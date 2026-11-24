@@ -1,4 +1,5 @@
 import { ANIMALS, getAnimal } from '../data/animals';
+import { isThreatened } from '../data/conservation';
 import { CATEGORIES, CATEGORY_ORDER, RARITIES, REPEAT_XP } from '../data/meta';
 import type { Animal, Category, Sighting, StateCode } from '../data/types';
 import type { Strings } from '../i18n/fr';
@@ -133,7 +134,7 @@ export const BADGES: Badge[] = [
   simple('legend', '⭐', RARITIES.legendaire.color, (p) => [countWhere(p, (a) => a.rarity === 'legendaire'), 1]),
   simple('danger', '☠️', '#991B1B', (p) => [countWhere(p, (a) => !!a.dangerous), 3]),
   simple('invasive', '🚨', '#B45309', (p) => [countWhere(p, (a) => !!a.introduced), 3]),
-  simple('endangered', '🛡️', '#EA580C', (p) => [countWhere(p, (a) => ['VU', 'EN', 'CR'].includes(a.conservation)), 3]),
+  simple('endangered', '🛡️', '#EA580C', (p) => [countWhere(p, isThreatened), 3]),
   simple('states3', '🗺️', '#4338CA', (p) => [p.statesVisited.size, 3]),
   simple('states8', '🧭', '#4338CA', (p) => [p.statesVisited.size, 8]),
   simple('obs50', '📸', '#0369A1', (_p, s) => [s.length, 50]),

@@ -6,14 +6,15 @@ Application **Android / iOS et web** construite avec Expo (React Native + TypeSc
 
 ## Fonctionnalités
 
-- **Anidex de 105 espèces** australiennes, numérotées de #001 à #105 : mammifères, oiseaux, reptiles, amphibiens, vie marine et invertébrés. Pour chaque espèce : noms français, anglais et scientifique, rareté, habitat, États où on la trouve, statut UICN, description et anecdote.
+- **Anidex de 151 espèces** australiennes, numérotées de #001 à #151 : mammifères, oiseaux, reptiles, amphibiens, vie aquatique, insectes, araignées et autres invertébrés, avec de nombreuses espèces de Victoria et de Phillip Island. Les plus rares (#142 à #151) sont « légendaires ». Pour chaque espèce : noms français, anglais et scientifique, rareté, habitat, États où on la trouve, description et anecdote.
+- **Conservation** sur chaque fiche : statut mondial (UICN), national (loi EPBC) et en Victoria (loi FFG), tendance de la population, principales menaces, gestes utiles, programmes de protection et, pour les espèces introduites, leur impact. Filtres « Menacées » et « Menacées en Victoria », écran de bilan et écran « Animal blessé ? » avec les numéros de secours de chaque État.
 - Les espèces pas encore observées apparaissent comme des **silhouettes mystère** ; une fois découvertes, elles affichent **ta photo**.
 - **Observer** : prends une photo (ou importe-la depuis la galerie) et l’IA propose jusqu’à 3 espèces avec un indice de confiance. Tu confirmes d’un geste. Sans connexion ni clé API, tu peux choisir l’espèce dans la liste.
 - **Journal de terrain** : toutes tes observations avec photo, date, lieu (géolocalisation) et méthode d’identification.
 - **Progression** : XP selon la rareté (commun 10, peu commun 25, rare 50, légendaire 100 ; 2 XP pour une espèce déjà vue), 10 rangs, du « Touriste curieux » à la « Légende de l’Anidex ».
 - **20 badges** : par catégorie, espèces rares ou légendaires, animaux dangereux (de loin !), espèces invasives, espèces menacées, États visités, etc.
 - Recherche, filtres par catégorie et par statut (découverts ou à trouver).
-- **Français / anglais** : bouton FR | EN en haut de chaque écran et dans les réglages. Toute l’interface est traduite, ainsi que les fiches des 105 espèces. Le nom affiché est le nom courant dans la langue choisie. Au premier lancement, l’app suit la langue du téléphone (français s’il est en français, anglais sinon) ; le choix est ensuite mémorisé.
+- **Français / anglais** : bouton FR | EN en haut de chaque écran et dans les réglages. Toute l’interface est traduite, ainsi que les fiches des 151 espèces. Le nom affiché est le nom courant dans la langue choisie. Au premier lancement, l’app suit la langue du téléphone (français s’il est en français, anglais sinon) ; le choix est ensuite mémorisé.
 - Toutes les données restent sur l’appareil. Sur mobile, la clé API est stockée chiffrée (Keychain / Keystore) ; sur le web, elle est enregistrée dans le navigateur.
 
 ## Identification par IA
@@ -70,7 +71,9 @@ src/
     (tabs)/badges.tsx   # niveau, statistiques et badges
     animal/[id].tsx     # fiche d’une espèce
     reglages.tsx        # clé API, localisation, données
-  data/animals.ts       # catalogue des 105 espèces
+  data/animals.ts       # catalogue des 151 espèces
+  data/conservation.ts  # statuts UICN / EPBC / FFG, menaces, gestes, programmes
+  data/rescue.ts        # numéros de secours pour la faune, par État
   data/meta.ts          # couleurs, XP et ordres d’affichage
   i18n/fr.ts, i18n/en.ts # textes de l’interface (même structure, vérifiée par TypeScript)
   i18n/index.tsx        # langue choisie, langue du téléphone, mémorisation
@@ -87,6 +90,16 @@ scripts/check-i18n.mjs     # repère les textes écrits en dur dans l’interfac
 ## Ajouter une espèce
 
 Ajoute une entrée **à la fin** de `src/data/animals.ts` : les numéros sont attribués dans l’ordre, donc en insérer une au milieu décalerait les numéros des observations déjà enregistrées. Le nom, l’habitat, la description et l’anecdote doivent être fournis en français (`fr`) et en anglais (`en`) ; TypeScript refuse la compilation s’il en manque un.
+
+## Sources des données de conservation
+
+Vérifiées en novembre 2026 :
+- **UICN** : catégorie de la Liste rouge lue via l’API GBIF, recoupée avec BirdLife et les communiqués de l’UICN pour les cas douteux.
+- **EPBC** (national) et **FFG** (Victoria) : copies officielles des listes publiées par l’Atlas of Living Australia (listes `dr656` et `dr655`, synchronisées en mai 2026). Les sites du gouvernement australien et de Victoria bloquent l’accès automatisé.
+- **Tendance de la population** : estimation, affichée comme telle. Elle n’a pas pu être vérifiée, car le site et l’API de l’UICN nécessitent un compte.
+- **Numéros de secours** : chaque numéro indique son niveau de vérification (page officielle, plusieurs sources, ou à confirmer).
+
+Quand une information est incertaine (taxonomie débattue, évaluation contestée, inscription limitée à une sous-espèce), la fiche le précise.
 
 ## Ajouter ou modifier un texte
 

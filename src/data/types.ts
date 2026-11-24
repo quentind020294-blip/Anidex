@@ -4,14 +4,13 @@ export type Category =
   | 'reptile'
   | 'amphibien'
   | 'marin'
+  | 'insecte'
+  | 'arachnide'
   | 'invertebre';
 
 export type Rarity = 'commun' | 'peu-commun' | 'rare' | 'legendaire';
 
 export type StateCode = 'NSW' | 'VIC' | 'QLD' | 'WA' | 'SA' | 'TAS' | 'NT' | 'ACT';
-
-/** IUCN Red List categories. */
-export type Conservation = 'LC' | 'NT' | 'VU' | 'EN' | 'CR';
 
 export type Lang = 'fr' | 'en';
 
@@ -31,7 +30,6 @@ export interface Animal {
   habitat: Localized;
   description: Localized;
   funFact: Localized;
-  conservation: Conservation;
   /** Espèce introduite (envahissante) en Australie. */
   introduced?: boolean;
   /** Venimeuse ou dangereuse : à observer de loin ! */

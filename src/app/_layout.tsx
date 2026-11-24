@@ -37,6 +37,8 @@ function Gate() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="animal/[id]" options={{ title: '' }} />
       <Stack.Screen name="reglages" options={{ title: s.screens.settings }} />
+      <Stack.Screen name="conservation" options={{ title: s.screens.conservation }} />
+      <Stack.Screen name="secours" options={{ title: s.screens.rescue }} />
       <Stack.Screen name="+not-found" options={{ title: s.screens.notFound }} />
     </Stack>
   );

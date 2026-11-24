@@ -1,10 +1,11 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
 import { AnimalAvatar, ProgressBar, RarityStars } from '../../components/ui';
 import { ANIMALS, dexNumber } from '../../data/animals';
+import { isThreatened, isThreatenedInVictoria } from '../../data/conservation';
 import { CATEGORIES, CATEGORY_ORDER } from '../../data/meta';
 import type { Category } from '../../data/types';
 import { useI18n } from '../../i18n';
@@ -13,6 +14,7 @@ import { useDex } from '../../lib/store';
 
 type Filter = Category | 'tous';
 type Show = 'tous' | 'decouverts' | 'a-trouver';
+type Status = 'all' | 'threatened' | 'vic';
 
 function normalize(s: string) {
   return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -25,6 +27,14 @@ export default function DexScreen() {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<Filter>('tous');
   const [show, setShow] = useState<Show>('tous');
+  const [status, setStatus] = useState<Status>('all');
+  // Le bilan de conservation peut ouvrir l'Anidex avec un filtre (« ?status=threatened »).
+  const { status: statusParam } = useLocalSearchParams<{ status?: Status }>();
+  const [appliedParam, setAppliedParam] = useState(statusParam);
+  if (statusParam !== appliedParam) {
+    setAppliedParam(statusParam);
+    if (statusParam === 'all' || statusParam === 'threatened' || statusParam === 'vic') setStatus(statusParam);
+  }
 
   const columns = width >= 700 ? 5 : width >= 500 ? 4 : 3;
   const cardWidth = (Math.min(width, 1000) - 16 * 2 - 10 * (columns - 1)) / columns;
@@ -33,6 +43,8 @@ export default function DexScreen() {
     const q = normalize(query.trim());
     return ANIMALS.filter((a) => {
       if (filter !== 'tous' && a.category !== filter) return false;
+      if (status === 'threatened' && !isThreatened(a)) return false;
+      if (status === 'vic' && !isThreatenedInVictoria(a)) return false;
       const found = progress.discovered.has(a.id);
       if (show === 'decouverts' && !found) return false;
       if (show === 'a-trouver' && found) return false;
@@ -40,7 +52,7 @@ export default function DexScreen() {
       // On cherche dans les deux langues : pratique si on connaît le nom anglais.
       return [a.name.fr, a.name.en, a.scientific, String(a.id)].some((v) => normalize(v).includes(q));
     });
-  }, [query, filter, show, progress.discovered]);
+  }, [query, filter, show, status, progress.discovered]);
 
   const total = ANIMALS.length;
   const found = progress.discovered.size;
@@ -93,6 +105,12 @@ export default function DexScreen() {
                 onPress={() => setFilter(filter === c ? 'tous' : c)}
               />
             ))}
+          </ScrollView>
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+            <Chip label={s.dex.statusAll} active={status === 'all'} onPress={() => setStatus('all')} color={colors.ink} />
+            <Chip label={s.dex.statusThreatened} active={status === 'threatened'} onPress={() => setStatus(status === 'threatened' ? 'all' : 'threatened')} color="#C2410C" />
+            <Chip label={s.dex.statusVic} active={status === 'vic'} onPress={() => setStatus(status === 'vic' ? 'all' : 'vic')} color="#1E3A8A" />
           </ScrollView>
 
           <View style={styles.segment}>

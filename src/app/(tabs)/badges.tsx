@@ -1,7 +1,8 @@
+import { router } from 'expo-router';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
-import { Card, ProgressBar } from '../../components/ui';
+import { Button, Card, ProgressBar } from '../../components/ui';
 import { ANIMALS } from '../../data/animals';
 import { CATEGORIES, CATEGORY_ORDER, RARITIES, RARITY_ORDER } from '../../data/meta';
 import { useI18n } from '../../i18n';
@@ -29,6 +30,8 @@ export default function BadgesScreen() {
           </Text>
         </View>
       </View>
+
+      <Button title={`🛡️ ${s.summary.open}`} variant="secondary" onPress={() => router.push('/conservation')} />
 
       <Card style={{ gap: 10 }}>
         <Text style={styles.section}>{s.badgesScreen.collection}</Text>
