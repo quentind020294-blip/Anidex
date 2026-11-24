@@ -1137,3 +1137,14 @@ export function isThreatened(animal: Animal): boolean {
 export function isThreatenedInVictoria(animal: Animal): boolean {
   return listedAsThreatened(conservationOf(animal).vic);
 }
+
+/**
+ * Espèce dont on ne partage jamais le lieu, même approximatif (État), avec les amis :
+ * menacée au niveau mondial, national ou en Victoria, ou inscrite sur une liste
+ * de protection (même si l'inscription ne concerne qu'une sous-espèce ou une population).
+ * La même liste est appliquée côté serveur (supabase/anidex.sql, table sensitive_species).
+ */
+export function hidesLocation(animal: Animal): boolean {
+  const c = conservationOf(animal);
+  return isThreatened(animal) || isThreatenedInVictoria(animal) || !!c.epbc || !!c.vic;
+}

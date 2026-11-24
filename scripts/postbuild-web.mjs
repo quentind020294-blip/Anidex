@@ -45,5 +45,27 @@ for (const file of htmlFiles(dist)) {
 // Page « introuvable » générée par Expo Router, sinon la page d'accueil.
 const notFound = existsSync(join(dist, '+not-found.html')) ? '+not-found.html' : 'index.html';
 copyFileSync(join(dist, notFound), join(dist, '404.html'));
+
+// Garde-fou : aucune clé secrète Supabase ne doit se retrouver dans le site publié.
+function allFiles(dir) {
+  return readdirSync(dir).flatMap((name) => {
+    const path = join(dir, name);
+    return statSync(path).isDirectory() ? allFiles(path) : [path];
+  });
+}
+for (const file of allFiles(dist).filter((f) => /\.(js|html|json)$/.test(f))) {
+  const text = readFileSync(file, 'utf8');
+  const jwtRoles = [...text.matchAll(/eyJ[\w-]+\.(eyJ[\w-]+)\.[\w-]+/g)].map((m) => {
+    try {
+      return JSON.parse(Buffer.from(m[1], 'base64url').toString()).role;
+    } catch {
+      return null;
+    }
+  });
+  if (/sb_secret_[\w-]{10,}/.test(text) || jwtRoles.includes('service_role')) {
+    console.error(`ERREUR : une clé SECRÈTE Supabase a été trouvée dans ${file}. Utilise uniquement la clé publique.`);
+    process.exit(1);
+  }
+}
 writeFileSync(join(dist, '.nojekyll'), '');
 console.log(`Export web finalisé : ${count} pages HTML, 404.html et .nojekyll créés (base « ${base || '/'} »).`);

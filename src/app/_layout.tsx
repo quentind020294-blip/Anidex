@@ -6,6 +6,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { colors } from '../components/theme';
 import { I18nProvider, useI18n } from '../i18n';
+import { FriendsProvider } from '../lib/friendsStore';
 import { DexProvider, useDex } from '../lib/store';
 
 function Gate() {
@@ -35,6 +36,7 @@ function Gate() {
       <Stack.Screen name="reglages" options={{ title: s.screens.settings }} />
       <Stack.Screen name="conservation" options={{ title: s.screens.conservation }} />
       <Stack.Screen name="secours" options={{ title: s.screens.rescue }} />
+      <Stack.Screen name="ami/[id]" options={{ title: s.screens.friend }} />
       <Stack.Screen name="+not-found" options={{ title: s.screens.notFound }} />
     </Stack>
   );
@@ -45,8 +47,10 @@ export default function RootLayout() {
     <SafeAreaProvider>
       <I18nProvider>
         <DexProvider>
-          <StatusBar style="light" />
-          <Gate />
+          <FriendsProvider>
+            <StatusBar style="light" />
+            <Gate />
+          </FriendsProvider>
         </DexProvider>
       </I18nProvider>
     </SafeAreaProvider>

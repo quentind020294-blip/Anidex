@@ -39,6 +39,7 @@ export default function TabsLayout() {
       <Tabs.Screen name="observer" options={{ title: s.tabs.observe, tabBarIcon: icon('camera') }} />
       <Tabs.Screen name="journal" options={{ title: s.tabs.journal, tabBarIcon: icon('images') }} />
       <Tabs.Screen name="badges" options={{ title: s.tabs.badges, tabBarIcon: icon('ribbon') }} />
+      <Tabs.Screen name="amis" options={{ title: s.tabs.friends, tabBarIcon: icon('people') }} />
     </Tabs>
   );
 }
