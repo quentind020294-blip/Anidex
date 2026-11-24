@@ -37,9 +37,10 @@ export function computeProgress(sightings: Sighting[]): Progress {
   for (const s of sorted) {
     const animal = getAnimal(s.animalId);
     if (!animal) continue;
-    const isNew = !discovered.has(animal.id);
+    // Une espèce est « découverte » (fiche débloquée) dès qu'une observation a une photo.
+    const isNew = !!s.photoUri && !discovered.has(animal.id);
     xp += xpFor(animal, isNew);
-    discovered.add(animal.id);
+    if (s.photoUri) discovered.add(animal.id);
     const list = sightingsByAnimal.get(animal.id) ?? [];
     list.push(s);
     sightingsByAnimal.set(animal.id, list);

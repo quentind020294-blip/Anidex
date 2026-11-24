@@ -8,7 +8,7 @@ const SIGHTINGS_KEY = 'anidex/sightings/v1';
 const SETTINGS_KEY = 'anidex/settings/v1';
 const API_KEY_KEY = 'anidex_anthropic_api_key';
 
-export const DEFAULT_SETTINGS: Settings = { autoIdentify: true, saveLocation: true };
+export const DEFAULT_SETTINGS: Settings = { autoIdentify: true, saveLocation: true, explorerMode: false };
 
 export async function loadSightings(): Promise<Sighting[]> {
   try {

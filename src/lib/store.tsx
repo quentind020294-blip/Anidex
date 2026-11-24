@@ -76,7 +76,7 @@ export function DexProvider({ children }: { children: ReactNode }) {
       const nextBadges = unlockedBadgeIds(nextProgress, next);
       await commit(next);
       const animal = getAnimal(s.animalId);
-      const isNew = !prevProgress.discovered.has(s.animalId);
+      const isNew = !prevProgress.discovered.has(s.animalId) && nextProgress.discovered.has(s.animalId);
       return {
         isNew,
         xpGained: animal ? xpFor(animal, isNew) : 0,
