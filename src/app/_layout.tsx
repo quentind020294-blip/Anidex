@@ -1,9 +1,9 @@
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { ActivityIndicator, Platform, Text, View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
-import { LanguageToggle } from '../components/LanguageToggle';
+import { HeaderTitle } from '../components/HeaderTitle';
 import { colors } from '../components/theme';
 import { I18nProvider, useI18n } from '../i18n';
 import { DexProvider, useDex } from '../lib/store';
@@ -26,12 +26,8 @@ function Gate() {
         headerTintColor: '#fff',
         headerTitleStyle: { fontWeight: '800' },
         contentStyle: { backgroundColor: colors.bg },
-        // Sur le web, l'en-tête n'ajoute pas de marge à droite (le natif le fait déjà).
-        headerRight: () => (
-          <View style={{ marginRight: Platform.OS === 'web' ? 16 : 0 }}>
-            <LanguageToggle />
-          </View>
-        ),
+        // Titres longs : deux lignes au maximum, puis « … » (jamais de chevauchement).
+        headerTitle: ({ children, tintColor }) => <HeaderTitle tintColor={tintColor}>{children}</HeaderTitle>,
       }}
     >
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />

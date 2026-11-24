@@ -51,7 +51,7 @@ export default function AnimalScreen() {
 
   return (
     <>
-      <Stack.Screen options={{ title: `${dexNumber(animal.id)}  ${animal.name[lang]}`, headerStyle: { backgroundColor: color } }} />
+      <Stack.Screen options={{ title: `${dexNumber(animal.id)} ${animal.name[lang]}`, headerStyle: { backgroundColor: color } }} />
       <ScrollView contentContainerStyle={styles.page}>
         <View style={[styles.hero, { backgroundColor: color }]}>
           {discovered && cover ? (

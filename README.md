@@ -15,7 +15,7 @@ Application **Android / iOS et web** construite avec Expo (React Native + TypeSc
 - **Progression** : XP selon la rareté (commun 10, peu commun 25, rare 50, légendaire 100 ; 2 XP pour une espèce déjà vue), 10 rangs, du « Touriste curieux » à la « Légende de l’Anidex ».
 - **20 badges** : par catégorie, espèces rares ou légendaires, animaux dangereux (de loin !), espèces invasives, espèces menacées, États visités, etc.
 - Recherche, filtres par catégorie et par statut (découverts ou à trouver).
-- **Français / anglais** : bouton FR | EN en haut de chaque écran et dans les réglages. Toute l’interface est traduite, ainsi que les fiches des 151 espèces. Le nom affiché est le nom courant dans la langue choisie. Au premier lancement, l’app suit la langue du téléphone (français s’il est en français, anglais sinon) ; le choix est ensuite mémorisé.
+- **Français / anglais** : choix « Langue / Language » dans les réglages (icône engrenage). Toute l’interface est traduite, ainsi que les fiches des 151 espèces. Le nom affiché est le nom courant dans la langue choisie. Au premier lancement, l’app suit la langue du téléphone (français s’il est en français, anglais sinon) ; le choix est ensuite mémorisé.
 - Toutes les données restent sur l’appareil. Sur mobile, la clé API est stockée chiffrée (Keychain / Keystore) ; sur le web, elle est enregistrée dans le navigateur.
 
 ## Identification par IA

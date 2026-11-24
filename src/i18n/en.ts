@@ -14,7 +14,8 @@ export const en: Strings = {
   },
 
   language: {
-    title: 'Language',
+    // Toujours bilingue : on doit pouvoir retrouver ce réglage quelle que soit la langue affichée.
+    title: 'Langue / Language',
     hint: 'By default, the Anidex uses your phone’s language.',
   },
 
