@@ -12,10 +12,12 @@ import { getFriend, type FriendDetail } from '../../lib/friends';
 import { useFriends } from '../../lib/friendsStore';
 import { BADGES, LEVEL_THRESHOLDS, rankName } from '../../lib/progress';
 import { useDex } from '../../lib/store';
+import { HIDDEN_NAME, useUnlock } from '../../lib/unlock';
 
 export default function FriendScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { s, lang } = useI18n();
+  const { isUnlocked } = useUnlock();
   const { progress } = useDex();
   const { removeFriend, friends } = useFriends();
   const [entry, setEntry] = useState<{ key: string; data: FriendDetail | null } | null>(null);
@@ -91,9 +93,10 @@ export default function FriendScreen() {
         <Text style={styles.note}>{s.friends.inCommon(inCommon)}</Text>
         <View style={styles.grid}>
           {animals.map((a) => (
-            <Pressable key={a.id} onPress={() => router.push(`/animal/${a.id}`)} style={styles.cell} accessibilityLabel={a.name[lang]}>
-              <AnimalAvatar animal={a} discovered size={44} />
-              <Text style={styles.cellText} numberOfLines={2}>{a.name[lang]}</Text>
+            <Pressable key={a.id} onPress={() => router.push(`/animal/${a.id}`)} style={styles.cell} accessibilityLabel={isUnlocked(a.id) ? a.name[lang] : `${dexNumber(a.id)} ${s.locked.a11yLocked}`}>
+              {/* Une espèce que je n'ai pas encore débloquée reste cachée, même si mon ami l'a trouvée. */}
+              <AnimalAvatar animal={a} discovered={isUnlocked(a.id)} size={44} />
+              <Text style={styles.cellText} numberOfLines={2}>{isUnlocked(a.id) ? a.name[lang] : `${dexNumber(a.id)} ${HIDDEN_NAME}`}</Text>
             </Pressable>
           ))}
         </View>
@@ -118,13 +121,15 @@ export default function FriendScreen() {
           const a = getAnimal(x.animal_id);
           if (!a) return null;
           // Double sécurité : même si le serveur renvoyait un État, on ne l'affiche pas pour une espèce menacée.
-          const where = hidesLocation(a) ? s.friends.locationHidden : x.state ? `📍 ${s.states[x.state]}` : s.friends.noLocation;
+          const open = isUnlocked(a.id);
+          // Fiche verrouillée : on n'indique pas non plus « lieu masqué », qui trahirait le statut de menace.
+          const where = !open ? null : hidesLocation(a) ? s.friends.locationHidden : x.state ? `📍 ${s.states[x.state]}` : s.friends.noLocation;
           return (
             <View key={`${x.animal_id}-${x.observed_on}-${i}`} style={styles.sighting}>
-              <AnimalAvatar animal={a} discovered size={36} />
+              <AnimalAvatar animal={a} discovered={open} size={36} />
               <View style={{ flex: 1 }}>
-                <Text style={styles.text} numberOfLines={1}>{dexNumber(a.id)} {a.name[lang]}</Text>
-                <Text style={styles.note}>🗓️ {formatDate(x.observed_on, s)} · {where}</Text>
+                <Text style={styles.text} numberOfLines={1}>{dexNumber(a.id)} {open ? a.name[lang] : HIDDEN_NAME}</Text>
+                <Text style={styles.note}>🗓️ {formatDate(x.observed_on, s)}{where ? ` · ${where}` : ''}</Text>
               </View>
             </View>
           );

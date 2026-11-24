@@ -294,6 +294,9 @@ export const fr = {
     saved: 'Enregistrée ✓',
     remove: 'Supprimer',
     autoIdentify: 'Identifier automatiquement après la photo',
+    explorerTitle: '🧭 Mode explorateur',
+    explorer: 'Mode explorateur : tout afficher',
+    explorerHint: 'Affiche toutes les fiches, même celles des espèces que tu n’as pas encore photographiées. Ta progression ne change pas.',
     locationTitle: '📍 Localisation',
     saveLocation: 'Enregistrer le lieu de chaque observation',
     locationHint: 'Le lieu sert à ton journal et aux badges d’exploration. Il reste sur ton téléphone.',
@@ -453,6 +456,18 @@ export const fr = {
       planeur: 'Planeur',
     },
     note: 'Valeurs habituelles pour un adulte, vérifiées dans les articles de Wikipédia (novembre 2026). « — » : donnée inconnue ou non confirmée.',
+  },
+
+  locked: {
+    clues: '🔎 Indices',
+    cluesHint: 'De quoi t’aider à la trouver :',
+    title: 'Espèce encore inconnue',
+    cta: 'Prends-la en photo pour débloquer sa fiche !',
+    ctaButton: 'Ouvrir l’appareil photo',
+    lockedTitle: '🔒 Fiche verrouillée',
+    items: ['Noms français, anglais et scientifique', 'Description et « Le savais-tu ? »', 'Poids, taille et types', 'Conservation détaillée'],
+    unlocked: 'FICHE DÉBLOQUÉE !',
+    a11yLocked: 'Espèce non découverte',
   },
 
   consSection: {

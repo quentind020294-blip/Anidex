@@ -8,10 +8,12 @@ import { dexNumber, getAnimal } from '../../data/animals';
 import { useI18n } from '../../i18n';
 import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
+import { HIDDEN_NAME, useUnlock } from '../../lib/unlock';
 
 export default function JournalScreen() {
   const { sightings } = useDex();
   const { s, lang } = useI18n();
+  const { isUnlocked } = useUnlock();
   const sorted = [...sightings].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
@@ -45,12 +47,12 @@ export default function JournalScreen() {
               <StoredImage uri={item.photoUri} style={styles.photo} />
             ) : (
               <View style={[styles.photo, { alignItems: 'center', justifyContent: 'center' }]}>
-                <AnimalAvatar animal={animal} discovered size={60} />
+                <AnimalAvatar animal={animal} discovered={isUnlocked(animal.id)} size={60} />
               </View>
             )}
             <View style={{ flex: 1, gap: 4 }}>
               <Text style={styles.number}>{dexNumber(animal.id)}</Text>
-              <Text style={styles.name}>{animal.name[lang]}</Text>
+              <Text style={styles.name}>{isUnlocked(animal.id) ? animal.name[lang] : HIDDEN_NAME}</Text>
               <TypeBadge category={animal.category} small />
               <Text style={styles.meta}>🗓️ {formatDate(item.date, s)}</Text>
               {where && <Text style={styles.meta} numberOfLines={1}>📍 {where}</Text>}

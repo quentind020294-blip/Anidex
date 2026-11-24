@@ -293,6 +293,9 @@ export const en: Strings = {
     saved: 'Saved ✓',
     remove: 'Remove',
     autoIdentify: 'Identify automatically after taking a photo',
+    explorerTitle: '🧭 Explorer mode',
+    explorer: 'Explorer mode: show everything',
+    explorerHint: 'Shows every entry, even for species you haven’t photographed yet. Your progress doesn’t change.',
     locationTitle: '📍 Location',
     saveLocation: 'Save the place of each sighting',
     locationHint: 'The place is used for your journal and exploration badges. It stays on your phone.',
@@ -452,6 +455,18 @@ export const en: Strings = {
       planeur: 'Glider',
     },
     note: 'Typical values for an adult, checked against Wikipedia articles (November 2026). “—”: unknown or unconfirmed.',
+  },
+
+  locked: {
+    clues: '🔎 Clues',
+    cluesHint: 'Some help to track it down:',
+    title: 'Unknown species',
+    cta: 'Photograph it to unlock its entry!',
+    ctaButton: 'Open the camera',
+    lockedTitle: '🔒 Entry locked',
+    items: ['French, English and scientific names', 'Description and “Did you know?”', 'Weight, size and types', 'Detailed conservation'],
+    unlocked: 'ENTRY UNLOCKED!',
+    a11yLocked: 'Undiscovered species',
   },
 
   consSection: {

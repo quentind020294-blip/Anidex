@@ -84,6 +84,16 @@ export default function SettingsScreen() {
       </Card>
 
       <Card style={{ gap: 10 }}>
+        <Text style={styles.title}>{s.settings.explorerTitle}</Text>
+        <Row
+          label={s.settings.explorer}
+          value={settings.explorerMode}
+          onChange={(v) => void updateSettings({ explorerMode: v })}
+        />
+        <Text style={styles.small}>{s.settings.explorerHint}</Text>
+      </Card>
+
+      <Card style={{ gap: 10 }}>
         <Text style={styles.title}>{s.settings.dataTitle}</Text>
         <Text style={styles.text}>{s.settings.dataSummary(sightings.length, ANIMALS.length)}</Text>
         <Button title={s.settings.resetAll} variant="secondary" onPress={confirmReset} disabled={!sightings.length} />

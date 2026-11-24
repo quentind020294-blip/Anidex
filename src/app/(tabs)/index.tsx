@@ -11,6 +11,7 @@ import type { Category } from '../../data/types';
 import { useI18n } from '../../i18n';
 import { rankName } from '../../lib/progress';
 import { useDex } from '../../lib/store';
+import { HIDDEN_NAME, matchesNumber, useUnlock } from '../../lib/unlock';
 
 type Filter = Category | 'tous';
 type Show = 'tous' | 'decouverts' | 'a-trouver';
@@ -23,6 +24,7 @@ function normalize(s: string) {
 export default function DexScreen() {
   const { progress } = useDex();
   const { s, lang } = useI18n();
+  const { isUnlocked } = useUnlock();
   const { width } = useWindowDimensions();
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<Filter>('tous');
@@ -43,16 +45,20 @@ export default function DexScreen() {
     const q = normalize(query.trim());
     return ANIMALS.filter((a) => {
       if (filter !== 'tous' && a.category !== filter) return false;
-      if (status === 'threatened' && !isThreatened(a)) return false;
-      if (status === 'vic' && !isThreatenedInVictoria(a)) return false;
+      const unlocked = isUnlocked(a.id);
+      // Le statut de conservation fait partie de la fiche : les filtres « menacées »
+      // ne s'appliquent qu'aux espèces débloquées, pour ne rien dévoiler des autres.
+      if (status === 'threatened' && !(unlocked && isThreatened(a))) return false;
+      if (status === 'vic' && !(unlocked && isThreatenedInVictoria(a))) return false;
       const found = progress.discovered.has(a.id);
       if (show === 'decouverts' && !found) return false;
       if (show === 'a-trouver' && found) return false;
       if (!q) return true;
-      // On cherche dans les deux langues : pratique si on connaît le nom anglais.
-      return [a.name.fr, a.name.en, a.scientific, String(a.id)].some((v) => normalize(v).includes(q));
+      if (matchesNumber(a.id, q)) return true;
+      // Les noms (dans les deux langues) ne sont cherchables que pour les fiches débloquées.
+      return unlocked && [a.name.fr, a.name.en, a.scientific].some((v) => normalize(v).includes(q));
     });
-  }, [query, filter, show, status, progress.discovered]);
+  }, [query, filter, show, status, progress.discovered, isUnlocked]);
 
   const total = ANIMALS.length;
   const found = progress.discovered.size;
@@ -132,18 +138,19 @@ export default function DexScreen() {
         </Text>
       }
       renderItem={({ item }) => {
-        const discovered = progress.discovered.has(item.id);
+        const discovered = isUnlocked(item.id);
         const sightings = progress.sightingsByAnimal.get(item.id);
         const photo = sightings?.find((s) => s.photoUri)?.photoUri;
         return (
           <Pressable
             onPress={() => router.push(`/animal/${item.id}`)}
+            accessibilityLabel={`${dexNumber(item.id)} ${discovered ? item.name[lang] : s.locked.a11yLocked}`}
             style={({ pressed }) => [styles.cell, { width: cardWidth }, pressed && { transform: [{ scale: 0.97 }] }]}
           >
             <Text style={styles.number}>{dexNumber(item.id)}</Text>
             <AnimalAvatar animal={item} discovered={discovered} photoUri={photo} size={Math.min(cardWidth - 24, 96)} />
             <Text numberOfLines={2} style={[styles.name, !discovered && { color: colors.muted }]}>
-              {item.name[lang]}
+              {discovered ? item.name[lang] : HIDDEN_NAME}
             </Text>
             {discovered ? (
               <View style={[styles.dot, { backgroundColor: CATEGORIES[item.category].color }]} />

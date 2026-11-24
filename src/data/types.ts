@@ -52,4 +52,6 @@ export interface Sighting {
 export interface Settings {
   autoIdentify: boolean;
   saveLocation: boolean;
+  /** Mode explorateur : affiche toutes les fiches, même celles des espèces non découvertes. */
+  explorerMode: boolean;
 }

@@ -12,6 +12,7 @@ import { TRAITS } from '../../data/traits';
 import { useI18n } from '../../i18n';
 import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
+import { HIDDEN_NAME, useUnlock } from '../../lib/unlock';
 
 // Export web statique : une page HTML est générée pour chaque espèce.
 export function generateStaticParams(): { id: string }[] {
@@ -23,6 +24,7 @@ export default function AnimalScreen() {
   const animal = getAnimal(Number(id));
   const { progress, removeSighting } = useDex();
   const { s, lang } = useI18n();
+  const { isUnlocked } = useUnlock();
 
   if (!animal) {
     return (
@@ -33,6 +35,8 @@ export default function AnimalScreen() {
   }
 
   const discovered = progress.discovered.has(animal.id);
+  // Fiche lisible : espèce photographiée, ou mode explorateur activé dans les réglages.
+  const unlocked = isUnlocked(animal.id);
   const sightings = [...(progress.sightingsByAnimal.get(animal.id) ?? [])].reverse();
   const cover = sightings.find((x) => x.photoUri)?.photoUri;
   const color = CATEGORIES[animal.category].color;
@@ -49,6 +53,104 @@ export default function AnimalScreen() {
       { text: s.animal.cancel, style: 'cancel' },
       { text: s.animal.delete, style: 'destructive', onPress: doDelete },
     ]);
+  }
+
+  const nav = (
+    <View style={styles.nav}>
+      {prev ? (
+        <Pressable onPress={() => router.replace(`/animal/${prev.id}`)} style={styles.navBtn}>
+          <Text style={styles.navText}>‹ {dexNumber(prev.id)}</Text>
+        </Pressable>
+      ) : <View />}
+      <Text style={styles.small}>{animal.id} / {ANIMALS.length}</Text>
+      {next ? (
+        <Pressable onPress={() => router.replace(`/animal/${next.id}`)} style={styles.navBtn}>
+          <Text style={styles.navText}>{dexNumber(next.id)} ›</Text>
+        </Pressable>
+      ) : <View />}
+    </View>
+  );
+
+  const whereToSee = (
+    <>
+      <Info label={s.animal.habitat} value={animal.habitat[lang]} />
+      <View style={{ gap: 6 }}>
+        <Text style={styles.label}>{s.animal.whereToSee}</Text>
+        <View style={styles.states}>
+          {STATE_ORDER.map((code) => {
+            const present = animal.states.includes(code);
+            return (
+              <View key={code} style={[styles.stateChip, present ? { backgroundColor: color } : { backgroundColor: '#EEE9DD' }]}>
+                <Text style={[styles.stateText, { color: present ? '#fff' : '#A8A293' }]}>{code}</Text>
+              </View>
+            );
+          })}
+        </View>
+        <Text style={styles.small}>{STATE_ORDER.filter((code) => animal.states.includes(code)).map((code) => s.states[code]).join(' · ')}</Text>
+      </View>
+      <View style={{ gap: 6 }}>
+        <Text style={styles.label}>{s.map.title}</Text>
+        <SpeciesMap animal={animal} sightings={sightings} />
+      </View>
+    </>
+  );
+
+  if (!unlocked) {
+    // Fiche verrouillée : uniquement numéro, silhouette, catégorie, rareté et indices.
+    return (
+      <>
+        <Stack.Screen options={{ title: `${dexNumber(animal.id)} ${HIDDEN_NAME}`, headerStyle: { backgroundColor: color } }} />
+        <ScrollView contentContainerStyle={styles.page}>
+          <View style={[styles.hero, { backgroundColor: color }]}>
+            <View style={styles.avatarRing}>
+              <AnimalAvatar animal={animal} discovered={false} size={150} />
+            </View>
+            <Text style={styles.heroNumber}>{dexNumber(animal.id)}</Text>
+            <Text style={styles.heroName} accessibilityLabel={s.locked.a11yLocked}>{HIDDEN_NAME}</Text>
+            <Text style={styles.heroSub}>🔒 {s.locked.title}</Text>
+            <View style={styles.heroTags}>
+              <View style={styles.whitePill}><Text style={[styles.pillText, { color }]}>{CATEGORIES[animal.category].emoji} {s.categories[animal.category].label}</Text></View>
+              <View style={styles.whitePill}>
+                <RarityStars rarity={animal.rarity} />
+                <Text style={[styles.pillText, { color: RARITIES[animal.rarity].color }]}> {s.rarities[animal.rarity]}</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Avertissement de sécurité conservé même sur une fiche verrouillée. */}
+          {animal.dangerous && (
+            <View style={[styles.alert, { backgroundColor: '#FDE8E8', borderColor: '#F5B5B5' }]}>
+              <Text style={styles.alertText}>{s.animal.dangerous}</Text>
+            </View>
+          )}
+
+          <Card style={{ gap: 12 }}>
+            <View style={{ gap: 2 }}>
+              <Text style={styles.section}>{s.locked.clues}</Text>
+              <Text style={styles.small}>{s.locked.cluesHint}</Text>
+            </View>
+            {whereToSee}
+          </Card>
+
+          <Card style={styles.cta}>
+            <Text style={styles.ctaText}>📸 {s.locked.cta}</Text>
+            <Button title={s.locked.ctaButton} icon="📷" onPress={() => router.navigate('/observer')} />
+          </Card>
+
+          <Card style={styles.lockedCard}>
+            <Text style={styles.section}>{s.locked.lockedTitle}</Text>
+            {s.locked.items.map((item) => (
+              <View key={item} style={styles.lockedRow}>
+                <Text style={styles.lockIcon}>🔒</Text>
+                <Text style={styles.lockedText}>{item}</Text>
+              </View>
+            ))}
+          </Card>
+
+          {nav}
+        </ScrollView>
+      </>
+    );
   }
 
   return (
@@ -107,25 +209,7 @@ export default function AnimalScreen() {
         </Card>
 
         <Card style={{ gap: 12 }}>
-          <Info label={s.animal.habitat} value={animal.habitat[lang]} />
-          <View style={{ gap: 6 }}>
-            <Text style={styles.label}>{s.animal.whereToSee}</Text>
-            <View style={styles.states}>
-              {STATE_ORDER.map((code) => {
-                const present = animal.states.includes(code);
-                return (
-                  <View key={code} style={[styles.stateChip, present ? { backgroundColor: color } : { backgroundColor: '#EEE9DD' }]}>
-                    <Text style={[styles.stateText, { color: present ? '#fff' : '#A8A293' }]}>{code}</Text>
-                  </View>
-                );
-              })}
-            </View>
-            <Text style={styles.small}>{STATE_ORDER.filter((code) => animal.states.includes(code)).map((code) => s.states[code]).join(' · ')}</Text>
-          </View>
-          <View style={{ gap: 6 }}>
-            <Text style={styles.label}>{s.map.title}</Text>
-            <SpeciesMap animal={animal} sightings={sightings} />
-          </View>
+          {whereToSee}
         </Card>
 
         <ConservationCard animal={animal} />
@@ -158,19 +242,7 @@ export default function AnimalScreen() {
           <Button title={s.animal.foundIt} icon="📷" onPress={() => router.navigate('/observer')} />
         )}
 
-        <View style={styles.nav}>
-          {prev ? (
-            <Pressable onPress={() => router.replace(`/animal/${prev.id}`)} style={styles.navBtn}>
-              <Text style={styles.navText}>‹ {dexNumber(prev.id)}</Text>
-            </Pressable>
-          ) : <View />}
-          <Text style={styles.small}>{animal.id} / {ANIMALS.length}</Text>
-          {next ? (
-            <Pressable onPress={() => router.replace(`/animal/${next.id}`)} style={styles.navBtn}>
-              <Text style={styles.navText}>{dexNumber(next.id)} ›</Text>
-            </Pressable>
-          ) : <View />}
-        </View>
+        {nav}
       </ScrollView>
     </>
   );
@@ -211,4 +283,10 @@ const styles = StyleSheet.create({
   nav: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginTop: 4 },
   navBtn: { backgroundColor: colors.card, paddingHorizontal: 14, paddingVertical: 10, borderRadius: radius.md },
   navText: { fontWeight: '800', color: colors.ink },
+  cta: { gap: 12, alignItems: 'stretch', borderWidth: 2, borderColor: colors.gold },
+  ctaText: { fontSize: 16, fontWeight: '900', color: colors.ink, textAlign: 'center' },
+  lockedCard: { gap: 8 },
+  lockedRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
+  lockIcon: { fontSize: 13, opacity: 0.7 },
+  lockedText: { fontSize: 14, color: colors.muted, fontWeight: '600' },
 });
