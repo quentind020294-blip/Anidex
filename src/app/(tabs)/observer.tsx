@@ -13,7 +13,7 @@ import { CATEGORIES, RARITIES, STATES } from '../../data/meta';
 import type { Animal, Sighting } from '../../data/types';
 import { getCurrentPlace, pickPhoto, type PreparedPhoto } from '../../lib/capture';
 import { identifyAnimal, IdentifyError, type IdentifyResult } from '../../lib/identify';
-import { persistPhoto } from '../../lib/storage';
+import { persistPhoto } from '../../lib/photoStore';
 import { useDex, type AddResult } from '../../lib/store';
 
 type Phase =

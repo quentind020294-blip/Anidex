@@ -3,7 +3,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Location from 'expo-location';
 import { Platform } from 'react-native';
 
-import { stateFromRegion } from '../data/meta';
+import { approxStateFromCoords, STATES, stateFromRegion } from '../data/meta';
 import type { StateCode } from '../data/types';
 
 export interface PreparedPhoto {
@@ -17,9 +17,14 @@ export async function pickPhoto(source: 'camera' | 'library'): Promise<PreparedP
     const perm = await ImagePicker.requestCameraPermissionsAsync();
     if (!perm.granted) throw new Error('L’accès à l’appareil photo est nécessaire pour observer des animaux.');
   }
-  const options: ImagePicker.ImagePickerOptions = { mediaTypes: ['images'], quality: 0.9 };
+  const options: ImagePicker.ImagePickerOptions = {
+    mediaTypes: ['images'],
+    quality: 0.9,
+    // Sur le web (Chrome Android), ouvre directement la caméra arrière.
+    cameraType: ImagePicker.CameraType.back,
+  };
   const result =
-    source === 'camera' && Platform.OS !== 'web'
+    source === 'camera'
       ? await ImagePicker.launchCameraAsync(options)
       : await ImagePicker.launchImageLibraryAsync(options);
   if (result.canceled || !result.assets[0]) return null;
@@ -67,6 +72,8 @@ export async function getCurrentPlace(): Promise<Place | null> {
         state = stateFromRegion(first.region);
       }
     }
+    state ??= approxStateFromCoords(latitude, longitude);
+    place ??= state ? STATES[state] : undefined;
     return { latitude, longitude, place, state };
   } catch {
     return null;

@@ -59,3 +59,22 @@ export function stateFromRegion(region?: string | null): StateCode | undefined {
   }
   return undefined;
 }
+
+/**
+ * Estimation de l'État à partir des coordonnées GPS, à partir de frontières simplifiées.
+ * Utilisée sur le web (pas de géocodage inverse) et en secours sur mobile.
+ * Peut se tromper à quelques kilomètres des frontières.
+ */
+export function approxStateFromCoords(lat: number, lon: number): StateCode | undefined {
+  // En dehors du cadre géographique de l'Australie (Tasmanie comprise).
+  if (lat > -9 || lat < -44 || lon < 112 || lon > 154.5) return undefined;
+  if (lat < -39.5) return 'TAS';
+  if (lon < 129) return 'WA';
+  if (lon >= 148.76 && lon <= 149.4 && lat >= -35.92 && lat <= -35.12) return 'ACT';
+  if (lon < 138) return lat > -26 ? 'NT' : 'SA';
+  if (lon < 141) return lat > -26 ? 'QLD' : 'SA';
+  if (lat > -29) return 'QLD';
+  // Frontière NSW/VIC approchée par une droite entre (141 ; -34) et (150 ; -37,5).
+  const border = -34 - ((lon - 141) * 3.5) / 9;
+  return lat < border ? 'VIC' : 'NSW';
+}

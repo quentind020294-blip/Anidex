@@ -1,13 +1,18 @@
 import { Stack, router, useLocalSearchParams } from 'expo-router';
-import { Alert, Image, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
-import { AnimalAvatar, Button, Card, RarityStars } from '../../components/ui';
+import { AnimalAvatar, Button, Card, RarityStars, StoredImage } from '../../components/ui';
 import { ANIMALS, dexNumber, getAnimal } from '../../data/animals';
 import { CATEGORIES, CONSERVATION, RARITIES, STATES } from '../../data/meta';
 import type { StateCode } from '../../data/types';
 import { formatDate } from '../../lib/format';
 import { useDex } from '../../lib/store';
+
+// Export web statique : une page HTML est générée pour chaque espèce.
+export function generateStaticParams(): { id: string }[] {
+  return ANIMALS.map((a) => ({ id: String(a.id) }));
+}
 
 const STATE_ORDER: StateCode[] = ['WA', 'NT', 'SA', 'QLD', 'NSW', 'ACT', 'VIC', 'TAS'];
 
@@ -50,7 +55,7 @@ export default function AnimalScreen() {
       <ScrollView contentContainerStyle={styles.page}>
         <View style={[styles.hero, { backgroundColor: color }]}>
           {discovered && cover ? (
-            <Image source={{ uri: cover }} style={styles.cover} />
+            <StoredImage uri={cover} style={styles.cover} />
           ) : (
             <View style={styles.avatarRing}>
               <AnimalAvatar animal={animal} discovered={discovered} size={150} />
@@ -130,7 +135,7 @@ export default function AnimalScreen() {
             <Text style={styles.section}>Mes observations</Text>
             {sightings.map((s) => (
               <Card key={s.id} style={styles.sighting}>
-                {s.photoUri ? <Image source={{ uri: s.photoUri }} style={styles.thumb} /> : <View style={styles.thumb} />}
+                <StoredImage uri={s.photoUri} style={styles.thumb} />
                 <View style={{ flex: 1, gap: 3 }}>
                   <Text style={styles.text}>🗓️ {formatDate(s.date)}</Text>
                   {(s.place || s.state) && <Text style={styles.small}>📍 {s.place ?? STATES[s.state!]}</Text>}

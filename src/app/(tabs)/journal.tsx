@@ -1,8 +1,8 @@
 import { router } from 'expo-router';
-import { FlatList, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
-import { AnimalAvatar, Button, TypeBadge } from '../../components/ui';
+import { AnimalAvatar, Button, StoredImage, TypeBadge } from '../../components/ui';
 import { dexNumber, getAnimal } from '../../data/animals';
 import { STATES } from '../../data/meta';
 import { formatDate } from '../../lib/format';
@@ -37,7 +37,7 @@ export default function JournalScreen() {
         return (
           <Pressable onPress={() => router.push(`/animal/${animal.id}`)} style={({ pressed }) => [styles.row, pressed && { opacity: 0.8 }]}>
             {item.photoUri ? (
-              <Image source={{ uri: item.photoUri }} style={styles.photo} />
+              <StoredImage uri={item.photoUri} style={styles.photo} />
             ) : (
               <View style={[styles.photo, { alignItems: 'center', justifyContent: 'center' }]}>
                 <AnimalAvatar animal={animal} discovered size={60} />

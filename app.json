@@ -26,7 +26,15 @@
       ]
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "output": "static",
+      "favicon": "./assets/favicon.png",
+      "name": "Anidex",
+      "shortName": "Anidex",
+      "lang": "fr",
+      "themeColor": "#D7263D",
+      "backgroundColor": "#F4F1EA",
+      "description": "Un Pokédex de la faune australienne",
+      "display": "standalone"
     },
     "plugins": [
       "expo-router",
