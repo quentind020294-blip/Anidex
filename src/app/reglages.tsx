@@ -40,8 +40,10 @@ export default function SettingsScreen() {
         <Text style={styles.title}>🤖 Identification par IA</Text>
         <Text style={styles.text}>
           L’Anidex utilise Claude (Anthropic) pour reconnaître les animaux sur tes photos. Crée une clé API sur
-          console.anthropic.com puis colle-la ici. Elle est stockée de façon chiffrée sur ton appareil et n’est
-          envoyée qu’à l’API d’Anthropic.
+          console.anthropic.com puis colle-la ici. Elle n’est envoyée qu’à l’API d’Anthropic.{' '}
+          {Platform.OS === 'web'
+            ? 'Sur la version web, elle est enregistrée dans ce navigateur uniquement (non chiffrée) : n’utilise l’app que sur ton propre appareil, et fixe une limite de dépenses sur ta clé dans la console Anthropic.'
+            : 'Elle est stockée de façon chiffrée sur ton appareil.'}
         </Text>
         <Text style={styles.status}>
           {apiKey ? `✓ Clé enregistrée (${mask(apiKey)})` : 'Aucune clé enregistrée : identification manuelle uniquement.'}

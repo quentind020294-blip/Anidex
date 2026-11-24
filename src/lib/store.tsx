@@ -5,7 +5,6 @@ import type { Settings, Sighting } from '../data/types';
 import { BADGES, computeProgress, unlockedBadgeIds, xpFor, type Badge, type Progress } from './progress';
 import {
   DEFAULT_SETTINGS,
-  deletePhoto,
   loadApiKey,
   loadSettings,
   loadSightings,
@@ -13,6 +12,7 @@ import {
   saveSettings,
   saveSightings,
 } from './storage';
+import { deletePhoto } from './photoStore';
 
 export interface AddResult {
   isNew: boolean;

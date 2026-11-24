@@ -1,7 +1,8 @@
-import { Image, Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View, type ImageStyle, type StyleProp, type ViewStyle } from 'react-native';
 
 import { CATEGORIES, RARITIES } from '../data/meta';
 import type { Animal, Category, Rarity } from '../data/types';
+import { usePhotoUri } from '../lib/photoStore';
 import { colors, radius } from './theme';
 
 export function TypeBadge({ category, small }: { category: Category; small?: boolean }) {
@@ -41,11 +42,12 @@ export function AnimalAvatar({ animal, photoUri, discovered, size }: {
   animal: Animal; photoUri?: string | null; discovered: boolean; size: number;
 }) {
   const color = CATEGORIES[animal.category].color;
+  const resolved = usePhotoUri(photoUri);
   const base: ViewStyle = { width: size, height: size, borderRadius: size / 2, overflow: 'hidden' };
-  if (discovered && photoUri) {
+  if (discovered && resolved) {
     return (
       <View style={[base, { borderWidth: 3, borderColor: color }]}>
-        <Image source={{ uri: photoUri }} style={{ width: '100%', height: '100%' }} />
+        <Image source={{ uri: resolved }} style={{ width: '100%', height: '100%' }} />
       </View>
     );
   }
@@ -61,6 +63,13 @@ export function AnimalAvatar({ animal, photoUri, discovered, size }: {
       {!discovered && <Text style={[styles.question, { fontSize: size * 0.3 }]}>?</Text>}
     </View>
   );
+}
+
+/** Affiche une photo enregistrée (URI de fichier, data-URI ou référence IndexedDB sur le web). */
+export function StoredImage({ uri, style }: { uri: string | null | undefined; style: StyleProp<ImageStyle> }) {
+  const resolved = usePhotoUri(uri);
+  if (!resolved) return <View style={[style as StyleProp<ViewStyle>, { backgroundColor: '#EEE9DD' }]} />;
+  return <Image source={{ uri: resolved }} style={style} />;
 }
 
 export function Button({ title, onPress, variant = 'primary', icon, disabled, style }: {
