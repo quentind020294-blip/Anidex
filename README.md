@@ -7,6 +7,7 @@ Application **Android / iOS et web** construite avec Expo (React Native + TypeSc
 ## Fonctionnalités
 
 - **Anidex de 151 espèces** australiennes, numérotées de #001 à #151 : mammifères, oiseaux, reptiles, amphibiens, vie aquatique, insectes, araignées et autres invertébrés, avec de nombreuses espèces de Victoria et de Phillip Island. Les plus rares (#142 à #151) sont « légendaires ». Pour chaque espèce : noms français, anglais et scientifique, rareté, habitat, États où on la trouve, description et anecdote.
+- **Cartes** : chaque fiche a une carte de répartition de l’Australie (SVG intégré, sans service payant). Les États où l’espèce vit sont colorés : foncé pour une espèce commune, clair pour une espèce rare ou localisée, hachuré pour une espèce introduite. Tes observations géolocalisées apparaissent en points (touche-les pour voir la date). Le mode « Zones réelles » affiche des carrés d’environ 100 km où l’espèce a été observée, d’après l’API publique et gratuite de l’Atlas of Living Australia ; les données sont gardées 30 jours sur l’appareil, et sans connexion la carte revient à l’affichage par États. Le Journal affiche une carte de toutes tes observations.
 - **Conservation** sur chaque fiche : statut mondial (UICN), national (loi EPBC) et en Victoria (loi FFG), tendance de la population, principales menaces, gestes utiles, programmes de protection et, pour les espèces introduites, leur impact. Filtres « Menacées » et « Menacées en Victoria », écran de bilan et écran « Animal blessé ? » avec les numéros de secours de chaque État.
 - Les espèces pas encore observées apparaissent comme des **silhouettes mystère** ; une fois découvertes, elles affichent **ta photo**.
 - **Observer** : prends une photo (ou importe-la depuis la galerie) et l’IA propose jusqu’à 3 espèces avec un indice de confiance. Tu confirmes d’un geste. Sans connexion ni clé API, tu peux choisir l’espèce dans la liste.
@@ -74,6 +75,8 @@ src/
   data/animals.ts       # catalogue des 151 espèces
   data/conservation.ts  # statuts UICN / EPBC / FFG, menaces, gestes, programmes
   data/rescue.ts        # numéros de secours pour la faune, par État
+  data/australiaMap.ts  # contours SVG des États (généré par npm run gen:map, Natural Earth)
+  lib/alaGrid.ts        # zones réelles de présence (Atlas of Living Australia) + cache
   data/meta.ts          # couleurs, XP et ordres d’affichage
   i18n/fr.ts, i18n/en.ts # textes de l’interface (même structure, vérifiée par TypeScript)
   i18n/index.tsx        # langue choisie, langue du téléphone, mémorisation
