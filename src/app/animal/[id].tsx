@@ -12,7 +12,7 @@ import { TRAITS } from '../../data/traits';
 import { useI18n } from '../../i18n';
 import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
-import { HIDDEN_NAME, useUnlock } from '../../lib/unlock';
+import { useUnlock } from '../../lib/unlock';
 
 // Export web statique : une page HTML est générée pour chaque espèce.
 export function generateStaticParams(): { id: string }[] {
@@ -99,15 +99,17 @@ export default function AnimalScreen() {
     // Fiche verrouillée : uniquement numéro, silhouette, catégorie, rareté et indices.
     return (
       <>
-        <Stack.Screen options={{ title: `${dexNumber(animal.id)} ${HIDDEN_NAME}`, headerStyle: { backgroundColor: color } }} />
+        <Stack.Screen options={{ title: `${dexNumber(animal.id)} ${animal.name[lang]}`, headerStyle: { backgroundColor: color } }} />
         <ScrollView contentContainerStyle={styles.page}>
           <View style={[styles.hero, { backgroundColor: color }]}>
             <View style={styles.avatarRing}>
               <AnimalAvatar animal={animal} discovered={false} size={150} />
             </View>
             <Text style={styles.heroNumber}>{dexNumber(animal.id)}</Text>
-            <Text style={styles.heroName} accessibilityLabel={s.locked.a11yLocked}>{HIDDEN_NAME}</Text>
-            <Text style={styles.heroSub}>🔒 {s.locked.title}</Text>
+            <Text style={styles.heroName}>{animal.name[lang]}</Text>
+            <Text style={styles.heroSub}>{animal.name[lang === 'fr' ? 'en' : 'fr']}</Text>
+            <Text style={[styles.heroSub, { fontStyle: 'italic' }]}>{animal.scientific}</Text>
+            <Text style={styles.status}>🔒 {s.locked.title}</Text>
             <View style={styles.heroTags}>
               <View style={styles.whitePill}><Text style={[styles.pillText, { color }]}>{CATEGORIES[animal.category].emoji} {s.categories[animal.category].label}</Text></View>
               <View style={styles.whitePill}>
@@ -167,6 +169,7 @@ export default function AnimalScreen() {
           )}
           <Text style={styles.heroNumber}>{dexNumber(animal.id)}</Text>
           <Text style={styles.heroName}>{animal.name[lang]}</Text>
+          <Text style={styles.heroSub}>{animal.name[lang === 'fr' ? 'en' : 'fr']}</Text>
           <Text style={[styles.heroSub, { fontStyle: 'italic' }]}>{animal.scientific}</Text>
           <View style={styles.heroTags}>
             <View style={styles.whitePill}><Text style={[styles.pillText, { color }]}>{CATEGORIES[animal.category].emoji} {s.categories[animal.category].label}</Text></View>

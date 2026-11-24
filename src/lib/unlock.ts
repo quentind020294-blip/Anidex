@@ -2,9 +2,6 @@ import { useCallback } from 'react';
 
 import { useDex } from './store';
 
-/** Nom affiché à la place de celui d'une espèce non découverte. */
-export const HIDDEN_NAME = '???';
-
 /**
  * Fiche débloquée : l'espèce a au moins une observation avec photo, ou le
  * « mode explorateur » (réglages) affiche tout. La progression (XP, badges)

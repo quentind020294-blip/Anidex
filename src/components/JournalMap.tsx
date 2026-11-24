@@ -4,7 +4,6 @@ import { getAnimal } from '../data/animals';
 import { CATEGORIES } from '../data/meta';
 import type { Sighting, StateCode } from '../data/types';
 import { useI18n } from '../i18n';
-import { HIDDEN_NAME, useUnlock } from '../lib/unlock';
 import { formatDate } from '../lib/format';
 import { AustraliaMap, LegendSwatch, type MapPoint, type Presence } from './AustraliaMap';
 import { colors } from './theme';
@@ -13,7 +12,6 @@ import { Card } from './ui';
 /** Carte globale de toutes mes observations géolocalisées. */
 export function JournalMap({ sightings }: { sightings: Sighting[] }) {
   const { s, lang } = useI18n();
-  const { isUnlocked } = useUnlock();
   const points: MapPoint[] = [];
   const visited: Partial<Record<StateCode, Presence>> = {};
   for (const x of sightings) {
@@ -25,7 +23,7 @@ export function JournalMap({ sightings }: { sightings: Sighting[] }) {
       lat: x.latitude,
       lon: x.longitude,
       color: CATEGORIES[animal.category].color,
-      label: s.map.pointWithName(isUnlocked(animal.id) ? animal.name[lang] : HIDDEN_NAME, formatDate(x.date, s)),
+      label: s.map.pointWithName(animal.name[lang], formatDate(x.date, s)),
     });
   }
   const visitedNames = Object.keys(visited).map((st) => s.states[st as StateCode]).join(', ');

@@ -461,11 +461,11 @@ export const fr = {
   locked: {
     clues: '🔎 Indices',
     cluesHint: 'De quoi t’aider à la trouver :',
-    title: 'Espèce encore inconnue',
+    title: 'Pas encore photographiée',
     cta: 'Prends-la en photo pour débloquer sa fiche !',
     ctaButton: 'Ouvrir l’appareil photo',
     lockedTitle: '🔒 Fiche verrouillée',
-    items: ['Noms français, anglais et scientifique', 'Description et « Le savais-tu ? »', 'Poids, taille et types', 'Conservation détaillée'],
+    items: ['Description et « Le savais-tu ? »', 'Poids, taille et types', 'Longévité, régime, activité, vitesse et petits', 'Conservation détaillée', 'Autres infos (espèce introduite…)'],
     unlocked: 'FICHE DÉBLOQUÉE !',
     a11yLocked: 'Espèce non découverte',
   },

@@ -460,11 +460,11 @@ export const en: Strings = {
   locked: {
     clues: '🔎 Clues',
     cluesHint: 'Some help to track it down:',
-    title: 'Unknown species',
+    title: 'Not photographed yet',
     cta: 'Photograph it to unlock its entry!',
     ctaButton: 'Open the camera',
     lockedTitle: '🔒 Entry locked',
-    items: ['French, English and scientific names', 'Description and “Did you know?”', 'Weight, size and types', 'Detailed conservation'],
+    items: ['Description and “Did you know?”', 'Weight, size and types', 'Lifespan, diet, activity, speed and offspring', 'Detailed conservation', 'Other info (introduced species…)'],
     unlocked: 'ENTRY UNLOCKED!',
     a11yLocked: 'Undiscovered species',
   },

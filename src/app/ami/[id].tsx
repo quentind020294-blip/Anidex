@@ -12,7 +12,7 @@ import { getFriend, type FriendDetail } from '../../lib/friends';
 import { useFriends } from '../../lib/friendsStore';
 import { BADGES, LEVEL_THRESHOLDS, rankName } from '../../lib/progress';
 import { useDex } from '../../lib/store';
-import { HIDDEN_NAME, useUnlock } from '../../lib/unlock';
+import { useUnlock } from '../../lib/unlock';
 
 export default function FriendScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -93,10 +93,10 @@ export default function FriendScreen() {
         <Text style={styles.note}>{s.friends.inCommon(inCommon)}</Text>
         <View style={styles.grid}>
           {animals.map((a) => (
-            <Pressable key={a.id} onPress={() => router.push(`/animal/${a.id}`)} style={styles.cell} accessibilityLabel={isUnlocked(a.id) ? a.name[lang] : `${dexNumber(a.id)} ${s.locked.a11yLocked}`}>
-              {/* Une espèce que je n'ai pas encore débloquée reste cachée, même si mon ami l'a trouvée. */}
+            <Pressable key={a.id} onPress={() => router.push(`/animal/${a.id}`)} style={styles.cell} accessibilityLabel={a.name[lang]}>
+              {/* Silhouette tant que je n'ai pas moi-même débloqué l'espèce. */}
               <AnimalAvatar animal={a} discovered={isUnlocked(a.id)} size={44} />
-              <Text style={styles.cellText} numberOfLines={2}>{isUnlocked(a.id) ? a.name[lang] : `${dexNumber(a.id)} ${HIDDEN_NAME}`}</Text>
+              <Text style={styles.cellText} numberOfLines={2}>{a.name[lang]}</Text>
             </Pressable>
           ))}
         </View>
@@ -128,7 +128,7 @@ export default function FriendScreen() {
             <View key={`${x.animal_id}-${x.observed_on}-${i}`} style={styles.sighting}>
               <AnimalAvatar animal={a} discovered={open} size={36} />
               <View style={{ flex: 1 }}>
-                <Text style={styles.text} numberOfLines={1}>{dexNumber(a.id)} {open ? a.name[lang] : HIDDEN_NAME}</Text>
+                <Text style={styles.text} numberOfLines={1}>{dexNumber(a.id)} {a.name[lang]}</Text>
                 <Text style={styles.note}>🗓️ {formatDate(x.observed_on, s)}{where ? ` · ${where}` : ''}</Text>
               </View>
             </View>
