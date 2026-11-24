@@ -4,29 +4,32 @@ export type Category =
   | 'reptile'
   | 'amphibien'
   | 'marin'
+  | 'insecte'
+  | 'arachnide'
   | 'invertebre';
 
 export type Rarity = 'commun' | 'peu-commun' | 'rare' | 'legendaire';
 
 export type StateCode = 'NSW' | 'VIC' | 'QLD' | 'WA' | 'SA' | 'TAS' | 'NT' | 'ACT';
 
-/** IUCN Red List categories. */
-export type Conservation = 'LC' | 'NT' | 'VU' | 'EN' | 'CR';
+export type Lang = 'fr' | 'en';
+
+/** Texte disponible dans les deux langues de l'app. */
+export type Localized = Record<Lang, string>;
 
 export interface Animal {
   /** Numéro dans l'Anidex (1-based, stable). */
   id: number;
-  nameFr: string;
-  nameEn: string;
+  /** Nom courant : français en mode FR, anglais en mode EN. */
+  name: Localized;
   scientific: string;
   category: Category;
   rarity: Rarity;
   emoji: string;
   states: StateCode[];
-  habitat: string;
-  description: string;
-  funFact: string;
-  conservation: Conservation;
+  habitat: Localized;
+  description: Localized;
+  funFact: Localized;
   /** Espèce introduite (envahissante) en Australie. */
   introduced?: boolean;
   /** Venimeuse ou dangereuse : à observer de loin ! */

@@ -2,11 +2,12 @@ import { Stack, router, useLocalSearchParams } from 'expo-router';
 import { Alert, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
+import { ConservationCard } from '../../components/ConservationCard';
 import { AnimalAvatar, Button, Card, RarityStars, StoredImage } from '../../components/ui';
 import { ANIMALS, dexNumber, getAnimal } from '../../data/animals';
-import { CATEGORIES, CONSERVATION, RARITIES, STATES } from '../../data/meta';
-import type { StateCode } from '../../data/types';
-import { formatDate } from '../../lib/format';
+import { CATEGORIES, RARITIES, STATE_ORDER } from '../../data/meta';
+import { useI18n } from '../../i18n';
+import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
 
 // Export web statique : une page HTML est générée pour chaque espèce.
@@ -14,44 +15,42 @@ export function generateStaticParams(): { id: string }[] {
   return ANIMALS.map((a) => ({ id: String(a.id) }));
 }
 
-const STATE_ORDER: StateCode[] = ['WA', 'NT', 'SA', 'QLD', 'NSW', 'ACT', 'VIC', 'TAS'];
-
 export default function AnimalScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const animal = getAnimal(Number(id));
   const { progress, removeSighting } = useDex();
+  const { s, lang } = useI18n();
 
   if (!animal) {
     return (
       <View style={{ padding: 24 }}>
-        <Text>Espèce introuvable.</Text>
+        <Text>{s.animal.notFound}</Text>
       </View>
     );
   }
 
   const discovered = progress.discovered.has(animal.id);
   const sightings = [...(progress.sightingsByAnimal.get(animal.id) ?? [])].reverse();
-  const cover = sightings.find((s) => s.photoUri)?.photoUri;
+  const cover = sightings.find((x) => x.photoUri)?.photoUri;
   const color = CATEGORIES[animal.category].color;
-  const cons = CONSERVATION[animal.conservation];
   const prev = getAnimal(animal.id - 1);
   const next = getAnimal(animal.id + 1);
 
   function confirmDelete(sightingId: string) {
     const doDelete = () => void removeSighting(sightingId);
     if (Platform.OS === 'web') {
-      if (window.confirm('Supprimer cette observation ?')) doDelete();
+      if (window.confirm(`${s.animal.deleteTitle}\n${s.animal.deleteText}`)) doDelete();
       return;
     }
-    Alert.alert('Supprimer cette observation ?', 'La photo sera aussi supprimée.', [
-      { text: 'Annuler', style: 'cancel' },
-      { text: 'Supprimer', style: 'destructive', onPress: doDelete },
+    Alert.alert(s.animal.deleteTitle, s.animal.deleteText, [
+      { text: s.animal.cancel, style: 'cancel' },
+      { text: s.animal.delete, style: 'destructive', onPress: doDelete },
     ]);
   }
 
   return (
     <>
-      <Stack.Screen options={{ title: `${dexNumber(animal.id)}  ${animal.nameFr}`, headerStyle: { backgroundColor: color } }} />
+      <Stack.Screen options={{ title: `${dexNumber(animal.id)}  ${animal.name[lang]}`, headerStyle: { backgroundColor: color } }} />
       <ScrollView contentContainerStyle={styles.page}>
         <View style={[styles.hero, { backgroundColor: color }]}>
           {discovered && cover ? (
@@ -62,17 +61,17 @@ export default function AnimalScreen() {
             </View>
           )}
           <Text style={styles.heroNumber}>{dexNumber(animal.id)}</Text>
-          <Text style={styles.heroName}>{animal.nameFr}</Text>
-          <Text style={styles.heroSub}>{animal.nameEn} · <Text style={{ fontStyle: 'italic' }}>{animal.scientific}</Text></Text>
+          <Text style={styles.heroName}>{animal.name[lang]}</Text>
+          <Text style={[styles.heroSub, { fontStyle: 'italic' }]}>{animal.scientific}</Text>
           <View style={styles.heroTags}>
-            <View style={styles.whitePill}><Text style={[styles.pillText, { color }]}>{CATEGORIES[animal.category].emoji} {CATEGORIES[animal.category].label}</Text></View>
+            <View style={styles.whitePill}><Text style={[styles.pillText, { color }]}>{CATEGORIES[animal.category].emoji} {s.categories[animal.category].label}</Text></View>
             <View style={styles.whitePill}>
               <RarityStars rarity={animal.rarity} />
-              <Text style={[styles.pillText, { color: RARITIES[animal.rarity].color }]}> {RARITIES[animal.rarity].label}</Text>
+              <Text style={[styles.pillText, { color: RARITIES[animal.rarity].color }]}> {s.rarities[animal.rarity]}</Text>
             </View>
           </View>
           <Text style={styles.status}>
-            {discovered ? `✓ Découvert · ${sightings.length} observation${sightings.length > 1 ? 's' : ''}` : 'Pas encore observé'}
+            {discovered ? s.animal.discovered(sightings.length) : s.animal.notSeen}
           </Text>
         </View>
 
@@ -80,75 +79,70 @@ export default function AnimalScreen() {
           <View style={{ gap: 8 }}>
             {animal.dangerous && (
               <View style={[styles.alert, { backgroundColor: '#FDE8E8', borderColor: '#F5B5B5' }]}>
-                <Text style={styles.alertText}>☠️ Espèce dangereuse : observe-la de loin et ne la touche jamais.</Text>
+                <Text style={styles.alertText}>{s.animal.dangerous}</Text>
               </View>
             )}
             {animal.introduced && (
               <View style={[styles.alert, { backgroundColor: '#FEF3C7', borderColor: '#F5D88A' }]}>
-                <Text style={styles.alertText}>🚨 Espèce introduite : elle menace la faune locale.</Text>
+                <Text style={styles.alertText}>{s.animal.introduced}</Text>
               </View>
             )}
           </View>
         )}
 
         <Card style={{ gap: 8 }}>
-          <Text style={styles.section}>Description</Text>
-          <Text style={styles.text}>{animal.description}</Text>
-          <Text style={[styles.section, { marginTop: 6 }]}>Le savais-tu ?</Text>
-          <Text style={styles.text}>💡 {animal.funFact}</Text>
+          <Text style={styles.section}>{s.animal.description}</Text>
+          <Text style={styles.text}>{animal.description[lang]}</Text>
+          <Text style={[styles.section, { marginTop: 6 }]}>{s.animal.didYouKnow}</Text>
+          <Text style={styles.text}>💡 {animal.funFact[lang]}</Text>
         </Card>
 
         <Card style={{ gap: 12 }}>
-          <Info label="Habitat" value={animal.habitat} />
+          <Info label={s.animal.habitat} value={animal.habitat[lang]} />
           <View style={{ gap: 6 }}>
-            <Text style={styles.label}>Statut de conservation (UICN)</Text>
-            <View style={styles.consRow}>
-              {(Object.keys(CONSERVATION) as (keyof typeof CONSERVATION)[]).map((k) => (
-                <View
-                  key={k}
-                  style={[styles.consCell, { backgroundColor: k === animal.conservation ? CONSERVATION[k].color : '#EEE9DD' }]}
-                >
-                  <Text style={[styles.consCode, { color: k === animal.conservation ? '#fff' : colors.muted }]}>{k}</Text>
-                </View>
-              ))}
-            </View>
-            <Text style={[styles.text, { color: cons.color, fontWeight: '800' }]}>{cons.label}</Text>
-          </View>
-          <View style={{ gap: 6 }}>
-            <Text style={styles.label}>Où l’observer</Text>
+            <Text style={styles.label}>{s.animal.whereToSee}</Text>
             <View style={styles.states}>
-              {STATE_ORDER.map((s) => {
-                const present = animal.states.includes(s);
+              {STATE_ORDER.map((code) => {
+                const present = animal.states.includes(code);
                 return (
-                  <View key={s} style={[styles.stateChip, present ? { backgroundColor: color } : { backgroundColor: '#EEE9DD' }]}>
-                    <Text style={[styles.stateText, { color: present ? '#fff' : '#A8A293' }]}>{s}</Text>
+                  <View key={code} style={[styles.stateChip, present ? { backgroundColor: color } : { backgroundColor: '#EEE9DD' }]}>
+                    <Text style={[styles.stateText, { color: present ? '#fff' : '#A8A293' }]}>{code}</Text>
                   </View>
                 );
               })}
             </View>
-            <Text style={styles.small}>{animal.states.map((s) => STATES[s]).join(' · ')}</Text>
+            <Text style={styles.small}>{STATE_ORDER.filter((code) => animal.states.includes(code)).map((code) => s.states[code]).join(' · ')}</Text>
           </View>
         </Card>
 
+        <ConservationCard animal={animal} />
+
         {discovered ? (
           <View style={{ gap: 10 }}>
-            <Text style={styles.section}>Mes observations</Text>
-            {sightings.map((s) => (
-              <Card key={s.id} style={styles.sighting}>
-                <StoredImage uri={s.photoUri} style={styles.thumb} />
+            <Text style={styles.section}>{s.animal.mySightings}</Text>
+            {sightings.map((sg) => {
+              const where = placeLabel(sg, s);
+              return (
+              <Card key={sg.id} style={styles.sighting}>
+                <StoredImage uri={sg.photoUri} style={styles.thumb} />
                 <View style={{ flex: 1, gap: 3 }}>
-                  <Text style={styles.text}>🗓️ {formatDate(s.date)}</Text>
-                  {(s.place || s.state) && <Text style={styles.small}>📍 {s.place ?? STATES[s.state!]}</Text>}
-                  <Text style={styles.small}>{s.method === 'ia' ? '🤖 Identifié par l’IA' : '✍️ Identifié manuellement'}</Text>
+                  <Text style={styles.text}>🗓️ {formatDate(sg.date, s)}</Text>
+                  {where && <Text style={styles.small}>📍 {where}</Text>}
+                  <Text style={styles.small}>
+                    {sg.method === 'ia'
+                      ? s.method.ai(sg.confidence != null ? Math.round(sg.confidence * 100) : undefined)
+                      : s.method.manual}
+                  </Text>
                 </View>
-                <Pressable onPress={() => confirmDelete(s.id)} hitSlop={10} accessibilityLabel="Supprimer l’observation">
+                <Pressable onPress={() => confirmDelete(sg.id)} hitSlop={10} accessibilityLabel={s.a11y.deleteSighting}>
                   <Text style={{ fontSize: 18 }}>🗑️</Text>
                 </Pressable>
               </Card>
-            ))}
+              );
+            })}
           </View>
         ) : (
-          <Button title="Je l’ai trouvé ! Observer" icon="📷" onPress={() => router.navigate('/observer')} />
+          <Button title={s.animal.foundIt} icon="📷" onPress={() => router.navigate('/observer')} />
         )}
 
         <View style={styles.nav}>
@@ -196,9 +190,6 @@ const styles = StyleSheet.create({
   text: { fontSize: 15, color: colors.ink, lineHeight: 21 },
   label: { fontSize: 12, fontWeight: '800', color: colors.muted, textTransform: 'uppercase', letterSpacing: 0.5 },
   small: { fontSize: 12, color: colors.muted },
-  consRow: { flexDirection: 'row', gap: 4 },
-  consCell: { flex: 1, paddingVertical: 6, borderRadius: 6, alignItems: 'center' },
-  consCode: { fontWeight: '900', fontSize: 12 },
   states: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   stateChip: { paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
   stateText: { fontWeight: '800', fontSize: 12 },

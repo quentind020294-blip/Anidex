@@ -1,9 +1,11 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
 import { Tabs } from 'expo-router/js-tabs';
-import { Pressable, type ColorValue } from 'react-native';
+import { Pressable, View, type ColorValue } from 'react-native';
 
+import { LanguageToggle } from '../../components/LanguageToggle';
 import { colors } from '../../components/theme';
+import { useI18n } from '../../i18n';
 
 type IconName = React.ComponentProps<typeof Ionicons>['name'];
 
@@ -15,6 +17,7 @@ function icon(name: IconName) {
 }
 
 export default function TabsLayout() {
+  const { s } = useI18n();
   return (
     <Tabs
       screenOptions={{
@@ -25,18 +28,21 @@ export default function TabsLayout() {
         tabBarInactiveTintColor: colors.muted,
         sceneStyle: { backgroundColor: colors.bg },
         headerRight: () => (
-          <Link href="/reglages" asChild>
-            <Pressable hitSlop={12} style={{ marginRight: 16 }} accessibilityLabel="Réglages">
-              <Ionicons name="settings-outline" size={22} color="#fff" />
-            </Pressable>
-          </Link>
+          <View style={{ flexDirection: 'row', alignItems: 'center', gap: 14, marginRight: 16 }}>
+            <LanguageToggle />
+            <Link href="/reglages" asChild>
+              <Pressable hitSlop={12} accessibilityLabel={s.a11y.settings}>
+                <Ionicons name="settings-outline" size={22} color="#fff" />
+              </Pressable>
+            </Link>
+          </View>
         ),
       }}
     >
-      <Tabs.Screen name="index" options={{ title: 'Anidex', tabBarIcon: icon('book') }} />
-      <Tabs.Screen name="observer" options={{ title: 'Observer', tabBarIcon: icon('camera') }} />
-      <Tabs.Screen name="journal" options={{ title: 'Journal', tabBarIcon: icon('images') }} />
-      <Tabs.Screen name="badges" options={{ title: 'Badges', tabBarIcon: icon('ribbon') }} />
+      <Tabs.Screen name="index" options={{ title: s.tabs.dex, tabBarIcon: icon('book') }} />
+      <Tabs.Screen name="observer" options={{ title: s.tabs.observe, tabBarIcon: icon('camera') }} />
+      <Tabs.Screen name="journal" options={{ title: s.tabs.journal, tabBarIcon: icon('images') }} />
+      <Tabs.Screen name="badges" options={{ title: s.tabs.badges, tabBarIcon: icon('ribbon') }} />
     </Tabs>
   );
 }

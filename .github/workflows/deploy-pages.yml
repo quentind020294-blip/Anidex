@@ -30,10 +30,11 @@ jobs:
       - name: Installer les dépendances
         run: npm ci
 
-      - name: Vérifier les types et le lint
+      - name: Vérifier les types, le lint et les traductions
         run: |
           npm run typecheck
           npm run lint
+          npm run check:i18n
 
       - name: Construire la version web
         env:

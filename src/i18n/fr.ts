@@ -1,0 +1,387 @@
+// Textes de l'interface en français. en.ts doit avoir exactement la même structure
+// (TypeScript le vérifie grâce au type Strings).
+
+export const fr = {
+  dateLocale: 'fr-FR',
+
+  tabs: { dex: 'Anidex', observe: 'Observer', journal: 'Journal', badges: 'Badges' },
+  screens: { settings: 'Réglages', notFound: 'Introuvable', conservation: 'Conservation', rescue: 'Animal blessé ?' },
+
+  a11y: {
+    settings: 'Réglages',
+    languageSwitch: 'Changer de langue',
+    deleteSighting: 'Supprimer l’observation',
+  },
+
+  language: {
+    title: 'Langue',
+    hint: 'Par défaut, l’Anidex utilise la langue de ton téléphone.',
+  },
+
+  categories: {
+    mammifere: { label: 'Mammifère', plural: 'Mammifères' },
+    oiseau: { label: 'Oiseau', plural: 'Oiseaux' },
+    reptile: { label: 'Reptile', plural: 'Reptiles' },
+    amphibien: { label: 'Amphibien', plural: 'Amphibiens' },
+    marin: { label: 'Aquatique', plural: 'Vie aquatique' },
+    insecte: { label: 'Insecte', plural: 'Insectes' },
+    arachnide: { label: 'Arachnide', plural: 'Araignées' },
+    invertebre: { label: 'Invertébré', plural: 'Autres invertébrés' },
+  },
+
+  rarities: { commun: 'Commun', 'peu-commun': 'Peu commun', rare: 'Rare', legendaire: 'Légendaire' },
+
+  states: {
+    NSW: 'Nouvelle-Galles du Sud',
+    VIC: 'Victoria',
+    QLD: 'Queensland',
+    WA: 'Australie-Occidentale',
+    SA: 'Australie-Méridionale',
+    TAS: 'Tasmanie',
+    NT: 'Territoire du Nord',
+    ACT: 'Territoire de la capitale',
+  },
+
+  conservation: {
+    LC: 'Préoccupation mineure',
+    NT: 'Quasi menacée',
+    VU: 'Vulnérable',
+    EN: 'En danger',
+    CR: 'En danger critique',
+    DD: 'Données insuffisantes',
+    NE: 'Non évaluée',
+  },
+
+  auStatus: {
+    CR: 'En danger critique',
+    EN: 'En danger',
+    VU: 'Vulnérable',
+    CD: 'Dépendante de mesures de conservation',
+    TH: 'Menacée',
+    EW: 'Éteinte à l’état sauvage',
+    EX: 'Éteinte',
+  },
+
+  trend: { up: '↗ En hausse', stable: '→ Stable', down: '↘ En baisse', unknown: '? Inconnue' },
+
+  threats: {
+    cats_foxes: 'Chats et renards',
+    fire: 'Feux de brousse',
+    habitat: 'Perte d’habitat (défrichement, urbanisation)',
+    roads: 'Collisions sur les routes',
+    climate: 'Changement climatique',
+    disease: 'Maladies',
+    pollution: 'Pollution',
+    drought: 'Sécheresses',
+    dogs: 'Chiens',
+    fishing: 'Pêche et captures accidentelles',
+    plastic: 'Déchets plastiques et lignes de pêche',
+    disturbance: 'Dérangement par les humains',
+    water: 'Rivières régulées, barrages et zones humides asséchées',
+    invasive: 'Espèces envahissantes (herbivores, mauvaises herbes, rats…)',
+    persecution: 'Persécution et abattage',
+    trade: 'Trafic d’animaux sauvages',
+    cane_toads: 'Crapauds buffles',
+    coastal: 'Aménagement du littoral',
+    ocean_warming: 'Réchauffement des océans',
+    pesticides: 'Pesticides et poisons',
+    light: 'Pollution lumineuse',
+    small_pop: 'Population minuscule (consanguinité)',
+    boat_strikes: 'Collisions avec les bateaux',
+    competition: 'Concurrence d’autres oiseaux (méliphages agressifs)',
+  },
+
+  actions: {
+    slow_down: 'Ralentis sur les routes à l’aube, au crépuscule et la nuit.',
+    cat_indoors: 'Garde ton chat à l’intérieur, surtout la nuit.',
+    no_feeding: 'Ne nourris pas les animaux sauvages.',
+    report_injured: 'Si tu trouves un animal blessé, appelle un service de secours (voir les numéros).',
+    dogs_leash: 'Tiens ton chien en laisse dans la nature et sur les plages.',
+    plant_natives: 'Plante des espèces locales dans ton jardin.',
+    no_litter: 'Ramasse tes déchets, surtout les plastiques et les lignes de pêche.',
+    keep_distance: 'Observe à distance, sans déranger ni toucher.',
+    citizen_science: 'Partage tes observations sur iNaturalist ou l’Atlas of Living Australia.',
+    report_invasive: 'Signale cette espèce envahissante aux autorités de ton État.',
+    no_release: 'Ne relâche jamais d’animaux de compagnie ou d’aquarium dans la nature.',
+    check_pouch: 'Si tu trouves un marsupial mort, un petit peut être vivant dans sa poche : appelle les secours.',
+    fire_safe: 'Respecte les interdictions de faire du feu.',
+    leave_logs: 'Laisse le bois mort et les arbres creux en place : ce sont des abris.',
+    responsible_fishing: 'Respecte les tailles et quotas de pêche, relâche les espèces protégées.',
+    boat_care: 'En bateau, ralentis et garde tes distances avec les animaux marins.',
+    reduce_chemicals: 'Évite pesticides et appâts empoisonnés.',
+    support_program: 'Soutiens un programme de conservation (visite, don, bénévolat).',
+    clean_gear: 'Nettoie bottes et matériel entre deux sites pour ne pas propager de maladies.',
+    water_wise: 'Économise l’eau et protège les zones humides.',
+    respect_closures: 'Respecte les clôtures et zones fermées pour protéger l’habitat.',
+  },
+
+  ranks: [
+    'Touriste curieux',
+    'Randonneur',
+    'Explorateur du bush',
+    'Ranger junior',
+    'Ranger',
+    'Naturaliste',
+    'Pisteur aguerri',
+    'Gardien de l’Outback',
+    'Maître du Bush',
+    'Légende de l’Anidex',
+  ],
+
+  dex: {
+    discovered: 'Espèces découvertes',
+    level: (n: number) => `Niveau ${n}`,
+    search: 'Rechercher (nom, n°, nom scientifique…)',
+    allCategories: 'Tous',
+    showAll: 'Tout',
+    showFound: 'Découverts',
+    showMissing: 'À trouver',
+    emptyNone: 'Aucune espèce découverte pour l’instant.\nVa dans l’onglet « Observer » pour commencer !',
+    emptySearch: 'Aucune espèce ne correspond à ta recherche.',
+    statusAll: 'Tous statuts',
+    statusThreatened: '🛡️ Menacées',
+    statusVic: '🛡️ Menacées en Victoria',
+  },
+
+  observe: {
+    title: 'Pars à la découverte !',
+    subtitle: 'Photographie un animal australien : l’Anidex l’identifie et l’ajoute à ta collection.',
+    takePhoto: 'Prendre une photo',
+    importPhoto: 'Importer depuis la galerie',
+    aiTitle: '🤖 Identification automatique',
+    aiText:
+      'Ajoute ta clé API Claude dans les réglages pour que l’app reconnaisse les animaux toute seule. Sans clé, tu choisis l’espèce dans la liste.',
+    openSettings: 'Ouvrir les réglages',
+    tipsTitle: 'Conseils de ranger',
+    tips: [
+      'Garde tes distances : serpents, crocodiles et araignées se photographient de loin.',
+      'Ne nourris pas les animaux sauvages.',
+      'Cadre l’animal en entier, bien net et éclairé.',
+      'Les espèces rares rapportent plus d’XP !',
+    ],
+    footnote: (n: number, total: number) => `${n} / ${total} espèces découvertes`,
+    analyzing: 'Analyse en cours…',
+    analyzingText: (total: number) => `L’Anidex compare ta photo aux ${total} espèces du catalogue.`,
+    saving: 'Enregistrement…',
+    whichSpecies: 'Quelle espèce as-tu photographiée ?',
+    pickOther: 'Autre espèce : choisir dans la liste',
+    pickFromList: 'Choisir l’espèce dans la liste',
+    retry: 'Relancer l’identification',
+    cancel: 'Annuler',
+    resultFound: 'Voici ce que l’Anidex a trouvé :',
+    noAnimal: 'Aucun animal détecté sur cette photo.',
+    outsideDex: (name: string) => `Ça ressemble à : ${name}. Cette espèce n’est pas (encore) dans l’Anidex.`,
+    unknown: 'Impossible de reconnaître une espèce de l’Anidex.',
+    alreadyFound: 'déjà découvert',
+    newSpecies: 'nouvelle espèce !',
+    itsThisOne: 'C’est lui !',
+    ratherThis: 'Plutôt celui-ci',
+    pickerTitle: 'Choisir l’espèce',
+    pickerSearch: 'Rechercher une espèce…',
+    close: 'Fermer',
+    rewardNew: 'NOUVELLE ESPÈCE !',
+    rewardRepeat: 'Nouvelle observation',
+    levelReached: (n: number) => `Niveau ${n} atteint !`,
+    nowRank: (rank: string) => `Tu es maintenant « ${rank} ».`,
+    badgeUnlocked: 'Badge débloqué',
+    didYouKnow: 'Le savais-tu ?',
+    seeEntry: 'Voir la fiche',
+    newObservation: 'Nouvelle observation',
+  },
+
+  errors: {
+    openPhoto: 'Impossible d’ouvrir la photo.',
+    cameraPermission: 'L’accès à l’appareil photo est nécessaire pour observer des animaux.',
+    preparePhoto: 'Impossible de préparer la photo.',
+    identify: {
+      noKey: 'Ajoute ta clé API Claude dans les réglages pour activer l’identification automatique.',
+      auth: 'Clé API invalide. Vérifie-la dans les réglages.',
+      permission: 'Cette clé API n’a pas accès au modèle demandé.',
+      rateLimit: 'Trop de demandes d’un coup. Réessaie dans quelques instants.',
+      badRequest: 'La photo n’a pas pu être analysée (format ou taille). Essaie une autre photo.',
+      connection: 'Pas de connexion Internet. Tu peux choisir l’espèce manuellement.',
+      api: (status: string) => `Le service d’identification est indisponible (erreur ${status}).`,
+      refusal: 'Cette photo n’a pas pu être analysée. Choisis l’espèce manuellement.',
+      empty: 'Réponse vide du service d’identification.',
+      parse: 'Réponse illisible du service d’identification.',
+      generic: 'L’identification a échoué. Choisis l’espèce manuellement.',
+    },
+  },
+
+  journal: {
+    count: (n: number) => `${n} observation${n > 1 ? 's' : ''}`,
+    emptyTitle: 'Ton carnet de terrain est vide',
+    emptyText: 'Chaque animal que tu photographies apparaîtra ici, avec la date et le lieu.',
+    firstObservation: 'Faire ma première observation',
+  },
+
+  method: {
+    ai: (pct?: number) => `🤖 Identifié par l’IA${pct != null ? ` (${pct} %)` : ''}`,
+    manual: '✍️ Identifié manuellement',
+  },
+
+  badgesScreen: {
+    levelShort: 'NIV.',
+    xpLeft: (xp: number, left: number, next: number) => `${xp} XP · encore ${left} XP pour le niveau ${next}`,
+    xpMax: (xp: number) => `${xp} XP · niveau maximum !`,
+    collection: 'Collection par catégorie',
+    title: (n: number, total: number) => `Badges · ${n} / ${total}`,
+    unlocked: 'Débloqué ✓',
+  },
+
+  badges: {
+    first: { title: 'Premiers pas', desc: 'Ajoute ta première espèce à l’Anidex.' },
+    ten: { title: 'Collectionneur', desc: 'Découvre 10 espèces différentes.' },
+    twentyfive: { title: 'Naturaliste en herbe', desc: 'Découvre 25 espèces différentes.' },
+    fifty: { title: 'Encyclopédie vivante', desc: 'Découvre 50 espèces différentes.' },
+    all: { title: 'Anidex complet', desc: (total: number) => `Découvre les ${total} espèces de l’Anidex.` },
+    icons: {
+      title: 'Icônes australiennes',
+      desc: 'Observe le kangourou roux, le koala, le wombat, l’ornithorynque, l’échidné et l’émeu.',
+    },
+    category: {
+      mammifere: 'Ami des marsupiaux',
+      oiseau: 'Ornithologue',
+      reptile: 'Herpétologue',
+      amphibien: 'Roi de la mare',
+      marin: 'Plongeur du récif',
+      insecte: 'Entomologiste',
+      arachnide: 'Ami des araignées',
+      invertebre: 'Fouilleur de terre',
+    },
+    categoryDesc: (plural: string, goal: number, total: number) =>
+      `Découvre ${goal} espèces de la catégorie « ${plural} » (sur ${total}).`,
+    rare: { title: 'Œil de lynx', desc: 'Découvre 5 espèces rares.' },
+    legend: { title: 'Chasseur de légendes', desc: 'Découvre une espèce légendaire.' },
+    danger: { title: 'Sang-froid', desc: 'Observe (de loin !) 3 espèces dangereuses.' },
+    invasive: { title: 'Sentinelle', desc: 'Signale 3 espèces introduites envahissantes.' },
+    endangered: { title: 'Protecteur', desc: 'Observe 3 espèces menacées (au niveau mondial ou national).' },
+    states3: { title: 'Globe-trotter', desc: 'Fais des observations dans 3 États ou territoires.' },
+    states8: { title: 'Tour d’Australie', desc: 'Fais des observations dans les 8 États et territoires.' },
+    obs50: { title: 'Observateur assidu', desc: 'Enregistre 50 observations.' },
+  },
+
+  animal: {
+    notFound: 'Espèce introuvable.',
+    discovered: (n: number) => `✓ Découvert · ${n} observation${n > 1 ? 's' : ''}`,
+    notSeen: 'Pas encore observé',
+    dangerous: '☠️ Espèce dangereuse : observe-la de loin et ne la touche jamais.',
+    introduced: '🚨 Espèce introduite : elle menace la faune locale.',
+    description: 'Description',
+    didYouKnow: 'Le savais-tu ?',
+    habitat: 'Habitat',
+    conservation: 'Conservation',
+    whereToSee: 'Où l’observer',
+    mySightings: 'Mes observations',
+    foundIt: 'Je l’ai trouvé ! Observer',
+    deleteTitle: 'Supprimer cette observation ?',
+    deleteText: 'La photo sera aussi supprimée.',
+    delete: 'Supprimer',
+    cancel: 'Annuler',
+  },
+
+  settings: {
+    aiTitle: '🤖 Identification par IA',
+    aiText:
+      'L’Anidex utilise Claude (Anthropic) pour reconnaître les animaux sur tes photos. Crée une clé API sur console.anthropic.com puis colle-la ici. Elle n’est envoyée qu’à l’API d’Anthropic.',
+    keyStorageWeb:
+      'Sur la version web, elle est enregistrée dans ce navigateur uniquement (non chiffrée) : n’utilise l’app que sur ton propre appareil, et fixe une limite de dépenses sur ta clé dans la console Anthropic.',
+    keyStorageNative: 'Elle est stockée de façon chiffrée sur ton appareil.',
+    keySaved: (masked: string) => `✓ Clé enregistrée (${masked})`,
+    noKey: 'Aucune clé enregistrée : identification manuelle uniquement.',
+    save: 'Enregistrer',
+    saved: 'Enregistrée ✓',
+    remove: 'Supprimer',
+    autoIdentify: 'Identifier automatiquement après la photo',
+    locationTitle: '📍 Localisation',
+    saveLocation: 'Enregistrer le lieu de chaque observation',
+    locationHint: 'Le lieu sert à ton journal et aux badges d’exploration. Il reste sur ton téléphone.',
+    dataTitle: '🗂️ Données',
+    dataSummary: (n: number, total: number) => `${n} observation(s) enregistrée(s) · ${total} espèces dans l’Anidex.`,
+    resetAll: 'Tout effacer',
+    resetTitle: 'Tout effacer ?',
+    resetText: (n: number) => `Toutes tes observations (${n}) et leurs photos seront supprimées.`,
+    cancel: 'Annuler',
+    footer: 'Anidex · Un Pokédex de la faune australienne.\nRespecte la faune : observe sans déranger. 🦘',
+  },
+
+  consSection: {
+    iucn: 'Liste rouge mondiale (UICN)',
+    epbc: 'Australie (loi EPBC)',
+    vic: 'Victoria (loi FFG)',
+    notListed: 'Non inscrite',
+    trend: 'Tendance de la population',
+    trendEstimate: 'Estimation, non vérifiée auprès de l’UICN.',
+    threats: 'Principales menaces',
+    noThreats: 'Aucune menace majeure connue.',
+    actions: 'Comment aider ?',
+    programs: 'Programmes de protection',
+    invasive: '🚨 Espèce introduite (invasive) : son impact',
+    reportInjured: '🚑 Signaler un animal blessé',
+    sources: 'Sources : Liste rouge de l’UICN (via GBIF), listes EPBC et FFG (copies officielles de l’Atlas of Living Australia, mai 2026), vérifiées en novembre 2026.',
+  },
+
+  summary: {
+    intro: 'Combien d’espèces de chaque statut as-tu observées ? Les espèces menacées comptent parmi les plus difficiles à trouver.',
+    threatened: 'Espèces menacées observées',
+    threatenedHint: 'Menacées au niveau mondial (UICN) ou national (EPBC).',
+    vicThreatened: 'Menacées en Victoria observées',
+    iucnTitle: 'Liste rouge mondiale (UICN)',
+    epbcTitle: 'Loi nationale australienne (EPBC)',
+    vicTitle: 'Victoria (loi FFG)',
+    introducedTitle: 'Espèces introduites',
+    introducedHint: 'Signaler ces espèces aide les gestionnaires à les contrôler.',
+    notListed: 'Non inscrites',
+    seen: (n: number, total: number) => `${n} / ${total}`,
+    openList: 'Voir ces espèces dans l’Anidex',
+    sources: 'Les inscriptions limitées à une sous-espèce ou une population ne sont pas comptées ici ; elles sont détaillées sur chaque fiche.',
+    rescueButton: '🚑 Numéros pour un animal blessé',
+    open: 'Bilan de conservation',
+  },
+
+  rescue: {
+    intro: 'Tu as trouvé un animal sauvage blessé, malade ou orphelin ? Appelle le service de secours de l’État où tu te trouves.',
+    tipsTitle: 'En attendant les secours',
+    tips: [
+      'Ne prends aucun risque : serpents, chauves-souris, ornithorynques, gros kangourous et animaux marins doivent être manipulés par des personnes formées.',
+      'Si c’est sans danger, couvre l’animal d’une serviette et place-le dans une boîte aérée, au calme, au chaud et dans le noir.',
+      'Ne lui donne ni à manger ni à boire.',
+      'Note l’endroit exact où tu l’as trouvé.',
+      'Sur la route, mets-toi en sécurité et, si un marsupial est mort, signale-le : un petit peut être vivant dans sa poche.',
+    ],
+    yourState: 'Ton État (selon ta dernière observation)',
+    allStates: 'Tous les États et territoires',
+    call: 'Appeler',
+    website: 'Site web',
+    verified: {
+      official: '✓ Vérifié sur le site officiel',
+      multiple: '✓ Vérifié via plusieurs sources concordantes',
+      unconfirmed: '⚠️ À confirmer : la page officielle n’était pas accessible',
+    },
+    national: 'Partout en Australie',
+    checkedOn: 'Numéros vérifiés en novembre 2026. En cas de danger pour une personne, appelle le 000.',
+  },
+
+  notFound: {
+    title: 'Cette page a filé dans le bush',
+    text: 'L’adresse demandée n’existe pas.',
+    back: 'Retour à l’Anidex',
+  },
+
+  // Consignes envoyées à l'IA avec chaque photo.
+  ai: {
+    question: 'Quel animal vois-tu sur cette photo ?',
+    replyLanguage: 'Rédige « comment » et « outside_dex » en français.',
+  },
+};
+
+type Widen<T> = T extends string
+  ? string
+  : T extends (...args: infer A) => infer R
+    ? (...args: A) => Widen<R>
+    : T extends readonly (infer U)[]
+      ? Widen<U>[]
+      : { [K in keyof T]: Widen<T[K]> };
+
+/** Structure commune à toutes les langues. */
+export type Strings = Widen<typeof fr>;

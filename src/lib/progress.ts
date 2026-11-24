@@ -1,19 +1,13 @@
 import { ANIMALS, getAnimal } from '../data/animals';
+import { isThreatened } from '../data/conservation';
 import { CATEGORIES, CATEGORY_ORDER, RARITIES, REPEAT_XP } from '../data/meta';
 import type { Animal, Category, Sighting, StateCode } from '../data/types';
+import type { Strings } from '../i18n/fr';
 
-export const RANKS = [
-  'Touriste curieux',
-  'Randonneur',
-  'Explorateur du bush',
-  'Ranger junior',
-  'Ranger',
-  'Naturaliste',
-  'Pisteur aguerri',
-  'Gardien de l’Outback',
-  'Maître du Bush',
-  'Légende de l’Anidex',
-];
+/** Nom du rang (traduit) correspondant à un niveau. */
+export function rankName(s: Strings, level: number): string {
+  return s.ranks[Math.min(level, s.ranks.length) - 1];
+}
 
 /** XP total nécessaire pour atteindre chaque niveau (index = niveau - 1). */
 export const LEVEL_THRESHOLDS = [0, 40, 110, 220, 380, 600, 900, 1300, 1800, 2500];
@@ -21,7 +15,6 @@ export const LEVEL_THRESHOLDS = [0, 40, 110, 220, 380, 600, 900, 1300, 1800, 250
 export interface Progress {
   xp: number;
   level: number;
-  rank: string;
   levelStartXp: number;
   nextLevelXp: number | null;
   discovered: Set<number>;
@@ -60,7 +53,6 @@ export function computeProgress(sightings: Sighting[]): Progress {
   return {
     xp,
     level,
-    rank: RANKS[level - 1],
     levelStartXp: LEVEL_THRESHOLDS[level - 1],
     nextLevelXp: LEVEL_THRESHOLDS[level] ?? null,
     discovered,
@@ -73,10 +65,10 @@ export function computeProgress(sightings: Sighting[]): Progress {
 
 export interface Badge {
   id: string;
-  title: string;
-  description: string;
   emoji: string;
   color: string;
+  /** Titre et description dans la langue choisie. */
+  text: (s: Strings) => { title: string; description: string };
   /** Renvoie [valeur actuelle, objectif]. */
   progress: (p: Progress, sightings: Sighting[]) => [number, number];
 }
@@ -90,144 +82,62 @@ function countWhere(p: Progress, pred: (a: Animal) => boolean): number {
   return n;
 }
 
-const ICONS = ['Kangourou roux', 'Koala', 'Wombat commun', 'Ornithorynque', 'Échidné à nez court', 'Émeu d’Australie'];
-const iconIds = ICONS.map((n) => ANIMALS.find((a) => a.nameFr === n)?.id).filter((x): x is number => !!x);
+// Kangourou roux, koala, wombat, ornithorynque, échidné, émeu.
+const ICONS = [
+  'Osphranter rufus',
+  'Phascolarctos cinereus',
+  'Vombatus ursinus',
+  'Ornithorhynchus anatinus',
+  'Tachyglossus aculeatus',
+  'Dromaius novaehollandiae',
+];
+const iconIds = ICONS.map((n) => ANIMALS.find((a) => a.scientific === n)?.id).filter((x): x is number => !!x);
+
+type SimpleKey = 'first' | 'ten' | 'twentyfive' | 'fifty' | 'icons' | 'rare' | 'legend' | 'danger' | 'invasive' | 'endangered' | 'states3' | 'states8' | 'obs50';
+
+function simple(key: SimpleKey, emoji: string, color: string, progress: Badge['progress']): Badge {
+  return { id: key, emoji, color, progress, text: (s) => ({ title: s.badges[key].title, description: s.badges[key].desc }) };
+}
+
+const CATEGORY_GOAL = 5;
 
 const categoryBadges: Badge[] = CATEGORY_ORDER.map((cat: Category) => {
-  const meta = CATEGORIES[cat];
   const total = ANIMALS.filter((a) => a.category === cat).length;
-  const titles: Record<Category, string> = {
-    mammifere: 'Ami des marsupiaux',
-    oiseau: 'Ornithologue',
-    reptile: 'Herpétologue',
-    amphibien: 'Roi de la mare',
-    marin: 'Plongeur du récif',
-    invertebre: 'Entomologiste',
-  };
+  const goal = Math.min(CATEGORY_GOAL, total);
   return {
     id: `cat-${cat}`,
-    title: titles[cat],
-    description: `Découvre 5 espèces de la catégorie « ${meta.plural} » (sur ${total}).`,
-    emoji: meta.emoji,
-    color: meta.color,
-    progress: (p) => [countWhere(p, (a) => a.category === cat), Math.min(5, total)],
+    emoji: CATEGORIES[cat].emoji,
+    color: CATEGORIES[cat].color,
+    text: (s) => ({
+      title: s.badges.category[cat],
+      description: s.badges.categoryDesc(s.categories[cat].plural, goal, total),
+    }),
+    progress: (p) => [countWhere(p, (a) => a.category === cat), goal],
   };
 });
 
 export const BADGES: Badge[] = [
-  {
-    id: 'first',
-    title: 'Premiers pas',
-    description: 'Ajoute ta première espèce à l’Anidex.',
-    emoji: '👣',
-    color: '#D7263D',
-    progress: (p) => [p.discovered.size, 1],
-  },
-  {
-    id: 'ten',
-    title: 'Collectionneur',
-    description: 'Découvre 10 espèces différentes.',
-    emoji: '📘',
-    color: '#D7263D',
-    progress: (p) => [p.discovered.size, 10],
-  },
-  {
-    id: 'twentyfive',
-    title: 'Naturaliste en herbe',
-    description: 'Découvre 25 espèces différentes.',
-    emoji: '🌿',
-    color: '#D7263D',
-    progress: (p) => [p.discovered.size, 25],
-  },
-  {
-    id: 'fifty',
-    title: 'Encyclopédie vivante',
-    description: 'Découvre 50 espèces différentes.',
-    emoji: '📚',
-    color: '#D7263D',
-    progress: (p) => [p.discovered.size, 50],
-  },
+  simple('first', '👣', '#D7263D', (p) => [p.discovered.size, 1]),
+  simple('ten', '📘', '#D7263D', (p) => [p.discovered.size, 10]),
+  simple('twentyfive', '🌿', '#D7263D', (p) => [p.discovered.size, 25]),
+  simple('fifty', '📚', '#D7263D', (p) => [p.discovered.size, 50]),
   {
     id: 'all',
-    title: 'Anidex complet',
-    description: `Découvre les ${ANIMALS.length} espèces de l’Anidex.`,
     emoji: '🏆',
     color: '#D97706',
+    text: (s) => ({ title: s.badges.all.title, description: s.badges.all.desc(ANIMALS.length) }),
     progress: (p) => [p.discovered.size, ANIMALS.length],
   },
-  {
-    id: 'icons',
-    title: 'Icônes australiennes',
-    description: 'Observe le kangourou roux, le koala, le wombat, l’ornithorynque, l’échidné et l’émeu.',
-    emoji: '🇦🇺',
-    color: '#0F766E',
-    progress: (p) => [iconIds.filter((id) => p.discovered.has(id)).length, iconIds.length],
-  },
+  simple('icons', '🇦🇺', '#0F766E', (p) => [iconIds.filter((id) => p.discovered.has(id)).length, iconIds.length]),
   ...categoryBadges,
-  {
-    id: 'rare',
-    title: 'Œil de lynx',
-    description: 'Découvre 5 espèces rares.',
-    emoji: '🔎',
-    color: RARITIES.rare.color,
-    progress: (p) => [countWhere(p, (a) => a.rarity === 'rare'), 5],
-  },
-  {
-    id: 'legend',
-    title: 'Chasseur de légendes',
-    description: 'Découvre une espèce légendaire.',
-    emoji: '⭐',
-    color: RARITIES.legendaire.color,
-    progress: (p) => [countWhere(p, (a) => a.rarity === 'legendaire'), 1],
-  },
-  {
-    id: 'danger',
-    title: 'Sang-froid',
-    description: 'Observe (de loin !) 3 espèces dangereuses.',
-    emoji: '☠️',
-    color: '#991B1B',
-    progress: (p) => [countWhere(p, (a) => !!a.dangerous), 3],
-  },
-  {
-    id: 'invasive',
-    title: 'Sentinelle',
-    description: 'Signale 3 espèces introduites envahissantes.',
-    emoji: '🚨',
-    color: '#B45309',
-    progress: (p) => [countWhere(p, (a) => !!a.introduced), 3],
-  },
-  {
-    id: 'endangered',
-    title: 'Protecteur',
-    description: 'Observe 3 espèces menacées (vulnérables ou plus).',
-    emoji: '🛡️',
-    color: '#EA580C',
-    progress: (p) => [countWhere(p, (a) => ['VU', 'EN', 'CR'].includes(a.conservation)), 3],
-  },
-  {
-    id: 'states3',
-    title: 'Globe-trotter',
-    description: 'Fais des observations dans 3 États ou territoires.',
-    emoji: '🗺️',
-    color: '#4338CA',
-    progress: (p) => [p.statesVisited.size, 3],
-  },
-  {
-    id: 'states8',
-    title: 'Tour d’Australie',
-    description: 'Fais des observations dans les 8 États et territoires.',
-    emoji: '🧭',
-    color: '#4338CA',
-    progress: (p) => [p.statesVisited.size, 8],
-  },
-  {
-    id: 'obs50',
-    title: 'Observateur assidu',
-    description: 'Enregistre 50 observations.',
-    emoji: '📸',
-    color: '#0369A1',
-    progress: (_p, s) => [s.length, 50],
-  },
+  simple('rare', '🔎', RARITIES.rare.color, (p) => [countWhere(p, (a) => a.rarity === 'rare'), 5]),
+  simple('legend', '⭐', RARITIES.legendaire.color, (p) => [countWhere(p, (a) => a.rarity === 'legendaire'), 1]),
+  simple('danger', '☠️', '#991B1B', (p) => [countWhere(p, (a) => !!a.dangerous), 3]),
+  simple('invasive', '🚨', '#B45309', (p) => [countWhere(p, (a) => !!a.introduced), 3]),
+  simple('endangered', '🛡️', '#EA580C', (p) => [countWhere(p, isThreatened), 3]),
+  simple('states3', '🗺️', '#4338CA', (p) => [p.statesVisited.size, 3]),
+  simple('states8', '🧭', '#4338CA', (p) => [p.statesVisited.size, 8]),
+  simple('obs50', '📸', '#0369A1', (_p, s) => [s.length, 50]),
 ];
 
 export function unlockedBadgeIds(p: Progress, sightings: Sighting[]): Set<string> {

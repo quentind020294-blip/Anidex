@@ -1,44 +1,49 @@
-import type { Category, Conservation, Rarity, StateCode } from './types';
+import type { IucnStatus } from './conservation';
+import type { Category, Rarity, StateCode } from './types';
 
-export const CATEGORIES: Record<Category, { label: string; plural: string; color: string; emoji: string }> = {
-  mammifere: { label: 'Mammifère', plural: 'Mammifères', color: '#C0622D', emoji: '🦘' },
-  oiseau: { label: 'Oiseau', plural: 'Oiseaux', color: '#D99A0E', emoji: '🦜' },
-  reptile: { label: 'Reptile', plural: 'Reptiles', color: '#4D8F2E', emoji: '🦎' },
-  amphibien: { label: 'Amphibien', plural: 'Amphibiens', color: '#0F8F80', emoji: '🐸' },
-  marin: { label: 'Marin', plural: 'Vie marine', color: '#2563EB', emoji: '🐠' },
-  invertebre: { label: 'Invertébré', plural: 'Invertébrés', color: '#8250C4', emoji: '🕷️' },
+// Données visuelles et de jeu. Les libellés (noms de catégories, d'États, de statuts…)
+// sont traduits dans src/i18n/.
+export const CATEGORIES: Record<Category, { color: string; emoji: string }> = {
+  mammifere: { color: '#C0622D', emoji: '🦘' },
+  oiseau: { color: '#D99A0E', emoji: '🦜' },
+  reptile: { color: '#4D8F2E', emoji: '🦎' },
+  amphibien: { color: '#0F8F80', emoji: '🐸' },
+  marin: { color: '#2563EB', emoji: '🐠' },
+  insecte: { color: '#C2417A', emoji: '🦋' },
+  arachnide: { color: '#8250C4', emoji: '🕷️' },
+  invertebre: { color: '#7A6248', emoji: '🪱' },
 };
 
-export const CATEGORY_ORDER: Category[] = ['mammifere', 'oiseau', 'reptile', 'amphibien', 'marin', 'invertebre'];
+export const CATEGORY_ORDER: Category[] = ['mammifere', 'oiseau', 'reptile', 'amphibien', 'marin', 'insecte', 'arachnide', 'invertebre'];
 
-export const RARITIES: Record<Rarity, { label: string; xp: number; color: string; stars: number }> = {
-  commun: { label: 'Commun', xp: 10, color: '#6B7280', stars: 1 },
-  'peu-commun': { label: 'Peu commun', xp: 25, color: '#059669', stars: 2 },
-  rare: { label: 'Rare', xp: 50, color: '#2563EB', stars: 3 },
-  legendaire: { label: 'Légendaire', xp: 100, color: '#D97706', stars: 4 },
+export const RARITIES: Record<Rarity, { xp: number; color: string; stars: number }> = {
+  commun: { xp: 10, color: '#6B7280', stars: 1 },
+  'peu-commun': { xp: 25, color: '#059669', stars: 2 },
+  rare: { xp: 50, color: '#2563EB', stars: 3 },
+  legendaire: { xp: 100, color: '#D97706', stars: 4 },
 };
+
+export const RARITY_ORDER: Rarity[] = ['commun', 'peu-commun', 'rare', 'legendaire'];
 
 /** XP gagnés pour une nouvelle observation d'une espèce déjà découverte. */
 export const REPEAT_XP = 2;
 
-export const STATES: Record<StateCode, string> = {
-  NSW: 'Nouvelle-Galles du Sud',
-  VIC: 'Victoria',
-  QLD: 'Queensland',
-  WA: 'Australie-Occidentale',
-  SA: 'Australie-Méridionale',
-  TAS: 'Tasmanie',
-  NT: 'Territoire du Nord',
-  ACT: 'Territoire de la capitale',
+/** Ordre d'affichage des États (d'ouest en est, puis la Tasmanie). */
+export const STATE_ORDER: StateCode[] = ['WA', 'NT', 'SA', 'QLD', 'NSW', 'ACT', 'VIC', 'TAS'];
+
+/** Couleurs des catégories de la Liste rouge de l'UICN (codes internationaux). */
+export const IUCN_COLORS: Record<IucnStatus, string> = {
+  LC: '#16A34A',
+  NT: '#84CC16',
+  VU: '#EAB308',
+  EN: '#F97316',
+  CR: '#DC2626',
+  DD: '#9CA3AF',
+  NE: '#9CA3AF',
 };
 
-export const CONSERVATION: Record<Conservation, { label: string; color: string }> = {
-  LC: { label: 'Préoccupation mineure', color: '#16A34A' },
-  NT: { label: 'Quasi menacée', color: '#84CC16' },
-  VU: { label: 'Vulnérable', color: '#EAB308' },
-  EN: { label: 'En danger', color: '#F97316' },
-  CR: { label: 'En danger critique', color: '#DC2626' },
-};
+export const IUCN_ORDER: IucnStatus[] = ['LC', 'NT', 'VU', 'EN', 'CR'];
+export const IUCN_ALL: IucnStatus[] = ['CR', 'EN', 'VU', 'NT', 'LC', 'DD', 'NE'];
 
 /** Associe un nom de région renvoyé par le géocodage inverse à un code d'État. */
 export function stateFromRegion(region?: string | null): StateCode | undefined {

@@ -20,7 +20,6 @@ export interface AddResult {
   newBadges: Badge[];
   levelUp: boolean;
   level: number;
-  rank: string;
 }
 
 interface DexContextValue {
@@ -84,7 +83,6 @@ export function DexProvider({ children }: { children: ReactNode }) {
         newBadges: BADGES.filter((b) => nextBadges.has(b.id) && !prevBadges.has(b.id)),
         levelUp: nextProgress.level > prevProgress.level,
         level: nextProgress.level,
-        rank: nextProgress.rank,
       };
     },
     [commit],
@@ -130,6 +128,6 @@ export function DexProvider({ children }: { children: ReactNode }) {
 
 export function useDex(): DexContextValue {
   const ctx = useContext(DexContext);
-  if (!ctx) throw new Error('useDex doit être utilisé dans <DexProvider>');
+  if (!ctx) throw new Error('useDex must be used inside <DexProvider>');
   return ctx;
 }

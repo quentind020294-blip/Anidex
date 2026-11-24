@@ -4,36 +4,37 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { colors, radius } from '../../components/theme';
 import { AnimalAvatar, Button, StoredImage, TypeBadge } from '../../components/ui';
 import { dexNumber, getAnimal } from '../../data/animals';
-import { STATES } from '../../data/meta';
-import { formatDate } from '../../lib/format';
+import { useI18n } from '../../i18n';
+import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
 
 export default function JournalScreen() {
   const { sightings } = useDex();
+  const { s, lang } = useI18n();
   const sorted = [...sightings].sort((a, b) => b.date.localeCompare(a.date));
 
   return (
     <FlatList
       data={sorted}
-      keyExtractor={(s) => s.id}
+      keyExtractor={(item) => item.id}
       contentContainerStyle={styles.list}
       ListHeaderComponent={
         sorted.length ? (
-          <Text style={styles.header}>{sorted.length} observation{sorted.length > 1 ? 's' : ''}</Text>
+          <Text style={styles.header}>{s.journal.count(sorted.length)}</Text>
         ) : undefined
       }
       ListEmptyComponent={
         <View style={styles.empty}>
           <Text style={{ fontSize: 56 }}>📔</Text>
-          <Text style={styles.emptyTitle}>Ton carnet de terrain est vide</Text>
-          <Text style={styles.emptyText}>Chaque animal que tu photographies apparaîtra ici, avec la date et le lieu.</Text>
-          <Button title="Faire ma première observation" icon="📷" onPress={() => router.navigate('/observer')} />
+          <Text style={styles.emptyTitle}>{s.journal.emptyTitle}</Text>
+          <Text style={styles.emptyText}>{s.journal.emptyText}</Text>
+          <Button title={s.journal.firstObservation} icon="📷" onPress={() => router.navigate('/observer')} />
         </View>
       }
       renderItem={({ item }) => {
         const animal = getAnimal(item.animalId);
         if (!animal) return null;
-        const where = item.place ?? (item.state ? STATES[item.state] : null);
+        const where = placeLabel(item, s);
         return (
           <Pressable onPress={() => router.push(`/animal/${animal.id}`)} style={({ pressed }) => [styles.row, pressed && { opacity: 0.8 }]}>
             {item.photoUri ? (
@@ -45,14 +46,14 @@ export default function JournalScreen() {
             )}
             <View style={{ flex: 1, gap: 4 }}>
               <Text style={styles.number}>{dexNumber(animal.id)}</Text>
-              <Text style={styles.name}>{animal.nameFr}</Text>
+              <Text style={styles.name}>{animal.name[lang]}</Text>
               <TypeBadge category={animal.category} small />
-              <Text style={styles.meta}>🗓️ {formatDate(item.date)}</Text>
+              <Text style={styles.meta}>🗓️ {formatDate(item.date, s)}</Text>
               {where && <Text style={styles.meta} numberOfLines={1}>📍 {where}</Text>}
               <Text style={styles.meta}>
                 {item.method === 'ia'
-                  ? `🤖 Identifié par l’IA${item.confidence != null ? ` (${Math.round(item.confidence * 100)} %)` : ''}`
-                  : '✍️ Identifié manuellement'}
+                  ? s.method.ai(item.confidence != null ? Math.round(item.confidence * 100) : undefined)
+                  : s.method.manual}
               </Text>
             </View>
           </Pressable>

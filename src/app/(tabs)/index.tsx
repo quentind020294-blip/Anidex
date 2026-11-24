@@ -1,16 +1,20 @@
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useMemo, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from 'react-native';
 
 import { colors, radius } from '../../components/theme';
 import { AnimalAvatar, ProgressBar, RarityStars } from '../../components/ui';
 import { ANIMALS, dexNumber } from '../../data/animals';
+import { isThreatened, isThreatenedInVictoria } from '../../data/conservation';
 import { CATEGORIES, CATEGORY_ORDER } from '../../data/meta';
 import type { Category } from '../../data/types';
+import { useI18n } from '../../i18n';
+import { rankName } from '../../lib/progress';
 import { useDex } from '../../lib/store';
 
 type Filter = Category | 'tous';
 type Show = 'tous' | 'decouverts' | 'a-trouver';
+type Status = 'all' | 'threatened' | 'vic';
 
 function normalize(s: string) {
   return s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
@@ -18,10 +22,19 @@ function normalize(s: string) {
 
 export default function DexScreen() {
   const { progress } = useDex();
+  const { s, lang } = useI18n();
   const { width } = useWindowDimensions();
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<Filter>('tous');
   const [show, setShow] = useState<Show>('tous');
+  const [status, setStatus] = useState<Status>('all');
+  // Le bilan de conservation peut ouvrir l'Anidex avec un filtre (« ?status=threatened »).
+  const { status: statusParam } = useLocalSearchParams<{ status?: Status }>();
+  const [appliedParam, setAppliedParam] = useState(statusParam);
+  if (statusParam !== appliedParam) {
+    setAppliedParam(statusParam);
+    if (statusParam === 'all' || statusParam === 'threatened' || statusParam === 'vic') setStatus(statusParam);
+  }
 
   const columns = width >= 700 ? 5 : width >= 500 ? 4 : 3;
   const cardWidth = (Math.min(width, 1000) - 16 * 2 - 10 * (columns - 1)) / columns;
@@ -30,13 +43,16 @@ export default function DexScreen() {
     const q = normalize(query.trim());
     return ANIMALS.filter((a) => {
       if (filter !== 'tous' && a.category !== filter) return false;
+      if (status === 'threatened' && !isThreatened(a)) return false;
+      if (status === 'vic' && !isThreatenedInVictoria(a)) return false;
       const found = progress.discovered.has(a.id);
       if (show === 'decouverts' && !found) return false;
       if (show === 'a-trouver' && found) return false;
       if (!q) return true;
-      return [a.nameFr, a.nameEn, a.scientific, String(a.id)].some((v) => normalize(v).includes(q));
+      // On cherche dans les deux langues : pratique si on connaît le nom anglais.
+      return [a.name.fr, a.name.en, a.scientific, String(a.id)].some((v) => normalize(v).includes(q));
     });
-  }, [query, filter, show, progress.discovered]);
+  }, [query, filter, show, status, progress.discovered]);
 
   const total = ANIMALS.length;
   const found = progress.discovered.size;
@@ -55,14 +71,14 @@ export default function DexScreen() {
           <View style={styles.hero}>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end' }}>
               <View>
-                <Text style={styles.heroLabel}>Espèces découvertes</Text>
+                <Text style={styles.heroLabel}>{s.dex.discovered}</Text>
                 <Text style={styles.heroCount}>
                   {found}<Text style={styles.heroTotal}> / {total}</Text>
                 </Text>
               </View>
               <View style={{ alignItems: 'flex-end' }}>
-                <Text style={styles.heroLabel}>Niveau {progress.level}</Text>
-                <Text style={styles.heroRank}>{progress.rank}</Text>
+                <Text style={styles.heroLabel}>{s.dex.level(progress.level)}</Text>
+                <Text style={styles.heroRank}>{rankName(s, progress.level)}</Text>
               </View>
             </View>
             <ProgressBar value={found / total} color={colors.gold} track="rgba(255,255,255,0.25)" />
@@ -71,7 +87,7 @@ export default function DexScreen() {
           <TextInput
             value={query}
             onChangeText={setQuery}
-            placeholder="Rechercher (nom, n°, nom scientifique…)"
+            placeholder={s.dex.search}
             placeholderTextColor={colors.muted}
             style={styles.search}
             autoCorrect={false}
@@ -79,11 +95,11 @@ export default function DexScreen() {
           />
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
-            <Chip label="Tous" active={filter === 'tous'} onPress={() => setFilter('tous')} color={colors.ink} />
+            <Chip label={s.dex.allCategories} active={filter === 'tous'} onPress={() => setFilter('tous')} color={colors.ink} />
             {CATEGORY_ORDER.map((c) => (
               <Chip
                 key={c}
-                label={`${CATEGORIES[c].emoji} ${CATEGORIES[c].plural}`}
+                label={`${CATEGORIES[c].emoji} ${s.categories[c].plural}`}
                 active={filter === c}
                 color={CATEGORIES[c].color}
                 onPress={() => setFilter(filter === c ? 'tous' : c)}
@@ -91,11 +107,17 @@ export default function DexScreen() {
             ))}
           </ScrollView>
 
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 8 }}>
+            <Chip label={s.dex.statusAll} active={status === 'all'} onPress={() => setStatus('all')} color={colors.ink} />
+            <Chip label={s.dex.statusThreatened} active={status === 'threatened'} onPress={() => setStatus(status === 'threatened' ? 'all' : 'threatened')} color="#C2410C" />
+            <Chip label={s.dex.statusVic} active={status === 'vic'} onPress={() => setStatus(status === 'vic' ? 'all' : 'vic')} color="#1E3A8A" />
+          </ScrollView>
+
           <View style={styles.segment}>
-            {(['tous', 'decouverts', 'a-trouver'] as Show[]).map((s) => (
-              <Pressable key={s} onPress={() => setShow(s)} style={[styles.segmentItem, show === s && styles.segmentActive]}>
-                <Text style={[styles.segmentText, show === s && { color: '#fff' }]}>
-                  {s === 'tous' ? 'Tout' : s === 'decouverts' ? 'Découverts' : 'À trouver'}
+            {(['tous', 'decouverts', 'a-trouver'] as Show[]).map((v) => (
+              <Pressable key={v} onPress={() => setShow(v)} style={[styles.segmentItem, show === v && styles.segmentActive]}>
+                <Text style={[styles.segmentText, show === v && { color: '#fff' }]}>
+                  {v === 'tous' ? s.dex.showAll : v === 'decouverts' ? s.dex.showFound : s.dex.showMissing}
                 </Text>
               </Pressable>
             ))}
@@ -105,8 +127,8 @@ export default function DexScreen() {
       ListEmptyComponent={
         <Text style={styles.empty}>
           {show === 'decouverts' && found === 0
-            ? 'Aucune espèce découverte pour l’instant.\nVa dans l’onglet « Observer » pour commencer !'
-            : 'Aucune espèce ne correspond à ta recherche.'}
+            ? s.dex.emptyNone
+            : s.dex.emptySearch}
         </Text>
       }
       renderItem={({ item }) => {
@@ -121,7 +143,7 @@ export default function DexScreen() {
             <Text style={styles.number}>{dexNumber(item.id)}</Text>
             <AnimalAvatar animal={item} discovered={discovered} photoUri={photo} size={Math.min(cardWidth - 24, 96)} />
             <Text numberOfLines={2} style={[styles.name, !discovered && { color: colors.muted }]}>
-              {item.nameFr}
+              {item.name[lang]}
             </Text>
             {discovered ? (
               <View style={[styles.dot, { backgroundColor: CATEGORIES[item.category].color }]} />

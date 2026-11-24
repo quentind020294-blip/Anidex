@@ -2,6 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 import { ANIMALS, getAnimal } from '../data/animals';
 import type { Animal } from '../data/types';
+import type { Strings } from '../i18n/fr';
 
 export interface Candidate {
   animal: Animal;
@@ -16,12 +17,26 @@ export interface IdentifyResult {
   comment: string;
 }
 
-export class IdentifyError extends Error {}
+export type IdentifyErrorCode =
+  | 'noKey' | 'auth' | 'permission' | 'rateLimit' | 'badRequest' | 'connection' | 'api' | 'refusal' | 'empty' | 'parse';
+
+/** Erreur d'identification : le message affiché est choisi par l'interface selon `code` et la langue. */
+export class IdentifyError extends Error {
+  constructor(public code: IdentifyErrorCode, public status?: number) {
+    super(code);
+  }
+}
+
+export function identifyErrorMessage(error: unknown, s: Strings): string {
+  if (!(error instanceof IdentifyError)) return s.errors.identify.generic;
+  if (error.code === 'api') return s.errors.identify.api(String(error.status ?? '?'));
+  return s.errors.identify[error.code];
+}
 
 const MODEL = 'claude-opus-5-5';
 
 // Catalogue envoyé une fois dans le prompt système (stable → mis en cache côté API).
-const CATALOGUE = ANIMALS.map((a) => `${a.id} | ${a.scientific} | ${a.nameEn} | ${a.nameFr}`).join('\n');
+const CATALOGUE = ANIMALS.map((a) => `${a.id} | ${a.scientific} | ${a.name.en} | ${a.name.fr}`).join('\n');
 
 const SYSTEM = `Tu es le moteur d'identification de l'Anidex, une application mobile (façon Pokédex) pour découvrir la faune australienne.
 L'utilisateur t'envoie une photo prise sur le terrain. Identifie l'animal visible et fais-le correspondre au catalogue ci-dessous.
@@ -29,10 +44,11 @@ L'utilisateur t'envoie une photo prise sur le terrain. Identifie l'animal visibl
 Règles :
 - "candidates" : jusqu'à 3 espèces du catalogue, de la plus probable à la moins probable, avec "dex_id" (le numéro du catalogue) et "confidence" entre 0 et 1.
 - N'inclus que des espèces plausibles d'après ce qui est réellement visible. Si tu ne peux pas trancher entre espèces proches, baisse la confiance plutôt que d'en inventer.
-- Si l'animal visible n'est pas dans le catalogue (animal domestique, espèce non australienne ou absente du catalogue), laisse "candidates" vide ou limité aux espèces vraiment plausibles, et donne son nom en français dans "outside_dex".
+- Si l'animal visible n'est pas dans le catalogue (animal domestique, espèce non australienne ou absente du catalogue), laisse "candidates" vide ou limité aux espèces vraiment plausibles, et donne son nom courant dans "outside_dex".
 - Si aucun animal n'est visible (paysage, objet, personne), mets "contains_animal" à false.
 - Une photo d'une peluche, d'un dessin ou d'un écran ne compte pas comme une observation : signale-le dans "comment" et garde des confiances basses.
-- "comment" : une ou deux phrases en français, chaleureuses, qui expliquent les indices visuels utilisés.
+- "comment" : une ou deux phrases chaleureuses qui expliquent les indices visuels utilisés.
+- Rédige "comment" et "outside_dex" dans la langue demandée dans le message de l'utilisateur.
 
 Catalogue (dex_id | nom scientifique | nom anglais | nom français) :
 ${CATALOGUE}`;
@@ -67,8 +83,8 @@ interface RawResult {
   comment: string;
 }
 
-export async function identifyAnimal(apiKey: string, base64Jpeg: string): Promise<IdentifyResult> {
-  if (!apiKey) throw new IdentifyError('Ajoute ta clé API Claude dans les réglages pour activer l’identification automatique.');
+export async function identifyAnimal(apiKey: string, base64Jpeg: string, s: Strings): Promise<IdentifyResult> {
+  if (!apiKey) throw new IdentifyError('noKey');
 
   // La clé appartient à l'utilisateur et reste sur son appareil : l'appel part directement du téléphone.
   const client = new Anthropic({ apiKey, dangerouslyAllowBrowser: true, maxRetries: 2 });
@@ -87,40 +103,40 @@ export async function identifyAnimal(apiKey: string, base64Jpeg: string): Promis
           role: 'user',
           content: [
             { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: base64Jpeg } },
-            { type: 'text', text: 'Quel animal vois-tu sur cette photo ?' },
+            { type: 'text', text: `${s.ai.question}\n${s.ai.replyLanguage}` },
           ],
         },
       ],
     });
   } catch (error) {
     if (error instanceof Anthropic.AuthenticationError) {
-      throw new IdentifyError('Clé API invalide. Vérifie-la dans les réglages.');
+      throw new IdentifyError('auth');
     } else if (error instanceof Anthropic.PermissionDeniedError) {
-      throw new IdentifyError('Cette clé API n’a pas accès au modèle demandé.');
+      throw new IdentifyError('permission');
     } else if (error instanceof Anthropic.RateLimitError) {
-      throw new IdentifyError('Trop de demandes d’un coup. Réessaie dans quelques instants.');
+      throw new IdentifyError('rateLimit');
     } else if (error instanceof Anthropic.BadRequestError) {
-      throw new IdentifyError('La photo n’a pas pu être analysée (format ou taille). Essaie une autre photo.');
+      throw new IdentifyError('badRequest');
     } else if (error instanceof Anthropic.APIConnectionError) {
-      throw new IdentifyError('Pas de connexion Internet. Tu peux choisir l’espèce manuellement.');
+      throw new IdentifyError('connection');
     } else if (error instanceof Anthropic.APIError) {
-      throw new IdentifyError(`Le service d’identification est indisponible (erreur ${error.status ?? '?'}).`);
+      throw new IdentifyError('api', error.status);
     }
     throw error;
   }
 
   if (response.stop_reason === 'refusal') {
-    throw new IdentifyError('Cette photo n’a pas pu être analysée. Choisis l’espèce manuellement.');
+    throw new IdentifyError('refusal');
   }
 
   const text = response.content.find((b) => b.type === 'text');
-  if (!text || text.type !== 'text') throw new IdentifyError('Réponse vide du service d’identification.');
+  if (!text || text.type !== 'text') throw new IdentifyError('empty');
 
   let raw: RawResult;
   try {
     raw = JSON.parse(text.text) as RawResult;
   } catch {
-    throw new IdentifyError('Réponse illisible du service d’identification.');
+    throw new IdentifyError('parse');
   }
 
   const seen = new Set<number>();

@@ -2,15 +2,17 @@ import { Image, Pressable, StyleSheet, Text, View, type ImageStyle, type StylePr
 
 import { CATEGORIES, RARITIES } from '../data/meta';
 import type { Animal, Category, Rarity } from '../data/types';
+import { useI18n } from '../i18n';
 import { usePhotoUri } from '../lib/photoStore';
 import { colors, radius } from './theme';
 
 export function TypeBadge({ category, small }: { category: Category; small?: boolean }) {
   const meta = CATEGORIES[category];
+  const { s } = useI18n();
   return (
     <View style={[styles.badge, { backgroundColor: meta.color }, small && styles.badgeSmall]}>
       <Text style={[styles.badgeText, small && styles.badgeTextSmall]}>
-        {meta.emoji} {meta.label}
+        {meta.emoji} {s.categories[category].label}
       </Text>
     </View>
   );
@@ -18,8 +20,9 @@ export function TypeBadge({ category, small }: { category: Category; small?: boo
 
 export function RarityStars({ rarity, light }: { rarity: Rarity; light?: boolean }) {
   const meta = RARITIES[rarity];
+  const { s } = useI18n();
   return (
-    <Text style={[styles.stars, { color: light ? '#fff' : meta.color }]} accessibilityLabel={meta.label}>
+    <Text style={[styles.stars, { color: light ? '#fff' : meta.color }]} accessibilityLabel={s.rarities[rarity]}>
       {'★'.repeat(meta.stars)}
       <Text style={{ opacity: 0.25 }}>{'★'.repeat(4 - meta.stars)}</Text>
     </Text>
