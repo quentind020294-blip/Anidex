@@ -7,6 +7,7 @@ Application **Android / iOS et web** construite avec Expo (React Native + TypeSc
 ## Fonctionnalités
 
 - **Anidex de 151 espèces** australiennes, numérotées de #001 à #151 : mammifères, oiseaux, reptiles, amphibiens, vie aquatique, insectes, araignées et autres invertébrés, avec de nombreuses espèces de Victoria et de Phillip Island. Les plus rares (#142 à #151) sont « légendaires ». Pour chaque espèce : noms français, anglais et scientifique, rareté, habitat, États où on la trouve, description et anecdote.
+- **Caractéristiques** sous le nom de chaque espèce : une ligne poids · taille (hauteur, longueur ou envergure) · type, puis longévité, régime, activité, vitesse max et petits ou œufs par portée. Les 13 « types » de l’Anidex (Terrestre, Arboricole, Volant, Aquatique, Fouisseur, Nocturne, Carnivore, Herbivore, Insectivore, Omnivore, Venimeux, Toxique, Planeur) ont chacun une couleur et une icône. Chaque valeur chiffrée a été confrontée à l’article Wikipédia de l’espèce ; ce qui n’a pas pu être confirmé s’affiche « — ».
 - **Cartes** : chaque fiche a une carte de répartition de l’Australie (SVG intégré, sans service payant). Les États où l’espèce vit sont colorés : foncé pour une espèce commune, clair pour une espèce rare ou localisée, hachuré pour une espèce introduite. Tes observations géolocalisées apparaissent en points (touche-les pour voir la date). Le mode « Zones réelles » affiche des carrés d’environ 100 km où l’espèce a été observée, d’après l’API publique et gratuite de l’Atlas of Living Australia ; les données sont gardées 30 jours sur l’appareil, et sans connexion la carte revient à l’affichage par États. Le Journal affiche une carte de toutes tes observations.
 - **Amis** (facultatif, via Supabase) : compte avec un simple pseudo (sans e-mail), code ami à partager, liste d’amis, fiche de progression d’un ami et classement. Seuls l’espèce, le jour et l’**État** des observations sont partagés : jamais la position GPS ni le lieu précis, et aucun lieu pour les espèces menacées. Sans compte ou hors connexion, l’appli fonctionne comme avant. Mise en route pas à pas : [`supabase/GUIDE.md`](supabase/GUIDE.md).
 - **Conservation** sur chaque fiche : statut mondial (UICN), national (loi EPBC) et en Victoria (loi FFG), tendance de la population, principales menaces, gestes utiles, programmes de protection et, pour les espèces introduites, leur impact. Filtres « Menacées » et « Menacées en Victoria », écran de bilan et écran « Animal blessé ? » avec les numéros de secours de chaque État.
@@ -76,6 +77,8 @@ src/
   data/animals.ts       # catalogue des 151 espèces
   data/conservation.ts  # statuts UICN / EPBC / FFG, menaces, gestes, programmes
   data/rescue.ts        # numéros de secours pour la faune, par État
+  data/traits.ts        # poids, taille, types, longévité… des 151 espèces
+  data/animalTypes.ts   # les 13 types : couleur et icône
   data/australiaMap.ts  # contours SVG des États (généré par npm run gen:map, Natural Earth)
   lib/alaGrid.ts        # zones réelles de présence (Atlas of Living Australia) + cache
   lib/supabase.ts       # connexion Supabase (clé publique uniquement)
