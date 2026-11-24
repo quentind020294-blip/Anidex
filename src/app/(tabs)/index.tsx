@@ -11,7 +11,7 @@ import type { Category } from '../../data/types';
 import { useI18n } from '../../i18n';
 import { rankName } from '../../lib/progress';
 import { useDex } from '../../lib/store';
-import { HIDDEN_NAME, matchesNumber, useUnlock } from '../../lib/unlock';
+import { matchesNumber, useUnlock } from '../../lib/unlock';
 
 type Filter = Category | 'tous';
 type Show = 'tous' | 'decouverts' | 'a-trouver';
@@ -55,8 +55,7 @@ export default function DexScreen() {
       if (show === 'a-trouver' && found) return false;
       if (!q) return true;
       if (matchesNumber(a.id, q)) return true;
-      // Les noms (dans les deux langues) ne sont cherchables que pour les fiches débloquées.
-      return unlocked && [a.name.fr, a.name.en, a.scientific].some((v) => normalize(v).includes(q));
+      return [a.name.fr, a.name.en, a.scientific].some((v) => normalize(v).includes(q));
     });
   }, [query, filter, show, status, progress.discovered, isUnlocked]);
 
@@ -144,13 +143,13 @@ export default function DexScreen() {
         return (
           <Pressable
             onPress={() => router.push(`/animal/${item.id}`)}
-            accessibilityLabel={`${dexNumber(item.id)} ${discovered ? item.name[lang] : s.locked.a11yLocked}`}
+            accessibilityLabel={`${dexNumber(item.id)} ${item.name[lang]}${discovered ? '' : `, ${s.locked.a11yLocked}`}`}
             style={({ pressed }) => [styles.cell, { width: cardWidth }, pressed && { transform: [{ scale: 0.97 }] }]}
           >
             <Text style={styles.number}>{dexNumber(item.id)}</Text>
             <AnimalAvatar animal={item} discovered={discovered} photoUri={photo} size={Math.min(cardWidth - 24, 96)} />
             <Text numberOfLines={2} style={[styles.name, !discovered && { color: colors.muted }]}>
-              {discovered ? item.name[lang] : HIDDEN_NAME}
+              {item.name[lang]}
             </Text>
             {discovered ? (
               <View style={[styles.dot, { backgroundColor: CATEGORIES[item.category].color }]} />

@@ -17,7 +17,6 @@ import { identifyAnimal, identifyErrorMessage, type IdentifyResult } from '../..
 import { persistPhoto } from '../../lib/photoStore';
 import { rankName } from '../../lib/progress';
 import { useDex, type AddResult } from '../../lib/store';
-import { HIDDEN_NAME } from '../../lib/unlock';
 
 // Les erreurs sont gardées telles quelles (et non en texte) pour être traduites à l'affichage :
 // changer de langue met donc aussi le message à jour.
@@ -285,61 +284,57 @@ function SpeciesPicker({ visible, onClose, onPick, discovered, lang }: {
 }
 
 /**
- * Animation de déblocage : la silhouette sombre se colore, « ??? » laisse place au nom.
- * Respecte le réglage système « réduire les animations ».
+ * Animation de déblocage : la silhouette sombre se colore, puis les infos de la fiche
+ * apparaissent une à une. Respecte le réglage système « réduire les animations ».
  */
-function Reveal({ animal, photoUri, name, unlockedLabel }: {
-  animal: Animal; photoUri: string | null; name: string; unlockedLabel: string;
-}) {
-  const [progress] = useState(() => new Animated.Value(0));
-  const [pop] = useState(() => new Animated.Value(0));
-  const nativeDriver = Platform.OS !== 'web';
-
+function useReveal(enabled: boolean) {
+  const [avatar] = useState(() => new Animated.Value(enabled ? 0 : 1));
+  const [info] = useState(() => new Animated.Value(enabled ? 0 : 1));
   useEffect(() => {
+    if (!enabled) return;
+    const nativeDriver = Platform.OS !== 'web';
     let cancelled = false;
     AccessibilityInfo.isReduceMotionEnabled()
       .catch(() => false)
       .then((reduce) => {
         if (cancelled) return;
         if (reduce) {
-          progress.setValue(1);
-          pop.setValue(1);
+          avatar.setValue(1);
+          info.setValue(1);
           return;
         }
         Animated.sequence([
-          Animated.delay(450),
-          Animated.timing(progress, { toValue: 1, duration: 900, easing: Easing.out(Easing.cubic), useNativeDriver: nativeDriver }),
-          Animated.spring(pop, { toValue: 1, friction: 4, tension: 80, useNativeDriver: nativeDriver }),
+          Animated.delay(400),
+          Animated.timing(avatar, { toValue: 1, duration: 900, easing: Easing.out(Easing.cubic), useNativeDriver: nativeDriver }),
+          Animated.timing(info, { toValue: 1, duration: 900, easing: Easing.out(Easing.quad), useNativeDriver: nativeDriver }),
         ]).start();
       });
     return () => { cancelled = true; };
-  }, [progress, pop, nativeDriver]);
+  }, [enabled, avatar, info]);
+  return { avatar, info };
+}
 
+/** Style d'apparition décalé : l'élément n°index (0…count-1) glisse et apparaît à son tour. */
+function appear(info: Animated.Value, index: number, count: number) {
+  const from = index / (count + 1);
+  const to = Math.min(1, from + 2 / (count + 1));
+  return {
+    opacity: info.interpolate({ inputRange: [from, to], outputRange: [0, 1], extrapolate: 'clamp' }),
+    transform: [{ translateY: info.interpolate({ inputRange: [from, to], outputRange: [12, 0], extrapolate: 'clamp' }) }],
+  };
+}
+
+function RevealAvatar({ animal, photoUri, progress }: { animal: Animal; photoUri: string | null; progress: Animated.Value }) {
   const scale = progress.interpolate({ inputRange: [0, 0.5, 1], outputRange: [1, 1.12, 1] });
-  const hiddenOpacity = progress.interpolate({ inputRange: [0, 0.4], outputRange: [1, 0], extrapolate: 'clamp' });
-  const nameOpacity = progress.interpolate({ inputRange: [0.4, 1], outputRange: [0, 1], extrapolate: 'clamp' });
-  const nameShift = progress.interpolate({ inputRange: [0.4, 1], outputRange: [10, 0], extrapolate: 'clamp' });
-  const badgeScale = pop.interpolate({ inputRange: [0, 1], outputRange: [0.6, 1] });
-
   return (
-    <View style={{ alignItems: 'center', gap: 6 }} accessible accessibilityLabel={`${unlockedLabel} ${dexNumber(animal.id)} ${name}`}>
-      <Animated.View style={{ width: 150, height: 150, transform: [{ scale }] }}>
-        <View style={StyleSheet.absoluteFill}>
-          <AnimalAvatar animal={animal} discovered={false} size={150} />
-        </View>
-        <Animated.View style={[StyleSheet.absoluteFill, { opacity: progress }]}>
-          <AnimalAvatar animal={animal} discovered photoUri={photoUri} size={150} />
-        </Animated.View>
-      </Animated.View>
-      <Text style={styles.muted}>{dexNumber(animal.id)}</Text>
-      <View style={styles.revealName}>
-        <Animated.Text style={[styles.title, styles.revealLayer, { opacity: hiddenOpacity }]}>{HIDDEN_NAME}</Animated.Text>
-        <Animated.Text style={[styles.title, { opacity: nameOpacity, transform: [{ translateY: nameShift }] }]}>{name}</Animated.Text>
+    <Animated.View style={{ width: 150, height: 150, transform: [{ scale }] }}>
+      <View style={StyleSheet.absoluteFill}>
+        <AnimalAvatar animal={animal} discovered={false} size={150} />
       </View>
-      <Animated.View style={[styles.unlockedBadge, { opacity: pop, transform: [{ scale: badgeScale }] }]}>
-        <Text style={styles.unlockedText}>🔓 {unlockedLabel}</Text>
+      <Animated.View style={[StyleSheet.absoluteFill, { opacity: progress }]}>
+        <AnimalAvatar animal={animal} discovered photoUri={photoUri} size={150} />
       </Animated.View>
-    </View>
+    </Animated.View>
   );
 }
 
@@ -348,26 +343,27 @@ function Reward({ phase, onAgain }: { phase: Extract<Phase, { kind: 'done' }>; o
   const { animal, reward, place, state, photoUri } = phase;
   const color = CATEGORIES[animal.category].color;
   const where = place ?? (state ? s.states[state] : undefined);
+  const { avatar, info } = useReveal(reward.isNew);
+  const N = 5;
   return (
     <ScrollView contentContainerStyle={[styles.page, { paddingTop: 32 }]}>
       <Text style={styles.rewardKicker}>{reward.isNew ? s.observe.rewardNew : s.observe.rewardRepeat}</Text>
-      {reward.isNew ? (
-        <Reveal animal={animal} photoUri={photoUri} name={animal.name[lang]} unlockedLabel={s.locked.unlocked} />
-      ) : (
-        <>
-          <AnimalAvatar animal={animal} discovered photoUri={photoUri} size={150} />
-          <Text style={styles.muted}>{dexNumber(animal.id)}</Text>
-          <Text style={styles.title}>{animal.name[lang]}</Text>
-        </>
+      <RevealAvatar animal={animal} photoUri={photoUri} progress={avatar} />
+      <Text style={styles.muted}>{dexNumber(animal.id)}</Text>
+      <Text style={styles.title}>{animal.name[lang]}</Text>
+      {reward.isNew && (
+        <Animated.View style={[styles.unlockedBadge, appear(info, 0, N)]}>
+          <Text style={styles.unlockedText}>🔓 {s.locked.unlocked}</Text>
+        </Animated.View>
       )}
-      <View style={{ flexDirection: 'row', gap: 8, alignItems: 'center' }}>
+      <Animated.View style={[{ flexDirection: 'row', gap: 8, alignItems: 'center' }, appear(info, 1, N)]}>
         <TypeBadge category={animal.category} />
         <Text style={[styles.rarity, { color: RARITIES[animal.rarity].color }]}>{s.rarities[animal.rarity]}</Text>
-      </View>
-      {where && <Text style={styles.muted}>📍 {where}</Text>}
-      <View style={[styles.xp, { backgroundColor: color }]}>
+      </Animated.View>
+      {where && <Animated.Text style={[styles.muted, appear(info, 2, N)]}>📍 {where}</Animated.Text>}
+      <Animated.View style={[styles.xp, { backgroundColor: color }, appear(info, 2, N)]}>
         <Text style={styles.xpText}>+{reward.xpGained} XP</Text>
-      </View>
+      </Animated.View>
       {reward.levelUp && (
         <Card style={{ width: '100%', alignItems: 'center', gap: 4 }}>
           <Text style={{ fontSize: 28 }}>🎉</Text>
@@ -384,10 +380,12 @@ function Reward({ phase, onAgain }: { phase: Extract<Phase, { kind: 'done' }>; o
           </View>
         </Card>
       ))}
-      <Card style={{ width: '100%', gap: 4 }}>
-        <Text style={styles.cardTitle}>{s.observe.didYouKnow}</Text>
-        <Text style={styles.text}>{animal.funFact[lang]}</Text>
-      </Card>
+      <Animated.View style={[{ width: '100%' }, appear(info, 3, N)]}>
+        <Card style={{ gap: 4 }}>
+          <Text style={styles.cardTitle}>{s.observe.didYouKnow}</Text>
+          <Text style={styles.text}>{animal.funFact[lang]}</Text>
+        </Card>
+      </Animated.View>
       <View style={{ gap: 10, width: '100%' }}>
         <Button title={s.observe.seeEntry} icon="📖" onPress={() => router.push(`/animal/${animal.id}`)} />
         <Button title={s.observe.newObservation} icon="📷" variant="secondary" onPress={onAgain} />
@@ -429,8 +427,6 @@ const styles = StyleSheet.create({
   pickRow: {
     flexDirection: 'row', alignItems: 'center', gap: 12, backgroundColor: colors.card, padding: 10, borderRadius: radius.md,
   },
-  revealName: { alignItems: 'center', justifyContent: 'center', minHeight: 34 },
-  revealLayer: { position: 'absolute' },
   unlockedBadge: { backgroundColor: colors.gold, borderRadius: radius.pill, paddingHorizontal: 14, paddingVertical: 6 },
   unlockedText: { color: colors.ink, fontWeight: '900', letterSpacing: 1 },
   rewardKicker: { color: colors.red, fontWeight: '900', letterSpacing: 2, fontSize: 15 },
