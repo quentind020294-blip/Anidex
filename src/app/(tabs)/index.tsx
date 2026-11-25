@@ -148,7 +148,11 @@ export default function DexScreen() {
           >
             <Text style={styles.number}>{dexNumber(item.id)}</Text>
             <AnimalAvatar animal={item} discovered={discovered} photoUri={photo} size={Math.min(cardWidth - 24, 96)} />
-            <Text numberOfLines={2} style={[styles.name, !discovered && { color: colors.muted }]}>
+            {/* Noms longs (souvent en espagnol) : jusqu'à 3 lignes, en un peu plus petit. */}
+            <Text
+              numberOfLines={3}
+              style={[styles.name, item.name[lang].length > 22 && styles.nameLong, !discovered && { color: colors.muted }]}
+            >
               {item.name[lang]}
             </Text>
             {discovered ? (
@@ -197,6 +201,7 @@ const styles = StyleSheet.create({
   },
   number: { alignSelf: 'flex-start', marginLeft: 4, fontSize: 11, fontWeight: '800', color: colors.muted },
   name: { fontSize: 12, fontWeight: '700', textAlign: 'center', color: colors.ink, minHeight: 30 },
+  nameLong: { fontSize: 11, lineHeight: 14 },
   dot: { width: 8, height: 8, borderRadius: 4, marginTop: 4 },
   empty: { textAlign: 'center', color: colors.muted, marginTop: 40, lineHeight: 22 },
 });
