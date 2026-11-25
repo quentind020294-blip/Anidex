@@ -148,9 +148,9 @@ export default function DexScreen() {
           >
             <Text style={styles.number}>{dexNumber(item.id)}</Text>
             <AnimalAvatar animal={item} discovered={discovered} photoUri={photo} size={Math.min(cardWidth - 24, 96)} />
-            {/* Noms longs (souvent en espagnol) : jusqu'à 3 lignes, en un peu plus petit. */}
+            {/* Noms longs (souvent en espagnol) : jusqu'à 4 lignes, en un peu plus petit. */}
             <Text
-              numberOfLines={3}
+              numberOfLines={4}
               style={[styles.name, item.name[lang].length > 22 && styles.nameLong, !discovered && { color: colors.muted }]}
             >
               {item.name[lang]}
