@@ -1,7 +1,8 @@
-// Textes de l'interface en français. en.ts doit avoir exactement la même structure
+// Textes de l'interface en français. Chaque langue a un fichier ui.ts de même structure
 // (TypeScript le vérifie grâce au type Strings).
 
 export const fr = {
+  // Locale BCP 47 : format des dates et des nombres.
   dateLocale: 'fr-FR',
 
   tabs: { dex: 'Anidex', observe: 'Observer', journal: 'Journal', badges: 'Badges', friends: 'Amis' },
@@ -15,7 +16,7 @@ export const fr = {
 
   language: {
     // Toujours bilingue : on doit pouvoir retrouver ce réglage quelle que soit la langue affichée.
-    title: 'Langue / Language',
+    title: 'Langue / Language / Idioma',
     hint: 'Par défaut, l’Anidex utilise la langue de ton téléphone.',
   },
 

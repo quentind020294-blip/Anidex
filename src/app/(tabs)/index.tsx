@@ -55,7 +55,7 @@ export default function DexScreen() {
       if (show === 'a-trouver' && found) return false;
       if (!q) return true;
       if (matchesNumber(a.id, q)) return true;
-      return [a.name.fr, a.name.en, a.scientific].some((v) => normalize(v).includes(q));
+      return [...Object.values(a.name), a.scientific].some((v) => normalize(v).includes(q));
     });
   }, [query, filter, show, status, progress.discovered, isUnlocked]);
 

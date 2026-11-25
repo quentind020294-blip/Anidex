@@ -1,3 +1,5 @@
+import type { Lang } from '../i18n/registry';
+
 export type Category =
   | 'mammifere'
   | 'oiseau'
@@ -12,9 +14,9 @@ export type Rarity = 'commun' | 'peu-commun' | 'rare' | 'legendaire';
 
 export type StateCode = 'NSW' | 'VIC' | 'QLD' | 'WA' | 'SA' | 'TAS' | 'NT' | 'ACT';
 
-export type Lang = 'fr' | 'en';
+export type { Lang } from '../i18n/registry';
 
-/** Texte disponible dans les deux langues de l'app. */
+/** Texte disponible dans toutes les langues de l'app (voir src/i18n/registry.ts). */
 export type Localized = Record<Lang, string>;
 
 export interface Animal {

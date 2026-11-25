@@ -2,7 +2,7 @@ import { ANIMALS, getAnimal } from '../data/animals';
 import { isThreatened } from '../data/conservation';
 import { CATEGORIES, CATEGORY_ORDER, RARITIES, REPEAT_XP } from '../data/meta';
 import type { Animal, Category, Sighting, StateCode } from '../data/types';
-import type { Strings } from '../i18n/fr';
+import type { Strings } from '../i18n/types';
 
 /** Nom du rang (traduit) correspondant à un niveau. */
 export function rankName(s: Strings, level: number): string {

@@ -1,7 +1,8 @@
-import type { Strings } from './fr';
+import type { Strings } from '../fr/ui';
 
 // English UI strings. Must match the structure of fr.ts exactly (checked by TypeScript).
 export const en: Strings = {
+  // Locale BCP 47 : format des dates et des nombres.
   dateLocale: 'en-AU',
 
   tabs: { dex: 'Anidex', observe: 'Observe', journal: 'Journal', badges: 'Badges', friends: 'Friends' },
@@ -15,7 +16,7 @@ export const en: Strings = {
 
   language: {
     // Toujours bilingue : on doit pouvoir retrouver ce réglage quelle que soit la langue affichée.
-    title: 'Langue / Language',
+    title: 'Langue / Language / Idioma',
     hint: 'By default, the Anidex uses your phone’s language.',
   },
 
