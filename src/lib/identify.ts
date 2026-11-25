@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 import { ANIMALS, getAnimal } from '../data/animals';
 import type { Animal } from '../data/types';
-import type { Strings } from '../i18n/fr';
+import type { Strings } from '../i18n/types';
 
 export interface Candidate {
   animal: Animal;
@@ -36,7 +36,7 @@ export function identifyErrorMessage(error: unknown, s: Strings): string {
 const MODEL = 'claude-opus-5-5';
 
 // Catalogue envoyé une fois dans le prompt système (stable → mis en cache côté API).
-const CATALOGUE = ANIMALS.map((a) => `${a.id} | ${a.scientific} | ${a.name.en} | ${a.name.fr}`).join('\n');
+const CATALOGUE = ANIMALS.map((a) => `${a.id} | ${a.scientific} | ${a.name.en} | ${a.name.fr} | ${a.name.es}`).join('\n');
 
 const SYSTEM = `Tu es le moteur d'identification de l'Anidex, une application mobile (façon Pokédex) pour découvrir la faune australienne.
 L'utilisateur t'envoie une photo prise sur le terrain. Identifie l'animal visible et fais-le correspondre au catalogue ci-dessous.
@@ -50,7 +50,7 @@ Règles :
 - "comment" : une ou deux phrases chaleureuses qui expliquent les indices visuels utilisés.
 - Rédige "comment" et "outside_dex" dans la langue demandée dans le message de l'utilisateur.
 
-Catalogue (dex_id | nom scientifique | nom anglais | nom français) :
+Catalogue (dex_id | nom scientifique | nom anglais | nom français | nom espagnol) :
 ${CATALOGUE}`;
 
 const SCHEMA = {

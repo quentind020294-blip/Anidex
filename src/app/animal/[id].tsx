@@ -9,7 +9,7 @@ import { AnimalAvatar, Button, Card, RarityStars, StoredImage } from '../../comp
 import { ANIMALS, dexNumber, getAnimal } from '../../data/animals';
 import { CATEGORIES, RARITIES, STATE_ORDER } from '../../data/meta';
 import { TRAITS } from '../../data/traits';
-import { useI18n } from '../../i18n';
+import { LANGS, useI18n } from '../../i18n';
 import { formatDate, placeLabel } from '../../lib/format';
 import { useDex } from '../../lib/store';
 import { useUnlock } from '../../lib/unlock';
@@ -37,6 +37,9 @@ export default function AnimalScreen() {
   const discovered = progress.discovered.has(animal.id);
   // Fiche lisible : espèce photographiée, ou mode explorateur activé dans les réglages.
   const unlocked = isUnlocked(animal.id);
+  // Noms dans les autres langues (sans doublon : en espagnol, le nom anglais sert parfois de nom commun).
+  const otherNames = [...new Set(LANGS.filter((l) => l !== lang).map((l) => animal.name[l]))]
+    .filter((n) => n !== animal.name[lang]).join(' · ');
   const sightings = [...(progress.sightingsByAnimal.get(animal.id) ?? [])].reverse();
   const cover = sightings.find((x) => x.photoUri)?.photoUri;
   const color = CATEGORIES[animal.category].color;
@@ -107,7 +110,7 @@ export default function AnimalScreen() {
             </View>
             <Text style={styles.heroNumber}>{dexNumber(animal.id)}</Text>
             <Text style={styles.heroName}>{animal.name[lang]}</Text>
-            <Text style={styles.heroSub}>{animal.name[lang === 'fr' ? 'en' : 'fr']}</Text>
+            <Text style={styles.heroSub}>{otherNames}</Text>
             <Text style={[styles.heroSub, { fontStyle: 'italic' }]}>{animal.scientific}</Text>
             <Text style={styles.status}>🔒 {s.locked.title}</Text>
             <View style={styles.heroTags}>
@@ -169,7 +172,7 @@ export default function AnimalScreen() {
           )}
           <Text style={styles.heroNumber}>{dexNumber(animal.id)}</Text>
           <Text style={styles.heroName}>{animal.name[lang]}</Text>
-          <Text style={styles.heroSub}>{animal.name[lang === 'fr' ? 'en' : 'fr']}</Text>
+          <Text style={styles.heroSub}>{otherNames}</Text>
           <Text style={[styles.heroSub, { fontStyle: 'italic' }]}>{animal.scientific}</Text>
           <View style={styles.heroTags}>
             <View style={styles.whitePill}><Text style={[styles.pillText, { color }]}>{CATEGORIES[animal.category].emoji} {s.categories[animal.category].label}</Text></View>

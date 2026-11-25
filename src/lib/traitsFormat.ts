@@ -1,12 +1,13 @@
 import type { Range } from '../data/traitsTypes';
 import type { Lang } from '../data/types';
+import { LOCALES } from '../i18n/registry';
 
 /** Espace insécable : l'unité ne se retrouve jamais seule sur une ligne. */
 const NBSP = '\u00A0';
 
-/** Nombre formaté selon la langue (virgule en français), sans décimales inutiles. */
+/** Nombre formaté selon la langue (virgule en français et en espagnol), sans décimales inutiles. */
 function num(n: number, lang: Lang, digits = 1): string {
-  return n.toLocaleString(lang === 'fr' ? 'fr-FR' : 'en-AU', { maximumFractionDigits: digits });
+  return n.toLocaleString(LOCALES[lang].ui.dateLocale, { maximumFractionDigits: digits });
 }
 
 /** « 4–15 », « 10 », ou « ≤ 20 » pour une fourchette [0, 20] (« jusqu'à 20 »). */

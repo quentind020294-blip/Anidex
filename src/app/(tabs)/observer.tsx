@@ -10,7 +10,7 @@ import { colors, radius } from '../../components/theme';
 import { AnimalAvatar, Button, Card, ProgressBar, RarityStars, TypeBadge } from '../../components/ui';
 import { ANIMALS, dexNumber } from '../../data/animals';
 import { CATEGORIES, RARITIES } from '../../data/meta';
-import type { Animal, Sighting, StateCode } from '../../data/types';
+import type { Animal, Lang, Sighting, StateCode } from '../../data/types';
 import { useI18n, type Strings } from '../../i18n';
 import { CaptureError, getCurrentPlace, pickPhoto, type PreparedPhoto } from '../../lib/capture';
 import { identifyAnimal, identifyErrorMessage, type IdentifyResult } from '../../lib/identify';
@@ -234,7 +234,7 @@ function CandidateRow({ animal, confidence, best, discovered, onConfirm }: {
 }
 
 function SpeciesPicker({ visible, onClose, onPick, discovered, lang }: {
-  visible: boolean; onClose: () => void; onPick: (a: Animal) => void; discovered: Set<number>; lang: 'fr' | 'en';
+  visible: boolean; onClose: () => void; onPick: (a: Animal) => void; discovered: Set<number>; lang: Lang;
 }) {
   const { s } = useI18n();
   const [q, setQ] = useState('');
@@ -242,7 +242,7 @@ function SpeciesPicker({ visible, onClose, onPick, discovered, lang }: {
     const n = (v: string) => v.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
     const query = n(q.trim());
     const filtered = query
-      ? ANIMALS.filter((a) => [a.name.fr, a.name.en, a.scientific].some((v) => n(v).includes(query)))
+      ? ANIMALS.filter((a) => [...Object.values(a.name), a.scientific].some((v) => n(v).includes(query)))
       : ANIMALS;
     return [...filtered].sort((a, b) => a.name[lang].localeCompare(b.name[lang], lang));
   }, [q, lang]);

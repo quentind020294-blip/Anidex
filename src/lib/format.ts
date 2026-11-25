@@ -1,5 +1,6 @@
 import type { Sighting } from '../data/types';
-import { fr, type Strings } from '../i18n/fr';
+import { fr } from '../i18n/fr/ui';
+import type { Strings } from '../i18n/types';
 
 export function formatDate(iso: string, s: Strings) {
   return new Date(iso).toLocaleDateString(s.dateLocale, { day: 'numeric', month: 'long', year: 'numeric' });

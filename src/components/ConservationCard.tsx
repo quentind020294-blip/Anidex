@@ -120,8 +120,9 @@ const styles = StyleSheet.create({
   pill: { alignSelf: 'flex-start', paddingHorizontal: 10, paddingVertical: 4, borderRadius: radius.pill },
   pillText: { color: '#fff', fontWeight: '800', fontSize: 13 },
   tags: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
-  tag: { backgroundColor: '#F4EBDD', paddingHorizontal: 10, paddingVertical: 5, borderRadius: radius.pill },
-  tagText: { fontSize: 13, color: colors.ink, fontWeight: '600' },
+  // maxWidth + flexShrink : une menace longue passe à la ligne au lieu de sortir de l'écran.
+  tag: { backgroundColor: '#F4EBDD', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 14, maxWidth: '100%' },
+  tagText: { fontSize: 13, color: colors.ink, fontWeight: '600', flexShrink: 1 },
   invasive: { backgroundColor: '#FEF3C7', borderColor: '#F5D88A', borderWidth: 1, borderRadius: radius.md, padding: 12, gap: 4 },
   invasiveTitle: { fontWeight: '800', color: colors.ink },
 });

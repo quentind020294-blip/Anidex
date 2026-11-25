@@ -2,17 +2,7 @@
 // (celles dont le lieu n'est jamais partagé avec les amis), à partir des données de l'appli.
 // Usage : node scripts/gen-supabase-sql.mjs [--check]
 import { readFileSync, writeFileSync } from 'node:fs';
-import ts from 'typescript';
-
-const cache = {};
-function load(file) {
-  if (cache[file]) return cache[file];
-  const js = ts.transpileModule(readFileSync(file, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2020 } }).outputText;
-  const module = { exports: {} };
-  const dir = file.slice(0, file.lastIndexOf('/'));
-  new Function('module', 'exports', 'require', js)(module, module.exports, (p) => (p.startsWith('.') ? load(`${dir}/${p.replace('./', '')}.ts`) : {}));
-  return (cache[file] = module.exports);
-}
+import { loadTs as load } from './lib/load-ts.mjs';
 
 const { ANIMALS } = load('src/data/animals.ts');
 const { hidesLocation } = load('src/data/conservation.ts');

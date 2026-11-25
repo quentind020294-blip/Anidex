@@ -66,7 +66,7 @@ function ContactCard({ contact }: { contact: RescueContact }) {
     <Card style={{ gap: 6 }}>
       <Text style={styles.contactName}>{contact.name}</Text>
       <Text style={styles.phone}>{contact.phone}</Text>
-      <Text style={styles.text}>{contact.note[lang]}</Text>
+      <Text style={styles.text}>{contact.note?.[lang]}</Text>
       <Text style={[styles.note, contact.verified === 'unconfirmed' && { color: '#B45309', fontWeight: '700' }]}>
         {s.rescue.verified[contact.verified]}
       </Text>
