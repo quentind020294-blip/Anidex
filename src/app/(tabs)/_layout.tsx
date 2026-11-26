@@ -1,8 +1,9 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from 'expo-router';
 import { Tabs } from 'expo-router/js-tabs';
-import { Pressable, type ColorValue } from 'react-native';
+import { Pressable, Text, View, type ColorValue } from 'react-native';
 
+import { AnidexLogo } from '../../components/AnidexLogo';
 import { colors } from '../../components/theme';
 import { useI18n } from '../../i18n';
 
@@ -35,7 +36,20 @@ export default function TabsLayout() {
         ),
       }}
     >
-      <Tabs.Screen name="index" options={{ title: s.tabs.dex, tabBarIcon: icon('book') }} />
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: s.tabs.dex,
+          tabBarIcon: icon('book'),
+          // Logo de l'appli à côté du titre de l'écran principal.
+          headerTitle: ({ children }) => (
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+              <AnidexLogo size={30} />
+              <Text style={{ color: '#fff', fontWeight: '800', fontSize: 18 }}>{children}</Text>
+            </View>
+          ),
+        }}
+      />
       <Tabs.Screen name="observer" options={{ title: s.tabs.observe, tabBarIcon: icon('camera') }} />
       <Tabs.Screen name="journal" options={{ title: s.tabs.journal, tabBarIcon: icon('images') }} />
       <Tabs.Screen name="badges" options={{ title: s.tabs.badges, tabBarIcon: icon('ribbon') }} />

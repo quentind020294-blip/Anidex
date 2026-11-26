@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Alert, Platform, ScrollView, StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 
+import { AnidexLogo } from '../components/AnidexLogo';
 import { LanguageToggle } from '../components/LanguageToggle';
 import { colors, radius } from '../components/theme';
 import { Button, Card } from '../components/ui';
@@ -99,6 +100,7 @@ export default function SettingsScreen() {
         <Button title={s.settings.resetAll} variant="secondary" onPress={confirmReset} disabled={!sightings.length} />
       </Card>
 
+      <AnidexLogo size={150} variant="full" style={styles.logo} />
       <Text style={styles.footer}>{s.settings.footer}</Text>
     </ScrollView>
   );
@@ -124,5 +126,6 @@ const styles = StyleSheet.create({
     borderWidth: 1, borderColor: colors.line, color: colors.ink,
   },
   row: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  logo: { alignSelf: 'center', marginTop: 12 },
   footer: { textAlign: 'center', color: colors.muted, fontSize: 12, lineHeight: 18, marginTop: 8 },
 });

@@ -12,7 +12,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#D7263D",
+        "backgroundColor": "#18452F",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
@@ -32,7 +32,7 @@
       "shortName": "Anidex",
       "lang": "fr",
       "themeColor": "#D7263D",
-      "backgroundColor": "#F4F1EA",
+      "backgroundColor": "#18452F",
       "description": "Un Pokédex de la faune australienne",
       "display": "standalone"
     },
@@ -56,11 +56,17 @@
         {
           "locationWhenInUsePermission": "L’Anidex enregistre le lieu de tes observations pour ton journal et les badges d’exploration."
         }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#18452F"
+        }
       ]
     ],
-    "scheme": "anidex",
-    "splash": {
-      "backgroundColor": "#D7263D"
-    }
+    "scheme": "anidex"
   }
 }

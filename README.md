@@ -103,6 +103,15 @@ scripts/postbuild-web.mjs  # finalise l’export web (manifeste PWA, 404.html)
 scripts/check-i18n.mjs     # textes en dur, traductions manquantes ou oubliées (toutes les langues)
 ```
 
+## Logo et icônes
+
+Le logo (patte crème, carte de l’Australie découpée dans le coussinet, feuilles vertes, fond vert foncé) est dessiné en SVG :
+
+- [`assets/logo/anidex-icon.svg`](assets/logo/anidex-icon.svg) : version sans texte (icône) ;
+- [`assets/logo/anidex-logo.svg`](assets/logo/anidex-logo.svg) : version avec « ANIDEX ».
+
+Ils sont générés par `scripts/logo/gen-logo.py`. La carte reprend les contours Natural Earth déjà utilisés par l’appli, et les lettres sont des contours de la police Inter ExtraBold (licence SIL OFL) : le SVG ne dépend d’aucune police installée. `npm run gen:logo` régénère les SVG, puis toutes les images de l’appli avec Playwright : icône iOS, icône adaptative Android (premier plan, fond, version monochrome), écran de démarrage, favicon et icônes de la version web (PWA). Dans l’appli, le logo apparaît à côté du titre de l’Anidex et en bas des réglages (`src/components/AnidexLogo.tsx`).
+
 ## Ajouter une espèce
 
 Ajoute une entrée **à la fin** de `src/data/animals.ts` : les numéros sont attribués dans l’ordre, donc en insérer une au milieu décalerait les numéros des observations déjà enregistrées. Ajoute ensuite ses textes (nom, habitat, description, anecdote, régime) sous son numéro dans chaque `src/i18n/<langue>/content.ts` ; `npm run check:i18n` signale ceux qui manquent.
